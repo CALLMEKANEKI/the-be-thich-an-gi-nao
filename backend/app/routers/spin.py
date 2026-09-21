@@ -11,7 +11,7 @@ def recommend(payload: dict):
             "dish": {
                 "id": "dish_001",
                 "name": "Phở Bò",
-                "desciption": "Món nước nóng với bánh phở, thịt bò.",
+                "description": "Món nước nóng với bánh phở, thịt bò.",
                 "image_url": "https://example.com/pho=bo.jpg",
                 "category": "vietnamese",
             },
