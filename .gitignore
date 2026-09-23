@@ -1,6 +1,12 @@
+# Python
 backend/venv/
 backend/.env
-backend/__pycache__/
-backend/*.pyc
+**/__pycache__/
+*.pyc
+
+# Flutter
 frontend/build/
 frontend/.dart_tool/
+
+# Editor
+.vscode/
