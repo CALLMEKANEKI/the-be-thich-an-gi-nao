@@ -14,32 +14,36 @@ class RecommendationScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed:(){
-                 context.read<RecommendationProvider>().fetchWheelOption('Hôm nay tôi mệt quá');
+              onPressed:() async{ 
+                final provider = context.read<RecommendationProvider>();
+                await provider.fetchWheelOption('Hôm nay tôi mệt quá');
+                if (provider.status == RecommendationStatus.success){
+                  provider.spinWheel();
+                }
               },
               child: const Text('Spin'),
-              ),
-              const SizedBox(height: 20),
-              Consumer<RecommendationProvider>(
-                builder: (context, provider, child){
-                  return switch(provider.status){
-                    RecommendationStatus.idle => const Text('Press button to spin'),
-                    RecommendationStatus.loading => const CircularProgressIndicator(),
-                    RecommendationStatus.success => provider.selectedOption == null
-                    ? const Text('Đang tiến hành chọn ')
-                    : Text
-                    (
-                      '${provider.selectedOption!.dish.name}\n'
-                      '${provider.selectedOption!.reason}\n'
-                      'Độ tin cậy: ${provider.selectedOption!.confidence}'
-                    ),
-                    RecommendationStatus.error => Text(
-                      provider.errorMessage ?? 'Lỗi không xác định',
-                      style: const TextStyle(color : Colors.red),
-                    ) 
-                  };
-                },
-              ),
+            ),
+            const SizedBox(height: 20),
+            Consumer<RecommendationProvider>(
+              builder: (context, provider, child){
+                return switch(provider.status){
+                  RecommendationStatus.idle => const Text('Press button to spin'),
+                  RecommendationStatus.loading => const CircularProgressIndicator(),
+                  RecommendationStatus.success => provider.selectedOption == null
+                  ? const Text('Đang tiến hành chọn ')
+                  : Text
+                  (
+                    '${provider.selectedOption!.dish.name}\n'
+                    '${provider.selectedOption!.reason}\n'
+                    'Độ tin cậy: ${provider.selectedOption!.confidence}'
+                  ),
+                  RecommendationStatus.error => Text(
+                    provider.errorMessage ?? 'Lỗi không xác định',
+                    style: const TextStyle(color : Colors.red),
+                  ) 
+                };
+              },
+            ),
           ],
         ),
       )
