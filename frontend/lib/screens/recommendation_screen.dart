@@ -15,7 +15,7 @@ class RecommendationScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed:(){
-                 context.read<RecommendationProvider>().fetchRecommendation('happy');
+                 context.read<RecommendationProvider>().fetchWheelOption('Hôm nay tôi mệt quá');
               },
               child: const Text('Spin'),
               ),
@@ -25,8 +25,13 @@ class RecommendationScreen extends StatelessWidget {
                   return switch(provider.status){
                     RecommendationStatus.idle => const Text('Press button to spin'),
                     RecommendationStatus.loading => const CircularProgressIndicator(),
-                    RecommendationStatus.success => Text(
-                      '${provider.dish?.name}\n${provider.dish?.reason}\nĐộ tin cậy: ${provider.dish?.confidence}'
+                    RecommendationStatus.success => provider.selectedOption == null
+                    ? const Text('Đang tiến hành chọn ')
+                    : Text
+                    (
+                      '${provider.selectedOption!.dish.name}\n'
+                      '${provider.selectedOption!.reason}\n'
+                      'Độ tin cậy: ${provider.selectedOption!.confidence}'
                     ),
                     RecommendationStatus.error => Text(
                       provider.errorMessage ?? 'Lỗi không xác định',
