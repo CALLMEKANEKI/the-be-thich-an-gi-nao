@@ -1,89 +1,101 @@
+import torch
+import torch.nn as nn
 import json
-from google import genai
-from google.genai import types
-from app.core.config import settings
-from app.db.session import SessionLocal
-from app.db.models import Dish
+import os
+import numpy as np
+from transformers import AutoModel, AutoTokenizer
 
-client = genai.Client(api_key=settings.gemini_api_key)
+PHOBERT_MODEL = "vinai/phobert-base-v2"
+NUM_VIGO_LABELS = 28
 
-def build_dish_list_text(dishes: list[Dish]) -> str:
-    lines = [f"- {d.name} (id={d.id}, category={d.category}): {d.description}" for d in dishes]
-    return "\n".join(lines)
+VIGO_EMOTIONS = [
+    'amusement', 'excitement', 'joy', 'love', 'desire', 'optimism',
+    'caring', 'pride', 'admiration', 'gratitude', 'relief', 'approval',
+    'realization', 'surprise', 'curiosity', 'confusion', 'fear',
+    'nervousness', 'remorse', 'embarrassment', 'disappointment',
+    'sadness', 'grief', 'disgust', 'anger', 'annoyance',
+    'disapproval', 'neutral'
+]
 
-def recommend_dish(mood: str) -> dict:
-    with SessionLocal() as db:
-        dishes = db.query(Dish).all()
+MODEL_DIR = os.path.join(os.path.dirname(__file__), "..", "ml_models", "emotion")
+CHECKPOINT_PATH = os.path.join(MODEL_DIR, "best_multitask_model.pth")
+THRESHOLDS_PATH = os.path.join(MODEL_DIR, "emotion_thresholds.json")
 
-    if not dishes:
-        raise ValueError("Danh sách món ăn trong Database đang trống!")
 
-    dish_map = {d.id: d for d in dishes}
-    dish_list_text = build_dish_list_text(dishes)
+class PhoBERTMultiTask(nn.Module):
+    def __init__(self, num_hate_labels=3, num_emotion_labels=NUM_VIGO_LABELS, dropout=0.3):
+        super().__init__()
+        self.phobert = AutoModel.from_pretrained(PHOBERT_MODEL, use_safetensors=True)
+        hidden_size = self.phobert.config.hidden_size
+        intermediate_size = 256
 
-    prompt = f"""
-    Bạn là trợ lý gợi ý món ăn. Người dùng đang cảm thấy: "{mood}".
-    Danh sách món ăn sẵn có:
-    {dish_list_text}
+        self.emotion_head = nn.Sequential(
+            nn.Linear(hidden_size, hidden_size // 2),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_size // 2, intermediate_size),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(intermediate_size, num_emotion_labels)
+        )
 
-    Hãy chọn ĐÚNG 10 món ăn phù hợp nhất từ danh sách trên (xắp xếp từ phù hợp nhất xuống ít phù hợp hơn).
-    
-    Trả về định dạng một JSON ARRAY gồm 10 object, mỗi object có các field:
-    - "dish_id": (int) ID của món được chọn.
-    - "reason": (string) Lý do chọn món ngắn gọn trong 1 câu bằng Tiếng Việt.
-    - "confidence": (float) Độ tự tin từ 0 đến 1.
-    """
+        self.hate_head = nn.Sequential(
+            nn.Linear(hidden_size, intermediate_size),
+            nn.BatchNorm1d(intermediate_size),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(intermediate_size, num_hate_labels)
+        )
 
-    models_to_try = [
-        "gemini-3.1-flash-lite",
-        "gemini-2.5-flash-lite",
-        "gemini-3.5-flash-lite"
-    ]
+    def forward(self, input_ids, attention_mask):
+        outputs = self.phobert(input_ids=input_ids, attention_mask=attention_mask)
+        last_hidden = outputs.last_hidden_state
+        mask_exp = attention_mask.unsqueeze(-1).expand(last_hidden.size()).float()
+        sum_emb = torch.sum(last_hidden * mask_exp, 1)
+        sum_mask = torch.clamp(mask_exp.sum(1), min=1e-9)
+        pooled = sum_emb / sum_mask
+        return self.emotion_head(pooled), self.hate_head(pooled)
 
-    response_text = None
-    
-    for model_name in models_to_try:
-        try:
-            response = client.models.generate_content(
-                model=model_name,
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    response_mime_type="application/json"
-                )
-            )
-            response_text = response.text
-            break  
-        except Exception as e:
-            print(f"[Warning] Model {model_name} bận ({e}), đang chuyển sang model tiếp theo...")
-            continue
 
-    if not response_text:
-        raise Exception("Tất cả các model AI hiện đang bận, vui lòng thử lại sau!")
+class EmotionService:
+    def __init__(self):
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.tokenizer = AutoTokenizer.from_pretrained(PHOBERT_MODEL)
 
-    raw_results = json.loads(response_text)
-    
-    if isinstance(raw_results, dict):
-        raw_results = raw_results.get("recommendations", raw_results.get("dishes", []))
+        self.model = PhoBERTMultiTask()
+        state_dict = torch.load(CHECKPOINT_PATH, map_location=self.device, weights_only=True)
+        self.model.load_state_dict(state_dict)  
+        self.model.to(self.device)
+        self.model.eval()
 
-    recommended_list = []
-    for item in raw_results:
-        dish_id = item.get("dish_id")
-        if dish_id in dish_map:
-            recommended_list.append({
-                "dish": dish_map[dish_id],
-                "reason": item.get("reason", "Món ăn phù hợp với tâm trạng."),
-                "confidence": item.get("confidence", 0.9)
-            })
+        self.thresholds = self._load_thresholds()
 
-    if not recommended_list:
-        for d in dishes[:10]:
-            recommended_list.append({
-                "dish": d,
-                "reason": "Món ăn gợi ý mặc định.",
-                "confidence": 0.8
-            })
+    def _load_thresholds(self, default=0.5):
+        if os.path.exists(THRESHOLDS_PATH):
+            with open(THRESHOLDS_PATH, "r", encoding="utf-8") as f:
+                threshold_dict = json.load(f)
+            return np.array([threshold_dict.get(label, default) for label in VIGO_EMOTIONS])
+        return np.full(NUM_VIGO_LABELS, default)
 
-    return {
-        "total": len(recommended_list),
-        "recommendations": recommended_list
-    }
+    def predict_emotion(self, text: str) -> list[str]:
+        encoding = self.tokenizer(
+            text, add_special_tokens=True, max_length=128,
+            padding="max_length", truncation=True, return_tensors="pt"
+        )
+        input_ids = encoding["input_ids"].to(self.device)
+        attention_mask = encoding["attention_mask"].to(self.device)
+
+        with torch.no_grad():
+            emo_logits, _ = self.model(input_ids, attention_mask)
+            probs = torch.sigmoid(emo_logits).cpu().numpy()[0]
+
+        detected_with_prob = [
+            (VIGO_EMOTIONS[i], probs[i]) for i in range(NUM_VIGO_LABELS)
+            if probs[i] > self.thresholds[i]
+        ]
+        detected_with_prob.sort(key=lambda x: x[1], reverse=True)
+        detected = [label for label, _ in detected_with_prob]
+        return detected if detected else ["neutral"]
+
+
+emotion_service = EmotionService()

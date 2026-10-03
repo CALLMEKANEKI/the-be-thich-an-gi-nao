@@ -41,6 +41,6 @@ def recommend(payload: SpinRequest):
             "recommendation_id": f"rec_{uuid.uuid4().hex[:8]}",
             "detected_mood": detected_mood,
             "total": len(formatted_items),
-            "items": formatted_items
+            "wheel_options": formatted_items
         }
     }
