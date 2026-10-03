@@ -11,11 +11,13 @@ class WheelOption {
     required this.confidence,
   });
 
-  factory WheelOption.fromJson(Map<String, dynamic> json){
+  factory WheelOption.fromJson(Map<String, dynamic> json) {
+    final dishJson = json['dish'] as Map<String, dynamic>? ?? <String, dynamic>{};
+
     return WheelOption(
-      dish: DishRecommendation.fromJson(json['dish']),
-      reason: json['reason'],
-      confidence: (json['confidence'] as num).toDouble(), 
+      dish: DishRecommendation.fromJson(dishJson),
+      reason: json['reason'] ?? '',
+      confidence: (json['confidence'] as num? ?? 0).toDouble(),
     );
   }
 }

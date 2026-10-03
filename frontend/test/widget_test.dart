@@ -5,26 +5,27 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:frontend/main.dart';
+import 'package:frontend/models/wheel_option.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  test('WheelOption.fromJson parses backend payload correctly', () {
+    final json = {
+      'dish': {
+        'id': 1,
+        'name': 'Bún chả',
+        'description': 'Món ăn phù hợp cho buổi tối.',
+        'image_url': 'https://example.com/buncha.jpg',
+        'category': 'Món Việt',
+      },
+      'reason': 'Vì bạn đang cảm thấy chán nản, món này dễ ăn và đủ dinh dưỡng.',
+      'confidence': 0.87,
+    };
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    final option = WheelOption.fromJson(json);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(option.dish.name, 'Bún chả');
+    expect(option.reason.contains('chán nản'), isTrue);
+    expect(option.confidence, 0.87);
   });
 }
