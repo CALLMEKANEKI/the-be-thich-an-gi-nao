@@ -3,6 +3,7 @@ backend/venv/
 backend/.env
 **/__pycache__/
 *.pyc
+backend/app/ml_models/
 
 # Flutter
 frontend/build/
