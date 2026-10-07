@@ -4,6 +4,7 @@ from google.genai import types
 from app.core.config import settings
 from app.db.session import SessionLocal
 from app.db.models import Dish
+from app.services.weather_service import get_current_weather
 
 client = genai.Client(api_key=settings.gemini_api_key)
 
@@ -11,18 +12,21 @@ def build_dish_list_text(dishes: list[Dish]) -> str:
     lines = [f"- {d.name} (id={d.id}, category={d.category}): {d.description}" for d in dishes]
     return "\n".join(lines)
 
-def recommend_dish(mood: str) -> dict:
+def recommend_dish(mood: str, lat: float = None, lon: float = None) -> dict:
     with SessionLocal() as db:
         dishes = db.query(Dish).all()
-
+    
     if not dishes:
         raise ValueError("Danh sách món ăn trong Database đang trống!")
 
     dish_map = {d.id: d for d in dishes}
     dish_list_text = build_dish_list_text(dishes)
 
+    weather_info = get_current_weather(lat, lon) if lat is not None and lon is not None else "không rõ"
+
     prompt = f"""
     Bạn là trợ lý gợi ý món ăn. Người dùng đang cảm thấy: "{mood}".
+    Thời tiết hiện tại: {weather_info}
     Danh sách món ăn sẵn có:
     {dish_list_text}
 
