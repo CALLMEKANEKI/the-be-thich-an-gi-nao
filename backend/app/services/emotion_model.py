@@ -4,6 +4,8 @@ import json
 import os
 import numpy as np
 from transformers import AutoModel, AutoTokenizer
+from huggingface_hub import hf_hub_download
+from app.core.config import settings
 
 PHOBERT_MODEL = "vinai/phobert-base-v2"
 NUM_VIGO_LABELS = 28
@@ -16,11 +18,6 @@ VIGO_EMOTIONS = [
     'sadness', 'grief', 'disgust', 'anger', 'annoyance',
     'disapproval', 'neutral'
 ]
-
-MODEL_DIR = os.path.join(os.path.dirname(__file__), "..", "ml_models", "emotion")
-CHECKPOINT_PATH = os.path.join(MODEL_DIR, "best_multitask_model.pth")
-THRESHOLDS_PATH = os.path.join(MODEL_DIR, "emotion_thresholds.json")
-
 
 class PhoBERTMultiTask(nn.Module):
     def __init__(self, num_hate_labels=3, num_emotion_labels=NUM_VIGO_LABELS, dropout=0.3):
@@ -62,20 +59,29 @@ class EmotionService:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.tokenizer = AutoTokenizer.from_pretrained(PHOBERT_MODEL)
 
+        checkpoint_path = hf_hub_download(
+            repo_id=settings.hf_model_repo,
+            filename="best_multitask_model.pth",
+            token=settings.hf_token,
+        )
+        thresholds_path = hf_hub_download(
+            repo_id=settings.hf_model_repo,
+            filename="emotion_thresholds.json",
+            token=settings.hf_token,
+        )
+
         self.model = PhoBERTMultiTask()
-        state_dict = torch.load(CHECKPOINT_PATH, map_location=self.device, weights_only=True)
-        self.model.load_state_dict(state_dict)  
+        state_dict = torch.load(checkpoint_path, map_location=self.device, weights_only=True)
+        self.model.load_state_dict(state_dict)
         self.model.to(self.device)
         self.model.eval()
 
-        self.thresholds = self._load_thresholds()
+        self.thresholds = self._load_thresholds(thresholds_path)
 
-    def _load_thresholds(self, default=0.5):
-        if os.path.exists(THRESHOLDS_PATH):
-            with open(THRESHOLDS_PATH, "r", encoding="utf-8") as f:
-                threshold_dict = json.load(f)
-            return np.array([threshold_dict.get(label, default) for label in VIGO_EMOTIONS])
-        return np.full(NUM_VIGO_LABELS, default)
+    def _load_thresholds(self, path, default=0.5):
+        with open(path, "r", encoding="utf-8") as f:
+            threshold_dict = json.load(f)
+        return np.array([threshold_dict.get(label, default) for label in VIGO_EMOTIONS])
 
     def predict_emotion(self, text: str) -> list[str]:
         encoding = self.tokenizer(
