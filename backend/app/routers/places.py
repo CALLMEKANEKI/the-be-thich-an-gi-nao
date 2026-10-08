@@ -1,20 +1,13 @@
 from fastapi import APIRouter
+from app.schemas.places import PlacesRequest
+from app.services.places_service import search_nearby_places
 
-router = APIRouter(prefix="/api/v1/places", tags=["place"])
+router = APIRouter(prefix="/api/v1/places", tags=["places"])
 
-@router.post("/nearly")
-def nearly(payload: dict):
-    return {
-        "success": True,
-        "data": [{
-            "place_id": "place_001",
-            "name": "Phở_Anh_Hai",
-            "address": "Số 12 Đan Phượng",
-            "latitude": 10.7771,
-            "longitude": 106.7012,
-            "distance_m": 167,
-            "rating": 4.5,
-            "opening_status": "OPEN",
-            "map_url": "http://maps.exsample.com/place_001"
-        }]
-    }
+@router.post("/nearby")
+def nearby(payload: PlacesRequest):
+    places = search_nearby_places(
+        payload.dish_name, payload.latitude, payload.longitude,
+        payload.radius_m, payload.limit
+    )
+    return {"success": True, "data": places}
