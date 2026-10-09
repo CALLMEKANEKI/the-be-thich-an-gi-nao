@@ -17,6 +17,7 @@ class Dish(Base):
     description = Column(String)
     category = Column(String)
     image_url = Column(String)
+    ingredients = Column(JSON(none_as_null=True))
     
 class SpinHistory(Base):
     __tablename__ = "spin_history"
