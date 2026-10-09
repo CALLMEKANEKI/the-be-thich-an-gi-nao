@@ -10,7 +10,9 @@ class Setting():
     gemini_api_key: str=os.getenv("GEMINI_API_KEY")
     n8n_bhx_webhook_url: str=os.getenv("N8N_BHX_WEBHOOK_URL")
     weather_api_key: str=os.getenv("WEATHER_API_KEY")
-    map_api_key: str=os.getenv("MAP_API_KEY")
+    map_provider: str = os.getenv("MAP_PROVIDER", "goong")
+    goong_api_key: str = os.getenv("GOONG_API_KEY")
+    geoapify_api_key: str = os.getenv("GEOAPIFY_API_KEY")
     hf_token: str = os.getenv("HF_TOKEN")
     hf_model_repo: str = os.getenv("HF_MODEL_REPO")
         
