@@ -1,14 +1,16 @@
-from huggingface_hub import HfApi
-from app.core.config import settings
+from collections import Counter
+from app.db.models import Dish
+from app.db.session import SessionLocal
 
-api = HfApi(token=settings.hf_token)
-api.create_repo(repo_id=settings.hf_model_repo, repo_type="model", private=True, exist_ok=True)
-
-for fname in ["best_multitask_model.pth", "emotion_thresholds.json"]:
-    api.upload_file(
-        path_or_fileobj=f"{fname}",
-        path_in_repo=fname,
-        repo_id=settings.hf_model_repo,
-        repo_type="model",
-    )
-    print("Đã upload:", fname)
+counter = Counter()
+with SessionLocal() as db:
+    for (ings,) in db.query(Dish.ingredients).filter(Dish.ingredients.isnot(None)).all():
+        counter.update(i["normalized_name"] for i in ings)
+    # for dish in db.query(Dish).filter(Dish.ingredients.isnot(None)).all():
+    #     dish.ingredients = [
+    #         {**i, "normalized_name": SYNONYMS.get(slugify(i["ingredient"]), slugify(i["ingredient"]))}
+    #         for i in dish.ingredients
+    #     ]
+    # db.commit()
+for name, n in sorted(counter.items()):
+    print(f"{name}: {n}")
