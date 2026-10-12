@@ -1,0 +1,3952 @@
+{
+  "19": [
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Trứng vịt",
+      "normalized_name": "trung_vit",
+      "quantity": 5.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 100.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 2.0,
+      "unit": "tép"
+    }
+  ],
+  "5": [
+    {
+      "ingredient": "Bột bánh xèo",
+      "normalized_name": "bot_banh_xeo",
+      "quantity": 250.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 100.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 20.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 2.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    }
+  ],
+  "10": [
+    {
+      "ingredient": "Gạo tấm",
+      "normalized_name": "gao_tam",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Trứng vịt",
+      "normalized_name": "trung_vit",
+      "quantity": 3.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Da heo",
+      "normalized_name": "da_heo",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Đu đủ",
+      "normalized_name": "du_du",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "11": [
+    {
+      "ingredient": "Cá",
+      "normalized_name": "ca",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Gừng",
+      "normalized_name": "gung",
+      "quantity": 1.0,
+      "unit": "củ"
+    }
+  ],
+  "12": [
+    {
+      "ingredient": "Bột bánh xèo",
+      "normalized_name": "bot_banh_xeo",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Trứng vịt",
+      "normalized_name": "trung_vit",
+      "quantity": 4.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 2.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "13": [
+    {
+      "ingredient": "Miến dong",
+      "normalized_name": "mien_dong",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt gà",
+      "normalized_name": "thit_ga",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Gừng",
+      "normalized_name": "gung",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    }
+  ],
+  "14": [
+    {
+      "ingredient": "Bột gạo",
+      "normalized_name": "bot_gao",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Chả",
+      "normalized_name": "cha",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 2.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    }
+  ],
+  "16": [
+    {
+      "ingredient": "Bún tươi",
+      "normalized_name": "bun_tuoi",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cá",
+      "normalized_name": "ca",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nghệ",
+      "normalized_name": "nghe",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Mắm cá linh",
+      "normalized_name": "mam_ca_linh",
+      "quantity": 100.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Sả",
+      "normalized_name": "sa",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 5.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Gừng",
+      "normalized_name": "gung",
+      "quantity": 20.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "17": [
+    {
+      "ingredient": "Bún tươi",
+      "normalized_name": "bun_tuoi",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Đu đủ",
+      "normalized_name": "du_du",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 2.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Sả",
+      "normalized_name": "sa",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    }
+  ],
+  "18": [
+    {
+      "ingredient": "Bún tươi",
+      "normalized_name": "bun_tuoi",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Mắm cá linh",
+      "normalized_name": "mam_ca_linh",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cá",
+      "normalized_name": "ca",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Sả",
+      "normalized_name": "sa",
+      "quantity": 5.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Cà tím",
+      "normalized_name": "ca_tim",
+      "quantity": 100.0,
+      "unit": "g"
+    }
+  ],
+  "21": [
+    {
+      "ingredient": "Bánh phở",
+      "normalized_name": "banh_pho",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Gừng",
+      "normalized_name": "gung",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hoa hồi",
+      "normalized_name": "hoa_hoi",
+      "quantity": 5.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Quế",
+      "normalized_name": "que",
+      "quantity": 5.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nấm",
+      "normalized_name": "nam",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    }
+  ],
+  "22": [
+    {
+      "ingredient": "Bánh mì",
+      "normalized_name": "banh_mi",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Đu đủ",
+      "normalized_name": "du_du",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nấm",
+      "normalized_name": "nam",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Nước tương",
+      "normalized_name": "nuoc_tuong",
+      "quantity": 50.0,
+      "unit": "ml"
+    }
+  ],
+  "24": [
+    {
+      "ingredient": "Bún tươi",
+      "normalized_name": "bun_tuoi",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 3.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Nấm",
+      "normalized_name": "nam",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    }
+  ],
+  "25": [
+    {
+      "ingredient": "Mì",
+      "normalized_name": "mi",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Nấm",
+      "normalized_name": "nam",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Nước tương",
+      "normalized_name": "nuoc_tuong",
+      "quantity": 30.0,
+      "unit": "ml"
+    }
+  ],
+  "26": [
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 4.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Sả",
+      "normalized_name": "sa",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    }
+  ],
+  "27": [
+    {
+      "ingredient": "Hoa chuối",
+      "normalized_name": "hoa_chuoi",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Lạc",
+      "normalized_name": "lac",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "1": [
+    {
+      "ingredient": "Bánh phở",
+      "normalized_name": "banh_pho",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt bò",
+      "normalized_name": "thit_bo",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Xương bò",
+      "normalized_name": "xuong_bo",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Gừng",
+      "normalized_name": "gung",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hoa hồi",
+      "normalized_name": "hoa_hoi",
+      "quantity": 5.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Quế",
+      "normalized_name": "que",
+      "quantity": 5.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "2": [
+    {
+      "ingredient": "Bún tươi",
+      "normalized_name": "bun_tuoi",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cua đồng",
+      "normalized_name": "cua_dong",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cà chua",
+      "normalized_name": "ca_chua",
+      "quantity": 3.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 3.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Mắm tôm",
+      "normalized_name": "mam_tom",
+      "quantity": 50.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Giò sống",
+      "normalized_name": "gio_song",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Trứng vịt",
+      "normalized_name": "trung_vit",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "3": [
+    {
+      "ingredient": "Mì cao lầu",
+      "normalized_name": "mi_cao_lau",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Da heo",
+      "normalized_name": "da_heo",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 2.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Ngũ vị hương",
+      "normalized_name": "ngu_vi_huong",
+      "quantity": 10.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước tương",
+      "normalized_name": "nuoc_tuong",
+      "quantity": 50.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 100.0,
+      "unit": "g"
+    }
+  ],
+  "20": [
+    {
+      "ingredient": "Cơm nguội",
+      "normalized_name": "com_nguoi",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Trứng vịt",
+      "normalized_name": "trung_vit",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 2.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    }
+  ],
+  "28": [
+    {
+      "ingredient": "Bột bánh xèo",
+      "normalized_name": "bot_banh_xeo",
+      "quantity": 250.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 100.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nấm",
+      "normalized_name": "nam",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 2.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Nước tương",
+      "normalized_name": "nuoc_tuong",
+      "quantity": 50.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    }
+  ],
+  "34": [
+    {
+      "ingredient": "Trứng vịt",
+      "normalized_name": "trung_vit",
+      "quantity": 3.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Sữa tươi",
+      "normalized_name": "sua_tuoi",
+      "quantity": 250.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Kem tươi",
+      "normalized_name": "kem_tuoi",
+      "quantity": 50.0,
+      "unit": "ml"
+    }
+  ],
+  "83": [
+    {
+      "ingredient": "Khoai môn",
+      "normalized_name": "khoai_mon",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "85": [
+    {
+      "ingredient": "Sữa tươi",
+      "normalized_name": "sua_tuoi",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Kem tươi",
+      "normalized_name": "kem_tuoi",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Bột gelatin",
+      "normalized_name": "bot_gelatin",
+      "quantity": 20.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hạnh nhân",
+      "normalized_name": "hanh_nhan",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đường phèn",
+      "normalized_name": "duong_phen",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Vải thiều",
+      "normalized_name": "vai_thieu",
+      "quantity": 10.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Bột trà xanh",
+      "normalized_name": "bot_tra_xanh",
+      "quantity": 5.0,
+      "unit": "g"
+    }
+  ],
+  "86": [
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu xanh",
+      "normalized_name": "dau_xanh",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đường phèn",
+      "normalized_name": "duong_phen",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Bột gelatin",
+      "normalized_name": "bot_gelatin",
+      "quantity": 10.0,
+      "unit": "g"
+    }
+  ],
+  "88": [
+    {
+      "ingredient": "Nước dừa",
+      "normalized_name": "nuoc_dua",
+      "quantity": 500.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Bột rau câu",
+      "normalized_name": "bot_rau_cau",
+      "quantity": 10.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cơm dừa",
+      "normalized_name": "com_dua",
+      "quantity": 100.0,
+      "unit": "g"
+    }
+  ],
+  "90": [
+    {
+      "ingredient": "Chuối",
+      "normalized_name": "chuoi",
+      "quantity": 4.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Lạc",
+      "normalized_name": "lac",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cơm dừa",
+      "normalized_name": "com_dua",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 20.0,
+      "unit": "g"
+    }
+  ],
+  "92": [
+    {
+      "ingredient": "Quả tắc",
+      "normalized_name": "qua_tac",
+      "quantity": 10.0,
+      "unit": "quả"
+    }
+  ],
+  "95": [
+    {
+      "ingredient": "Trà túi lọc",
+      "normalized_name": "tra_tui_loc",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Quả tắc",
+      "normalized_name": "qua_tac",
+      "quantity": 6.0,
+      "unit": "quả"
+    }
+  ],
+  "97": [
+    {
+      "ingredient": "Hoa atiso",
+      "normalized_name": "hoa_atiso",
+      "quantity": 2.0,
+      "unit": "quả"
+    }
+  ],
+  "99": [
+    {
+      "ingredient": "Mía lau",
+      "normalized_name": "mia_lau",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Lá dứa",
+      "normalized_name": "la_dua",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Rễ tranh",
+      "normalized_name": "re_tranh",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đường phèn",
+      "normalized_name": "duong_phen",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "La hán quả",
+      "normalized_name": "la_han_qua",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "36": [
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột gạo",
+      "normalized_name": "bot_gao",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu xanh",
+      "normalized_name": "dau_xanh",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 300.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Lá dứa",
+      "normalized_name": "la_dua",
+      "quantity": 1.0,
+      "unit": "bó"
+    }
+  ],
+  "4": [
+    {
+      "ingredient": "Bột bánh xèo",
+      "normalized_name": "bot_banh_xeo",
+      "quantity": 250.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 2.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 100.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Bột nghệ",
+      "normalized_name": "bot_nghe",
+      "quantity": 10.0,
+      "unit": "g"
+    }
+  ],
+  "6": [
+    {
+      "ingredient": "Bánh tráng",
+      "normalized_name": "banh_trang",
+      "quantity": 20.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bún tươi",
+      "normalized_name": "bun_tuoi",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 2.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    }
+  ],
+  "7": [
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 2.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "8": [
+    {
+      "ingredient": "Bánh mì",
+      "normalized_name": "banh_mi",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Pate",
+      "normalized_name": "pate",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Sốt mayonnaise",
+      "normalized_name": "sot_mayonnaise",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "9": [
+    {
+      "ingredient": "Bún tươi",
+      "normalized_name": "bun_tuoi",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 4.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Đu đủ",
+      "normalized_name": "du_du",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    }
+  ],
+  "29": [
+    {
+      "ingredient": "Cà tím",
+      "normalized_name": "ca_tim",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Lạc",
+      "normalized_name": "lac",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 30.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "39": [
+    {
+      "ingredient": "Mía lau",
+      "normalized_name": "mia_lau",
+      "quantity": 1000.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Quả tắc",
+      "normalized_name": "qua_tac",
+      "quantity": 2.0,
+      "unit": "quả"
+    }
+  ],
+  "15": [
+    {
+      "ingredient": "Bánh canh",
+      "normalized_name": "banh_canh",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cua đồng",
+      "normalized_name": "cua_dong",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Chả",
+      "normalized_name": "cha",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Trứng cút",
+      "normalized_name": "trung_cut",
+      "quantity": 10.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "23": [
+    {
+      "ingredient": "Bánh tráng",
+      "normalized_name": "banh_trang",
+      "quantity": 10.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Bún tươi",
+      "normalized_name": "bun_tuoi",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Nấm",
+      "normalized_name": "nam",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    }
+  ],
+  "30": [
+    {
+      "ingredient": "Gạo",
+      "normalized_name": "gao",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Nấm",
+      "normalized_name": "nam",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Cà chua",
+      "normalized_name": "ca_chua",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    }
+  ],
+  "32": [
+    {
+      "ingredient": "Đậu xanh",
+      "normalized_name": "dau_xanh",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu đen",
+      "normalized_name": "dau_den",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột rau câu",
+      "normalized_name": "bot_rau_cau",
+      "quantity": 10.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Lá dứa",
+      "normalized_name": "la_dua",
+      "quantity": 5.0,
+      "unit": "bó"
+    }
+  ],
+  "37": [
+    {
+      "ingredient": "Gạo",
+      "normalized_name": "gao",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Sữa tươi",
+      "normalized_name": "sua_tuoi",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 100.0,
+      "unit": "ml"
+    }
+  ],
+  "40": [
+    {
+      "ingredient": "Cà phê",
+      "normalized_name": "ca_phe",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Sữa đặc",
+      "normalized_name": "sua_dac",
+      "quantity": 60.0,
+      "unit": "ml"
+    }
+  ],
+  "54": [
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nấm",
+      "normalized_name": "nam",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    }
+  ],
+  "55": [
+    {
+      "ingredient": "Thịt gà",
+      "normalized_name": "thit_ga",
+      "quantity": 1.0,
+      "unit": "con"
+    },
+    {
+      "ingredient": "Lá chanh",
+      "normalized_name": "la_chanh",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Gừng",
+      "normalized_name": "gung",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    }
+  ],
+  "59": [
+    {
+      "ingredient": "Thịt gà",
+      "normalized_name": "thit_ga",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Mướp",
+      "normalized_name": "muop",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    }
+  ],
+  "43": [
+    {
+      "ingredient": "Thịt bò",
+      "normalized_name": "thit_bo",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Nước tương",
+      "normalized_name": "nuoc_tuong",
+      "quantity": 30.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Dầu hào",
+      "normalized_name": "dau_hao",
+      "quantity": 30.0,
+      "unit": "ml"
+    }
+  ],
+  "45": [
+    {
+      "ingredient": "Khoai lang",
+      "normalized_name": "khoai_lang",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đường phèn",
+      "normalized_name": "duong_phen",
+      "quantity": 150.0,
+      "unit": "g"
+    }
+  ],
+  "47": [
+    {
+      "ingredient": "Gạo nếp",
+      "normalized_name": "gao_nep",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu xanh",
+      "normalized_name": "dau_xanh",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nghệ",
+      "normalized_name": "nghe",
+      "quantity": 10.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 5.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Thịt gà",
+      "normalized_name": "thit_ga",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "65": [
+    {
+      "ingredient": "Thịt bò",
+      "normalized_name": "thit_bo",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Dầu hào",
+      "normalized_name": "dau_hao",
+      "quantity": 30.0,
+      "unit": "ml"
+    }
+  ],
+  "31": [
+    {
+      "ingredient": "Bột nếp",
+      "normalized_name": "bot_nep",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu xanh",
+      "normalized_name": "dau_xanh",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Gừng",
+      "normalized_name": "gung",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Lạc",
+      "normalized_name": "lac",
+      "quantity": 20.0,
+      "unit": "g"
+    }
+  ],
+  "33": [
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Bột rau câu",
+      "normalized_name": "bot_rau_cau",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Sữa tươi",
+      "normalized_name": "sua_tuoi",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Vải thiều",
+      "normalized_name": "vai_thieu",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đào ngâm",
+      "normalized_name": "dao_ngam",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hạt sen",
+      "normalized_name": "hat_sen",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "35": [
+    {
+      "ingredient": "Bột gạo",
+      "normalized_name": "bot_gao",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Lá dứa",
+      "normalized_name": "la_dua",
+      "quantity": 5.0,
+      "unit": "bó"
+    }
+  ],
+  "41": [
+    {
+      "ingredient": "Gạo nếp",
+      "normalized_name": "gao_nep",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu xanh",
+      "normalized_name": "dau_xanh",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Lá chuối",
+      "normalized_name": "la_chuoi",
+      "quantity": 5.0,
+      "unit": "miếng"
+    }
+  ],
+  "42": [
+    {
+      "ingredient": "Bột gạo",
+      "normalized_name": "bot_gao",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Lá chuối",
+      "normalized_name": "la_chuoi",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    }
+  ],
+  "38": [
+    {
+      "ingredient": "Bơ",
+      "normalized_name": "bo",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Sữa tươi",
+      "normalized_name": "sua_tuoi",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Sữa đặc",
+      "normalized_name": "sua_dac",
+      "quantity": 100.0,
+      "unit": "g"
+    }
+  ],
+  "44": [
+    {
+      "ingredient": "Bột gạo",
+      "normalized_name": "bot_gao",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nấm",
+      "normalized_name": "nam",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 2.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    }
+  ],
+  "46": [
+    {
+      "ingredient": "Gạo nếp",
+      "normalized_name": "gao_nep",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt gà",
+      "normalized_name": "thit_ga",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 2.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 100.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 2.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    }
+  ],
+  "48": [
+    {
+      "ingredient": "Bột nếp",
+      "normalized_name": "bot_nep",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Chả",
+      "normalized_name": "cha",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Lá chuối",
+      "normalized_name": "la_chuoi",
+      "quantity": 2.0,
+      "unit": "miếng"
+    }
+  ],
+  "49": [
+    {
+      "ingredient": "Cá",
+      "normalized_name": "ca",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bún tươi",
+      "normalized_name": "bun_tuoi",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bánh tráng",
+      "normalized_name": "banh_trang",
+      "quantity": 10.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Đậu phộng",
+      "normalized_name": "dau_phong",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "50": [
+    {
+      "ingredient": "Ốc",
+      "normalized_name": "oc",
+      "quantity": 1000.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Sả",
+      "normalized_name": "sa",
+      "quantity": 5.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 3.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Gừng",
+      "normalized_name": "gung",
+      "quantity": 20.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 30.0,
+      "unit": "ml"
+    }
+  ],
+  "51": [
+    {
+      "ingredient": "Bánh hỏi",
+      "normalized_name": "banh_hoi",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Ngũ vị hương",
+      "normalized_name": "ngu_vi_huong",
+      "quantity": 10.0,
+      "unit": "g"
+    }
+  ],
+  "52": [
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Ngũ vị hương",
+      "normalized_name": "ngu_vi_huong",
+      "quantity": 5.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 30.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    }
+  ],
+  "53": [
+    {
+      "ingredient": "Cá",
+      "normalized_name": "ca",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bánh tráng",
+      "normalized_name": "banh_trang",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Quả tắc",
+      "normalized_name": "qua_tac",
+      "quantity": 3.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Trứng vịt",
+      "normalized_name": "trung_vit",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 50.0,
+      "unit": "ml"
+    }
+  ],
+  "56": [
+    {
+      "ingredient": "Khổ qua",
+      "normalized_name": "kho_qua",
+      "quantity": 3.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nấm",
+      "normalized_name": "nam",
+      "quantity": 30.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    }
+  ],
+  "57": [
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Khoai môn",
+      "normalized_name": "khoai_mon",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    }
+  ],
+  "58": [
+    {
+      "ingredient": "Cua đồng",
+      "normalized_name": "cua_dong",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cà chua",
+      "normalized_name": "ca_chua",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Mắm tôm",
+      "normalized_name": "mam_tom",
+      "quantity": 10.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Rau thơm",
+      "normalized_name": "rau_thom",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hoa chuối",
+      "normalized_name": "hoa_chuoi",
+      "quantity": 200.0,
+      "unit": "g"
+    }
+  ],
+  "60": [
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 30.0,
+      "unit": "ml"
+    }
+  ],
+  "61": [
+    {
+      "ingredient": "Đậu phụ",
+      "normalized_name": "dau_phu",
+      "quantity": 4.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nấm",
+      "normalized_name": "nam",
+      "quantity": 20.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cà chua",
+      "normalized_name": "ca_chua",
+      "quantity": 3.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Dầu hào",
+      "normalized_name": "dau_hao",
+      "quantity": 15.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 15.0,
+      "unit": "ml"
+    }
+  ],
+  "62": [
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Mộc nhĩ",
+      "normalized_name": "moc_nhi",
+      "quantity": 20.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Miến dong",
+      "normalized_name": "mien_dong",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bánh tráng",
+      "normalized_name": "banh_trang",
+      "quantity": 20.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Trứng vịt",
+      "normalized_name": "trung_vit",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    }
+  ],
+  "64": [
+    {
+      "ingredient": "Thịt gà",
+      "normalized_name": "thit_ga",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Gừng",
+      "normalized_name": "gung",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 30.0,
+      "unit": "ml"
+    }
+  ],
+  "63": [
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Thịt heo",
+      "normalized_name": "thit_heo",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 30.0,
+      "unit": "ml"
+    }
+  ],
+  "66": [
+    {
+      "ingredient": "Mực tươi",
+      "normalized_name": "muc_tuoi",
+      "quantity": 400.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Dứa",
+      "normalized_name": "dua",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Cà chua",
+      "normalized_name": "ca_chua",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Dưa leo",
+      "normalized_name": "dua_leo",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Cần tây",
+      "normalized_name": "can_tay",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 2.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Dầu hào",
+      "normalized_name": "dau_hao",
+      "quantity": 30.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 20.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "70": [
+    {
+      "ingredient": "Thịt bò",
+      "normalized_name": "thit_bo",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cà rốt",
+      "normalized_name": "ca_rot",
+      "quantity": 2.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tây",
+      "normalized_name": "hanh_tay",
+      "quantity": 1.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Sả",
+      "normalized_name": "sa",
+      "quantity": 3.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Gừng",
+      "normalized_name": "gung",
+      "quantity": 30.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hoa hồi",
+      "normalized_name": "hoa_hoi",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Quế",
+      "normalized_name": "que",
+      "quantity": 10.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Ngũ vị hương",
+      "normalized_name": "ngu_vi_huong",
+      "quantity": 10.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bánh mì",
+      "normalized_name": "banh_mi",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Nước dừa",
+      "normalized_name": "nuoc_dua",
+      "quantity": 500.0,
+      "unit": "ml"
+    }
+  ],
+  "71": [
+    {
+      "ingredient": "Bột nếp",
+      "normalized_name": "bot_nep",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Lá gai",
+      "normalized_name": "la_gai",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu xanh",
+      "normalized_name": "dau_xanh",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cơm dừa",
+      "normalized_name": "com_dua",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Lá chuối",
+      "normalized_name": "la_chuoi",
+      "quantity": 5.0,
+      "unit": "miếng"
+    }
+  ],
+  "73": [
+    {
+      "ingredient": "Chuối",
+      "normalized_name": "chuoi",
+      "quantity": 5.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột gạo",
+      "normalized_name": "bot_gao",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 300.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Lạc",
+      "normalized_name": "lac",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "74": [
+    {
+      "ingredient": "Chuối",
+      "normalized_name": "chuoi",
+      "quantity": 5.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Bánh mì",
+      "normalized_name": "banh_mi",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Trứng vịt",
+      "normalized_name": "trung_vit",
+      "quantity": 2.0,
+      "unit": "quả"
+    }
+  ],
+  "75": [
+    {
+      "ingredient": "Khoai mì",
+      "normalized_name": "khoai_mi",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Trứng vịt",
+      "normalized_name": "trung_vit",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "76": [
+    {
+      "ingredient": "Bột gạo",
+      "normalized_name": "bot_gao",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Lạc",
+      "normalized_name": "lac",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "77": [
+    {
+      "ingredient": "Khoai mì",
+      "normalized_name": "khoai_mi",
+      "quantity": 1000.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Lạc",
+      "normalized_name": "lac",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "78": [
+    {
+      "ingredient": "Khoai mì",
+      "normalized_name": "khoai_mi",
+      "quantity": 1000.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Lạc",
+      "normalized_name": "lac",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "67": [
+    {
+      "ingredient": "Cá",
+      "normalized_name": "ca",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Dứa",
+      "normalized_name": "dua",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cà chua",
+      "normalized_name": "ca_chua",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Giá đỗ",
+      "normalized_name": "gia_do",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bạc hà",
+      "normalized_name": "bac_ha",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Me",
+      "normalized_name": "me",
+      "quantity": 30.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 20.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 2.0,
+      "unit": "tép"
+    }
+  ],
+  "68": [
+    {
+      "ingredient": "Tôm",
+      "normalized_name": "tom",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Sả",
+      "normalized_name": "sa",
+      "quantity": 5.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Ớt",
+      "normalized_name": "ot",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 1.0,
+      "unit": "quả"
+    }
+  ],
+  "69": [
+    {
+      "ingredient": "Cá",
+      "normalized_name": "ca",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Cà chua",
+      "normalized_name": "ca_chua",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Hành lá",
+      "normalized_name": "hanh_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Thì là",
+      "normalized_name": "thi_la",
+      "quantity": 1.0,
+      "unit": "bó"
+    },
+    {
+      "ingredient": "Hành tím",
+      "normalized_name": "hanh_tim",
+      "quantity": 3.0,
+      "unit": "củ"
+    },
+    {
+      "ingredient": "Tỏi",
+      "normalized_name": "toi",
+      "quantity": 3.0,
+      "unit": "tép"
+    },
+    {
+      "ingredient": "Nước mắm",
+      "normalized_name": "nuoc_mam",
+      "quantity": 30.0,
+      "unit": "ml"
+    }
+  ],
+  "72": [
+    {
+      "ingredient": "Cốm dẹp",
+      "normalized_name": "com_dep",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu xanh",
+      "normalized_name": "dau_xanh",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Lá dứa",
+      "normalized_name": "la_dua",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "79": [
+    {
+      "ingredient": "Khoai lang",
+      "normalized_name": "khoai_lang",
+      "quantity": 500.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 100.0,
+      "unit": "ml"
+    }
+  ],
+  "80": [
+    {
+      "ingredient": "Đậu xanh",
+      "normalized_name": "dau_xanh",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 20.0,
+      "unit": "g"
+    }
+  ],
+  "81": [
+    {
+      "ingredient": "Đậu đen",
+      "normalized_name": "dau_den",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 100.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 20.0,
+      "unit": "g"
+    }
+  ],
+  "82": [
+    {
+      "ingredient": "Bắp",
+      "normalized_name": "bap",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 50.0,
+      "unit": "g"
+    }
+  ],
+  "84": [
+    {
+      "ingredient": "Hạt sen",
+      "normalized_name": "hat_sen",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đường phèn",
+      "normalized_name": "duong_phen",
+      "quantity": 100.0,
+      "unit": "g"
+    }
+  ],
+  "87": [
+    {
+      "ingredient": "Bưởi",
+      "normalized_name": "buoi",
+      "quantity": 1.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Đậu xanh",
+      "normalized_name": "dau_xanh",
+      "quantity": 150.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Bột năng",
+      "normalized_name": "bot_nang",
+      "quantity": 100.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Phèn chua",
+      "normalized_name": "phen_chua",
+      "quantity": 10.0,
+      "unit": "g"
+    }
+  ],
+  "89": [
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 400.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Kem tươi",
+      "normalized_name": "kem_tuoi",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Sữa tươi",
+      "normalized_name": "sua_tuoi",
+      "quantity": 100.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Cơm dừa",
+      "normalized_name": "com_dua",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Lạc",
+      "normalized_name": "lac",
+      "quantity": 30.0,
+      "unit": "g"
+    }
+  ],
+  "91": [
+    {
+      "ingredient": "Chanh",
+      "normalized_name": "chanh",
+      "quantity": 2.0,
+      "unit": "quả"
+    },
+    {
+      "ingredient": "Sả",
+      "normalized_name": "sa",
+      "quantity": 5.0,
+      "unit": "củ"
+    }
+  ],
+  "93": [
+    {
+      "ingredient": "Rau má",
+      "normalized_name": "rau_ma",
+      "quantity": 300.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Đậu xanh",
+      "normalized_name": "dau_xanh",
+      "quantity": 100.0,
+      "unit": "g"
+    }
+  ],
+  "94": [
+    {
+      "ingredient": "Nước dừa",
+      "normalized_name": "nuoc_dua",
+      "quantity": 600.0,
+      "unit": "ml"
+    }
+  ],
+  "96": [
+    {
+      "ingredient": "Trà túi lọc",
+      "normalized_name": "tra_tui_loc",
+      "quantity": 2.0,
+      "unit": "miếng"
+    },
+    {
+      "ingredient": "Đào ngâm",
+      "normalized_name": "dao_ngam",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Syrup đào",
+      "normalized_name": "syrup_dao",
+      "quantity": 50.0,
+      "unit": "ml"
+    }
+  ],
+  "98": [
+    {
+      "ingredient": "Đậu nành",
+      "normalized_name": "dau_nanh",
+      "quantity": 200.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Lá dứa",
+      "normalized_name": "la_dua",
+      "quantity": 5.0,
+      "unit": "bó"
+    }
+  ],
+  "100": [
+    {
+      "ingredient": "Bột sương sáo",
+      "normalized_name": "bot_suong_sao",
+      "quantity": 50.0,
+      "unit": "g"
+    },
+    {
+      "ingredient": "Nước cốt dừa",
+      "normalized_name": "nuoc_cot_dua",
+      "quantity": 200.0,
+      "unit": "ml"
+    },
+    {
+      "ingredient": "Sữa tươi",
+      "normalized_name": "sua_tuoi",
+      "quantity": 200.0,
+      "unit": "ml"
+    }
+  ]
+}

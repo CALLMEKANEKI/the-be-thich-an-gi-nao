@@ -8,6 +8,11 @@ from app.services.weather_service import get_current_weather
 
 client = genai.Client(api_key=settings.gemini_api_key)
 
+MODELS_TO_TRY = [
+    "gemini-3.1-flash-lite",
+    "gemini-2.5-flash-lite",
+    "gemini-3.5-flash-lite"
+]
 def build_dish_list_text(dishes: list[Dish]) -> str:
     lines = [f"- {d.name} (id={d.id}, category={d.category}): {d.description}" for d in dishes]
     return "\n".join(lines)
@@ -38,15 +43,9 @@ def recommend_dish(mood: str, lat: float = None, lon: float = None) -> dict:
     - "confidence": (float) Độ tự tin từ 0 đến 1.
     """
 
-    models_to_try = [
-        "gemini-3.1-flash-lite",
-        "gemini-2.5-flash-lite",
-        "gemini-3.5-flash-lite"
-    ]
-
     response_text = None
     
-    for model_name in models_to_try:
+    for model_name in MODELS_TO_TRY:
         try:
             response = client.models.generate_content(
                 model=model_name,
