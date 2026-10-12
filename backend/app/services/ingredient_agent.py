@@ -6,7 +6,7 @@ from app.db.models import Dish
 from app.db.session import SessionLocal
 from app.schemas.cart import IngredientListIn
 from app.services.ai_agent import MODELS_TO_TRY, client
-from app.services.ingredient_service import SYNONYMS, slugify
+from app.services.ingredient_service import normalize_key, slugify
 
 logger = logging.getLogger(__name__)
 
@@ -37,12 +37,11 @@ Quy tắc:
 def _clean(raw_items) -> list[dict]:
     items = []
     for i in raw_items:
-        slug = slugify(i.name)
-        if i.quantity <= 0 or not slug:
-            continue  # dòng sai thì bỏ
+        if i.quantity <= 0 or not slugify(i.name):
+            continue
         items.append({
             "ingredient": " ".join(i.name.split()),
-            "normalized_name": SYNONYMS.get(slug, slug),
+            "normalized_name": normalize_key(i.name),
             "quantity": round(i.quantity, 2),
             "unit": getattr(i.unit, "value", i.unit),
         })

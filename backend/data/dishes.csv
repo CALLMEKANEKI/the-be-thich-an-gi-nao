@@ -1,0 +1,101 @@
+name,decription,category,image_url
+Phở bò,"Bánh phở mềm ăn cùng nước dùng trong, thơm mùi hồi quế và thịt bò thái lát. Thường dùng kèm rau thơm, giá và chanh.",Món nước,https://unsplash.com/s/photos/ph%E1%BB%9F-b%C3%B2
+Bún riêu,"Bún nước dùng vị chua thanh từ cà chua và mắm tôm, thường có riêu cua, đậu phụ và rau sống.",Món nước,https://www.pexels.com/vi-vn/tim-kiem/?q=b%C3%BAn%20ri%C3%AAu
+Cao lầu,"Đặc sản Hội An với sợi mì dai, thịt xá xíu, rau sống và tóp mỡ, dùng rất ít nước.",Món nước,https://www.pexels.com/vi-vn/tim-kiem/cao%20l%E1%BA%A7u/
+Bánh xèo,"Bánh bột gạo chiên giòn với nhân tôm, thịt và giá, cuốn rau sống rồi chấm nước mắm.",Món chiên,https://www.pexels.com/vi-vn/tim-kiem/b%C3%A1nh%20x%C3%A8o/
+Bánh khọt,"Bánh bột gạo nhỏ chiên giòn, thường có tôm ở giữa, ăn kèm rau sống và nước mắm chua ngọt.",Món chiên,https://www.pexels.com/vi-vn/tim-kiem/?q=b%C3%A1nh%20kh%E1%BB%8Dt
+Gỏi cuốn,"Bánh tráng cuốn tôm, thịt, bún và rau sống, thường chấm tương đậu phộng hoặc nước mắm.",Món cuốn,https://www.pexels.com/vi-vn/tim-kiem/?q=g%E1%BB%8Fi%20cu%E1%BB%91n
+Bánh bột lọc,"Bánh trong làm từ bột năng, nhân tôm thịt, có độ dai nhẹ và thường dùng với nước mắm cay ngọt.",Món hấp,https://www.pexels.com/vi-vn/tim-kiem/?q=b%C3%A1nh%20b%E1%BB%99t%20l%E1%BB%8Dc
+Bánh mì thịt,"Bánh mì giòn kẹp thịt, pate, đồ chua, rau thơm và nước sốt; là món ăn đường phố phổ biến.",Món khô,https://www.pexels.com/vi-vn/tim-kiem/b%C3%A1nh%20m%C3%AC%20th%E1%BB%8Bt/
+Bún chả,"Bún ăn kèm thịt heo nướng và chả viên nướng, dùng với nước mắm pha chua ngọt cùng rau sống.",Món nước,https://www.pexels.com/vi-vn/tim-kiem/b%C3%BAn%20ch%E1%BA%A3/
+Cơm tấm,"Cơm từ hạt gạo tấm ăn cùng sườn nướng, bì, chả trứng và nước mắm pha.",Món khô,https://www.pexels.com/vi-vn/tim-kiem/c%C6%A1m%20t%E1%BA%A5m/
+Cá kho tộ,"Cá kho trong nồi đất với nước mắm, đường, tiêu và gia vị cho đến khi nước kho sánh đậm.",Món mặn,https://www.pexels.com/vi-vn/tim-kiem/?q=c%C3%A1%20kho%20food
+Bánh căn,"Bánh nhỏ làm từ bột gạo, đổ trong khuôn nóng với trứng, tôm hoặc thịt, thường ăn kèm nước chấm và rau.",Món chiên/nướng,https://www.pexels.com/vi-vn/tim-kiem/?q=b%C3%A1nh%20c%C4%83n
+Miến gà,"Miến dong mềm dai ăn cùng thịt gà xé và nước dùng gà trong, thường thêm hành và rau thơm.",Món nước,https://www.pexels.com/vi-vn/tim-kiem/?q=mi%E1%BA%BFn%20g%C3%A0
+Bánh ướt,"Bánh bột gạo hấp mềm, thường ăn với chả, thịt nướng, rau thơm và nước mắm pha.",Món hấp,https://www.pexels.com/vi-vn/tim-kiem/?q=b%C3%A1nh%20%C6%B0%E1%BB%9Bt
+Bánh canh cua,"Sợi bánh canh dai mềm dùng với nước dùng cua sánh nhẹ, thường có thịt cua, tôm, chả cá và trứng cút.",Món nước,https://unsplash.com/s/photos/vietnamese-food
+Bún cá Châu Đốc,"Bún với nước dùng đậm vị từ cá, thường có cá lóc, rau và các loại gia vị đặc trưng miền Tây.",Món nước,https://www.pexels.com/vi-vn/tim-kiem/?q=b%C3%BAn%20c%C3%A1%20ch%C3%A2u%20%C4%91%E1%BB%91c
+Bún thịt nướng,"Bún gạo ăn cùng thịt heo nướng, rau sống, đồ chua, đậu phộng và nước mắm pha.",Món khô,https://www.pexels.com/vi-vn/tim-kiem/b%C3%BAn%20th%E1%BB%8Bt%20n%C6%B0%E1%BB%9Bng/
+Bún mắm,"Món bún miền Tây với nước dùng từ mắm cá, thường có tôm, cá, thịt heo quay và nhiều loại rau.",Món nước,https://www.pexels.com/vi-vn/tim-kiem/?q=b%C3%BAn%20m%E1%BA%AFm
+Thịt kho trứng,"Thịt heo và trứng được kho lâu trong nước dừa cùng nước mắm, tạo màu nâu óng và vị mặn ngọt.",Món mặn,https://www.pexels.com/vi-vn/tim-kiem/?q=th%E1%BB%8Bt%20kho%20tr%E1%BB%A9ng
+Cơm chiên,"Cơm nguội được rang cùng trứng, rau củ, thịt hoặc hải sản và gia vị cho đến khi hạt cơm săn.",Món khô,https://www.pexels.com/vi-vn/tim-kiem/c%C6%A1m%20chi%C3%AAn/
+Bánh tét,"Bánh làm từ gạo nếp nhân đậu xanh, thịt lợn hoặc chuối, gói trong lá chuối hình trụ tròn và luộc chín.",Món khô,https://unsplash.com/fr/s/photos/banh-tet
+Bánh nậm,"Bánh bột gạo tráng mỏng trên lá chuối, phủ nhân tôm thịt băm nhỏ rồi hấp chín, ăn cùng nước mắm ngọt.",Món hấp,https://unsplash.com/fr/s/photos/b%C3%A1nh-n%E1%BA%ADm
+Bò lúc lắc,"Thịt bò cắt khối vuông xào nhanh trên lửa lớn cùng hành tây, ớt đà lạt và sốt dầu hàu đậm đà.",Món xào,https://unsplash.com/fr/s/photos/b%C3%B2-l%C3%BAc-l%E1%BA%AFc-food
+Bánh đúc nóng,"Bánh đúc mềm mịn ăn nóng cùng nhân thịt băm xào mộc nhĩ, hành phi và nước mắm chan ấm thanh nhẹ.",Món mặn,https://unsplash.com/s/photos/vietnamese-food
+Bánh rế,"Món bánh ngọt đặc sản làm từ khoai lang hoặc khoai mì bào sợi, chiên giòn và ngào đường thốt nốt.",Đồ ngọt,https://www.pexels.com/search/?q=b%C3%A1nh%20r%E1%BA%BF
+Xôi gà,"Xôi nếp dẻo thơm ăn kèm thịt gà xé phay, mỡ hành, dưa góp và sốt đậm vị.",Món khô,https://unsplash.com/fr/s/photos/x%C3%B4i
+Xôi xéo,"Xôi nếp dẻo màu vàng nghệ, ăn cùng đậu xanh giã mịn, hành phi thơm lừng và mỡ gà.",Món khô,https://unsplash.com/fr/s/photos/x%C3%B4i
+Bánh giầy chả,"Bánh giầy dẻo mềm làm từ bột nếp, kẹp miếng chả lụa hoặc chả quế thơm phức ở giữa.",Món khô,https://www.pexels.com/search/?q=b%C3%A1nh%20d%C3%A0y%20ch%E1%BA%A3%20ch%E1%BA%A3
+Lẩu thả Phan Thiết,"Lẩu gồm cá mai tươi trộn gia vị, ăn cùng bánh tráng, bún, rau củ và nước sốt đặc biệt.",Món nước,https://unsplash.com/s/photos/vietnamese-hotpot
+Ốc xào sả ớt,"Ốc tươi xào cùng sả, ớt, lá chanh và mắm đường đậm đà, thơm nồng vị cay ấm.",Món xào,https://unsplash.com/fr/s/photos/%E1%BB%91c-x%C3%A0o-food
+Bánh hỏi thịt quay,"Bánh hỏi bột gạo dệt tấm mỏng, ăn kèm thịt heo quay giòn rụm, mỡ hành và nước mắm chua ngọt.",Món khô,https://www.pexels.com/search/?q=b%C3%A1nh%20h%E1%BB%8Fi
+Thịt heo quay,"Thịt ba chỉ giòn rụm lớp da, phần thịt mềm mọng đậm vị, chấm cùng nước mắm chua ngọt hoặc sốt xá xíu.",Món mặn,https://unsplash.com/s/photos/roast-pork
+Cá chiên xù,"Cá tươi nguyên con lăn bột chiên giòn rụm, ăn kèm bánh tráng, rau sống và nước mắm me/tỏi ớt.",Món chiên,https://unsplash.com/s/photos/fried-fish
+Chả lá lốt,Thịt lợn băm trộn mộc nhĩ cuộn trong lá lốt rồi chiên vàng thơm lừng.,Món chiên,https://www.pexels.com/search/?q=ch%E1%BA%A3%20l%C3%A1%20l%E1%BB%91t
+Gà luộc lá chanh,"Thịt gà ta luộc chín tới da vàng giòn, ăn kèm muối tiêu chanh và lá chanh thái sợi.",Món luộc,https://www.pexels.com/search/?q=g%C3%A0%20lu%E1%BB%99c
+Canh khổ qua nhồi thịt,"Khổ qua bỏ ruột nhồi thịt băm mộc nhĩ, hầm thanh ngọt mát lành.",Món canh ,https://unsplash.com/fr/s/photos/bitter-melon-soup
+Canh sườn hầm khoai sọ,Sườn heo ninh mềm cùng khoai sọ bùi dẻo và rau nổ/mùi tàu thơm mát.,Món canh,https://www.pexels.com/vi-vn/tim-kiem/?q=canh%20s%C6%B0%E1%BB%9Dn%20khoai%20s%E1%BB%8D
+Canh riêu cua đồng,"Canh ngọt thanh từ gạch cua đồng, vị chua dịu từ cà chua và giấm mẻ, ăn cùng rau sống.",Món canh,https://www.pexels.com/search/?q=canh%2Bcua
+Lòng gà xào mướp,"Mề, gan, lòng gà xào nhanh trên lửa lớn cùng mướp hương thái lát giòn ngọt, thơm nồng vị hành, tỏi và tiêu.",món xào,https://unsplash.com/fr/s/photos/l%C3%B2ng-g%C3%A0-x%C3%A0o
+Sườn xào chua ngọt,Sườn heo đậm vị sốt chua dịu từ me/giấm và đường.,món mặn,https://unsplash.com/fr/s/photos/s%C6%B0%E1%BB%9Dn-s%E1%BB%91t-chua-ng%E1%BB%8Dt
+Đậu phụ nhồi thịt sốt cà chua,"Đậu phụ chiên vàng nhồi nhân thịt băm mộc nhĩ, om cùng sốt cà chua chua ngọt dịu.",món mặn,https://unsplash.com/fr/s/photos/%C4%91%E1%BA%ADu-ph%E1%BB%A5-nh%E1%BB%93i-th%E1%BB%8Bt-s%E1%BB%91t-c%C3%A0
+Nem rán,"Nhân thịt lợn/tôm băm trộn mộc nhĩ, miến, giá đỗ gói trong bánh tráng và chiên giòn vàng, ăn kèm nước mắm chua ngọt.",món chên,https://unsplash.com/fr/s/photos/fried-spring-rolls
+Tôm rang thịt ba chỉ,"Tôm tươi rang cháy cạnh cùng thịt ba chỉ béo ngậy, thấm vị mặn ngọt đậm đà.",món mặn,https://unsplash.com/fr/s/photos/stir-fried-shrimp
+Gà kho gừng,"Thịt gà đậm đà, săn chắc thơm nồng vị gừng thái sợi và tiêu cay ấm.",món kho,https://unsplash.com/fr/s/photos/g%C3%A0-kho-g%E1%BB%ABng
+Bò xào hành tây,"Thịt bò mềm xào lửa lớn cùng hành tây, cần tây và ớt đà lạt giòn ngọt.",món xào,https://unsplash.com/fr/s/photos/stir-fry-beef
+Mực xào chua ngọt,"Mực tươi xào cùng dứa (thơm), cà chua, dưa leo và cần tây đậm đà tròn vị.",món xào,https://unsplash.com/fr/s/photos/stir-fry-squid
+Canh chua cá lóc,"Canh nấu cá lóc cùng dứa, cà chua, giá đỗ, bạc hà (dọc mùng) vị chua ngọt giải nhiệt.",món canh,https://unsplash.com/fr/s/photos/canh-chua-c%C3%A1-l%C3%B3c
+Tôm hấp sả,"Tôm biển hoặc tôm sông tươi hấp chín tới cùng sả đập dập, giữ nguyên vị ngọt đậm tự nhiên.",món hấp,https://unsplash.com/fr/s/photos/steamed-shrimp
+Cá sốt cà chua,"Cá chép hoặc cá khúc chiên sơ rồi om trong sốt cà chua tươi đậm đà, rắc thêm hành lá và thì là.",món mặn,https://unsplash.com/fr/s/photos/fish-tomato-sauce
+Bò kho,"Thịt bò bắp/nạm hầm mềm với hoa hồi, thảo quả, cà rốt, nước sốt đậm đà ăn kèm cơm hoặc bánh mì.",món hầm,https://unsplash.com/fr/s/photos/bo-kho
+Phở chay,"Phở chay gồm bánh phở mềm, nước dùng rau củ thanh nhẹ, kết hợp đậu hũ, nấm và rau thơm. Đây là phiên bản không dùng thịt của món phở truyền thống.",món chay,https://unsplash.com/s/photos/vegetarian-pho
+Bánh mì chay,"Bánh mì chay sử dụng bánh mì giòn kẹp rau củ, dưa leo, đồ chua, nấm hoặc đậu hũ và rau thơm. Món ăn tiện lợi, phù hợp cho bữa sáng hoặc ăn nhẹ.",món chay,https://unsplash.com/s/photos/vegetarian-banh-mi
+Gỏi cuốn chay,"Gỏi cuốn chay gồm bánh tráng cuốn cùng bún, rau sống, dưa leo, đậu hũ hoặc nấm và thường ăn kèm nước chấm. Món có vị thanh mát và nhiều rau xanh.",món chay,https://unsplash.com/s/photos/vietnamese-spring-rolls
+Bún chay,"Bún chay gồm bún tươi kết hợp rau củ, nấm, đậu hũ và các loại rau thơm. Nước dùng hoặc nước trộn được nêm theo kiểu chay.",món chay,https://unsplash.com/s/photos/vegetarian-noodles
+Mì xào chay,"Mì xào chay được xào cùng các loại rau củ, nấm và đậu hũ, tạo nên món ăn thơm ngon nhưng không sử dụng thịt.",món chay,https://unsplash.com/s/photos/vegetarian-noodles
+Đậu hũ chiên sả ớt,Đậu hũ được chiên vàng rồi kết hợp với sả và ớt tạo mùi thơm đặc trưng. Đây là món chay phổ biến trong các bữa cơm gia đình.,món chay,https://unsplash.com/s/photos/fried-tofu
+Nộm hoa chuối chay,"Hoa chuối thái mỏng được trộn cùng rau thơm, đậu phộng và nước trộn chua ngọt. Phiên bản chay có thể kết hợp với đậu hũ và các loại rau củ.",món chay,https://unsplash.com/s/photos/banana-flower-salad
+Bánh xèo chay,"Bánh xèo chay có lớp vỏ vàng giòn, bên trong thường có giá đỗ, nấm và các loại rau củ. Món thường được ăn cùng rau sống và nước chấm chay.",món chay,https://unsplash.com/s/photos/vietnamese-pancake
+Cà tím nướng mỡ hành,"Cà tím được nướng mềm rồi phủ hành lá và dầu hành, tạo vị béo thơm. Đây là món rau đơn giản thường xuất hiện trong bữa cơm Việt.",món chay,https://unsplash.com/s/photos/grilled-eggplant
+Cơm chay,"Cơm chay kết hợp cơm trắng với các món rau củ, nấm, đậu hũ và thực phẩm không có thịt cá. Mâm cơm có thể thay đổi nguyên liệu tùy vùng miền.",món chay,https://unsplash.com/s/photos/vietnamese-vegetarian-food
+Chè trôi nước,"Chè trôi nước gồm những viên bột nếp tròn có nhân đậu xanh, nấu trong nước đường gừng và thường ăn cùng nước cốt dừa. Món có vị ngọt thơm và mềm dẻo.",đồ ngọt,https://unsplash.com/s/photos/che-troi-nuoc
+Chè ba màu,"Chè ba màu gồm nhiều lớp đậu, thạch và các nguyên liệu ngọt, kết hợp với nước cốt dừa và đá. Món có màu sắc bắt mắt và vị ngọt béo.",đồ ngọt,https://unsplash.com/s/photos/vietnamese-dessert
+Chè Thái,"Chè Thái kết hợp nhiều loại trái cây, thạch, hạt và nước cốt dừa hoặc sữa. Món thường được dùng lạnh với đá để giải nhiệt.",đồ ngọt,https://unsplash.com/s/photos/thai-dessert
+Bánh flan,"Bánh flan là món bánh mềm mịn làm từ trứng và sữa, phủ một lớp caramel ngọt bên trên. Đây là món tráng miệng phổ biến tại Việt Nam.",đồ ngọt,https://unsplash.com/s/photos/flan
+Bánh bò,"Bánh bò là loại bánh làm từ bột gạo, có kết cấu mềm xốp với nhiều lỗ nhỏ đặc trưng. Bánh thường có vị ngọt nhẹ và thơm mùi nước cốt dừa.",đồ ngọt,https://unsplash.com/s/photos/vietnamese-banh-bo
+Bánh da lợn,"Bánh da lợn gồm nhiều lớp bánh mềm dai làm từ bột năng, đậu xanh và nước cốt dừa, thường có màu xanh của lá dứa. Món có vị ngọt béo và thơm.",đồ ngọt,https://unsplash.com/s/photos/vietnamese-banh-da-lon
+Sữa chua nếp cẩm,Sữa chua nếp cẩm kết hợp sữa chua mềm mịn với nếp cẩm lên men có vị ngọt và hơi chua. Món thường được dùng lạnh như một món ăn nhẹ hoặc tráng miệng.,đồ ngọt,https://unsplash.com/s/photos/yogurt-sticky-rice
+Sinh tố bơ,"Sinh tố bơ được xay từ bơ chín cùng đá và sữa hoặc sữa đặc, tạo thành thức uống đặc sánh và béo ngậy. Đây là loại sinh tố phổ biến ở Việt Nam.",đồ uống,https://unsplash.com/s/photos/avocado-smoothie
+Nước mía,"Nước mía được ép trực tiếp từ cây mía tươi, thường thêm đá và đôi khi kết hợp với tắc để tạo vị chua nhẹ. Đây là thức uống đường phố quen thuộc ở Việt Nam.",đồ uống,https://unsplash.com/s/photos/sugarcane-juice
+Cà phê sữa đá,Cà phê sữa đá được pha bằng cà phê phin đậm đặc kết hợp với sữa đặc và đá. Đây là một trong những thức uống đặc trưng và phổ biến của Việt Nam.,đồ uống,https://unsplash.com/s/photos/vietnamese-iced-coffee
+Bánh ít lá gai,"Bánh ít lá gai có lớp vỏ dẻo thơm làm từ bột nếp và lá gai, bên trong thường là nhân đậu xanh hoặc dừa. Đây là đặc sản phổ biến ở miền Trung.",Đồ ngọt,https://unsplash.com/s/photos/vietnamese-rice-cake
+Bánh cốm,Bánh cốm có lớp vỏ mềm dẻo làm từ cốm non và nhân đậu xanh ngọt thơm. Món thường được dùng trong các dịp lễ và làm quà.,Đồ ngọt,https://unsplash.com/s/photos/vietnamese-green-rice
+Bánh chuối hấp,"Bánh chuối hấp được làm từ chuối chín kết hợp bột năng hoặc bột gạo, hấp đến khi mềm dẻo và thường ăn cùng nước cốt dừa.",Đồ ngọt,https://unsplash.com/s/photos/steamed-banana-cake
+Bánh chuối nướng,"Bánh chuối nướng được làm từ chuối chín và bột, nướng đến khi mặt bánh vàng thơm. Bánh có vị ngọt tự nhiên và kết cấu mềm.",Đồ ngọt,https://unsplash.com/s/photos/banana-bread
+Bánh khoai mì nướng,"Bánh khoai mì nướng làm từ khoai mì bào nhuyễn kết hợp nước cốt dừa và đường, sau đó nướng vàng. Món có vị béo và dẻo đặc trưng.",Đồ ngọt,https://unsplash.com/s/photos/cassava-cake
+Bánh đúc ngọt,"Bánh đúc ngọt có kết cấu mềm dẻo, thường được làm từ bột gạo hoặc bột năng và dùng cùng nước đường, đậu phộng hoặc nước cốt dừa.",Đồ ngọt,https://unsplash.com/s/photos/vietnamese-rice-cake
+Bánh tằm khoai mì,"Bánh tằm khoai mì được làm từ khoai mì tạo thành những sợi bánh nhiều màu, ăn cùng dừa nạo và đường. Món có vị ngọt béo và dai mềm.",Đồ ngọt,https://unsplash.com/s/photos/cassava-dessert
+Khoai mì hấp nước cốt dừa,"Khoai mì được hấp chín rồi dùng cùng nước cốt dừa và mè hoặc đậu phộng. Món dân dã có vị bùi, dẻo và béo.",Đồ ngọt,https://unsplash.com/s/photos/steamed-cassava
+Khoai lang dẻo,"Khoai lang được hấp hoặc luộc rồi chế biến thành những miếng mềm dẻo, có vị ngọt tự nhiên. Món thường được dùng như món ăn nhẹ hoặc tráng miệng.",Đồ ngọt,https://unsplash.com/s/photos/sweet-potato-dessert
+Chè đậu xanh,"Chè đậu xanh được nấu từ đậu xanh với đường, có thể dùng nóng hoặc lạnh và thường kết hợp nước cốt dừa. Món có vị ngọt thanh và bùi.",Đồ ngọt,https://unsplash.com/s/photos/mung-bean-dessert
+Chè đậu đen,"Chè đậu đen được nấu từ đậu đen với đường cho đến khi mềm, thường dùng cùng đá và nước cốt dừa. Đây là món giải nhiệt quen thuộc.",Đồ ngọt,https://unsplash.com/s/photos/black-bean-dessert
+Chè bắp,"Chè bắp được nấu từ hạt bắp ngọt cùng đường và thường dùng với nước cốt dừa. Món có vị ngọt nhẹ, thơm mùi bắp.",Đồ ngọt,https://unsplash.com/s/photos/corn-dessert
+Chè khoai môn,Chè khoai môn gồm những miếng khoai môn mềm bùi nấu cùng đường và nước cốt dừa. Món có vị béo thơm và thường dùng lạnh hoặc ấm.,Đồ ngọt,https://unsplash.com/s/photos/taro-dessert
+Chè hạt sen,Chè hạt sen được nấu từ hạt sen với đường phèn tạo vị thanh nhẹ. Món có thể dùng nóng hoặc lạnh và thường được xem là món tráng miệng thanh mát.,Đồ ngọt,https://unsplash.com/s/photos/lotus-seed-dessert
+Chè khúc bạch,"Chè khúc bạch gồm những miếng thạch mềm thơm kết hợp với trái cây, hạnh nhân và nước đường thanh mát. Món thường được dùng lạnh.",Đồ ngọt,https://unsplash.com/s/photos/vietnamese-che-khuc-bach
+Chè sương sa hạt lựu,"Món chè gồm các viên bột màu đỏ giống hạt lựu, thạch và đậu xanh, dùng cùng nước đường và nước cốt dừa. Món có màu sắc bắt mắt.",Đồ ngọt,https://unsplash.com/s/photos/vietnamese-dessert
+Chè bưởi,"Chè bưởi sử dụng cùi bưởi giòn dai nấu cùng đậu xanh và nước đường, thường ăn với nước cốt dừa. Món có vị ngọt béo và thơm.",Đồ ngọt,https://unsplash.com/s/photos/pomelo-dessert
+Rau câu dừa,"Rau câu dừa là món thạch làm từ nước dừa và cơm dừa, có kết cấu mềm mát và vị ngọt thanh. Món thường được dùng lạnh.",Đồ ngọt,https://unsplash.com/s/photos/coconut-jelly
+Kem dừa,"Kem dừa được làm từ nước cốt dừa hoặc sữa dừa, có vị béo thơm và thường được phục vụ trong vỏ dừa hoặc cùng các loại topping.",Đồ ngọt,https://unsplash.com/s/photos/coconut-ice-cream
+Kem chuối,"Kem chuối được làm từ chuối, nước cốt dừa, đậu phộng và dừa nạo rồi làm lạnh. Món có vị béo thơm và ngọt tự nhiên.",Đồ ngọt,https://unsplash.com/s/photos/banana-ice-cream
+Nước chanh sả,"Nước chanh sả kết hợp nước cốt chanh với đường và sả, thường dùng lạnh với đá. Thức uống có vị chua ngọt và mùi thơm nhẹ.",Đồ uống,https://unsplash.com/s/photos/lemon-lemongrass-drink
+Nước tắc,"Nước tắc được pha từ nước cốt tắc, đường và nước lọc, thường thêm đá. Món uống có vị chua ngọt và thơm đặc trưng của quả tắc.",Đồ uống,https://unsplash.com/s/photos/calamansi-juice
+Nước rau má,"Nước rau má được xay từ rau má tươi rồi lọc lấy nước, có thể thêm đường hoặc đậu xanh. Đây là thức uống dân dã thường dùng để giải khát.",Đồ uống,https://unsplash.com/s/photos/centella-juice
+Nước dừa tươi,"Nước dừa tươi được lấy trực tiếp từ trái dừa, có vị ngọt thanh và mát. Đây là thức uống tự nhiên phổ biến ở nhiều vùng miền Việt Nam.",Đồ uống,https://unsplash.com/s/photos/fresh-coconut-water
+Trà tắc,"Trà tắc là trà pha cùng nước cốt tắc và đường, thường uống lạnh với đá. Thức uống có vị chua ngọt và thơm mùi trà.",Đồ uống,https://unsplash.com/s/photos/calamansi-tea
+Trà đào,"Trà đào kết hợp trà với đào ngâm và syrup đào, thường dùng lạnh cùng đá. Món có vị ngọt thơm và dễ uống.",Đồ uống,https://unsplash.com/s/photos/peach-tea
+Trà atiso,"Trà atiso được pha từ hoa hoặc lá atiso, có vị thanh nhẹ và thường được dùng nóng hoặc lạnh. Đây là thức uống gắn với ẩm thực và đặc sản Đà Lạt.",Đồ uống,https://unsplash.com/s/photos/artichoke-tea
+Sữa đậu nành,"Sữa đậu nành được nấu từ hạt đậu nành xay và lọc, có vị béo nhẹ và thường uống nóng hoặc lạnh. Đây là thức uống quen thuộc ở Việt Nam.",Đồ uống,https://unsplash.com/s/photos/soy-milk
+Nước sâm,"Nước sâm là thức uống nấu từ nhiều loại thảo mộc và nguyên liệu như mía lau, rễ tranh hoặc lá dứa. Nước thường được uống lạnh để giải khát.",Đồ uống,https://unsplash.com/s/photos/herbal-tea
+Sương sáo,"Sương sáo là thạch màu đen có kết cấu mềm mát, thường dùng cùng nước đường, sữa hoặc nước cốt dừa và đá. Đây là món giải khát phổ biến.",Đồ ngọt,https://unsplash.com/s/photos/grass-jelly-dessert

@@ -1,0 +1,9 @@
+{
+  "synonyms": { "lac": "dau_phong" },
+  "overrides": {
+    "bò": "thit_bo",
+    "bơ": "qua_bo",
+    "dừa": "dua",
+    "dứa": "thom"
+  }
+}
