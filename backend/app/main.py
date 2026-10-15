@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import spin,places,dishes
+from app.routers import spin,places,dishes, cart
 from app.core.config import settings
 from app.db.session import engine, Base
 
@@ -8,6 +8,7 @@ app = FastAPI(title="Thế bé thích ăn gì nào? API", version="v1")
 app.include_router(spin.router)
 app.include_router(places.router)
 app.include_router(dishes.router)
+app.include_router(cart.router)
 
 @app.get("/health")
 def health_check():
