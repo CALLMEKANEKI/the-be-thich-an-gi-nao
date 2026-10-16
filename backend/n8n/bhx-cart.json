@@ -1,0 +1,156 @@
+{
+  "name": "bhx-cart",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bhx-cart",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4f97cc40-c650-4ccd-b635-d0ba5420f574",
+      "name": "Webhook",
+      "webhookId": "4416e121-e45f-4e3a-88a5-aa0a60acf139"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"notion_page_id\": \"={{ $json.id }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        656,
+        80
+      ],
+      "id": "6b638702-f9fe-4806-9b60-d0344ba62fd3",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body;\nconst items = body.items || [];\nconst fmt = (n) => Number(n).toLocaleString('vi-VN');\n\nconst have = items.filter(i => i.available);\nconst miss = items.filter(i => !i.available);\n\nconst lines = ['CÓ THỂ MUA TẠI BÁCH HOÁ XANH'];\nfor (const i of have) {\n  lines.push(`☐ ${i.ingredient}: cần ${i.quantity} ${i.unit} → ${i.packs_needed} × ${i.product_name} = ${fmt(i.subtotal_vnd)}đ`);\n}\nlines.push('', 'TỰ MUA (chưa tìm thấy trên Bách Hoá Xanh)');\nfor (const i of miss) {\n  lines.push(`☐ ${i.ingredient}: ${i.quantity} ${i.unit}`);\n}\n\nlet text = lines.join('\\n');\nif (text.length > 1900) text = text.slice(0, 1900) + '…';  // Notion giới hạn 2000 ký tự mỗi ô text\n\nreturn [{\n  json: {\n    title: `${body.dish?.name ?? 'Món'} — ${body.request_id ?? 'no-id'}`,\n    dish: body.dish?.name ?? '',\n    requestId: body.request_id ?? '',\n    available: have.length,\n    unavailable: miss.length,\n    total: body.summary?.estimated_total_vnd ?? 0,\n    itemsText: text,\n  },\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "c0da4716-7b1d-406a-b398-ed8bbbb3f1e1",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "dataSourceId": {
+          "__rl": true,
+          "value": "e5752cd2-450f-4a44-9a11-0168c98fb4b5",
+          "mode": "list",
+          "cachedResultName": "05 — Shopping List (n8n)",
+          "cachedResultUrl": "https://app.notion.com/p/1ab22d9946ed41069d9f8a0744140cac"
+        },
+        "title": "={{ $json.title }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Dish|rich_text",
+              "textContent": "={{ $json.dish }}"
+            },
+            {
+              "key": "Request ID|rich_text",
+              "textContent": "={{ $json.requestId }}"
+            },
+            {
+              "key": "Available|number",
+              "numberValue": "={{ $json.available }}"
+            },
+            {
+              "key": "Unavailable|number",
+              "numberValue": "={{ $json.unavailable }}"
+            },
+            {
+              "key": "Total VND|number",
+              "numberValue": "={{ $json.total }}"
+            },
+            {
+              "key": "Items|rich_text",
+              "textContent": "={{ $json.itemsText }}"
+            }
+          ]
+        },
+        "options": {},
+        "simple": "={{ true }}"
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 3,
+      "position": [
+        448,
+        0
+      ],
+      "id": "bb1aa9f5-260c-46cf-bd47-2077b7bef995",
+      "name": "Create a database page",
+      "credentials": {
+        "notionApi": {
+          "id": "QcBKkjZrfd4bKGyt",
+          "name": "Notion account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Create a database page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a database page": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2dd36743-739a-422c-80f5-c030db5fda88",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2228655cbae65767c83ea9a8d4cab1e53ef9edf9a9ac96ffa8349d0f52f971e6"
+  },
+  "nodeGroups": [],
+  "id": "zVmch1j4sZXoAG6P",
+  "tags": []
+}

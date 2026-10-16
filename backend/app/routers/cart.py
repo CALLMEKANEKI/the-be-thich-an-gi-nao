@@ -21,10 +21,10 @@ def create_cart(payload: CartRequest):
         "items": [i.model_dump() for i in items],
     })
     notion_page_id = (n8n_result or {}).get("notion_page_id")
-
+    request_id = payload.request_id or f"req_{uuid.uuid4().hex[:8]}"
     return CartResponse(
         data=CartData(
-            request_id=payload.request_id or f"req_{uuid.uuid4().hex[:8]}",
+            request_id=request_id,
             status="processed",
             summary=summary,
             items=items,
