@@ -2,16 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'provider/recommendation_provider.dart';
 import 'screens/recommendation_screen.dart';
+import 'provider/cart_provider.dart';
+import 'screens/cart_test_screen.dart';
 
 void main() {
   runApp(
-    // const MyApp()
-    ChangeNotifierProvider(
-      create: (_) => RecommendationProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => RecommendationProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+      ],
       child: const MaterialApp(
-        home: RecommendationScreen(),
-      )
-    )
+        debugShowCheckedModeBanner: false,
+        home: CartTestScreen(), // Hoặc màn hình chính MyApp() của bạn
+      ),
+    ),
   );
 }
 
