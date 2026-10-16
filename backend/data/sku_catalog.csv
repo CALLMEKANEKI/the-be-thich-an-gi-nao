@@ -1,0 +1,132 @@
+sku,normalized_name,ingredient,unit,so_mon_dung,luong_thuong_dung,product_name,pack_size,price_vnd,search_keyword
+SKU001,bac_ha,Bạc hà,g,1,100.0,Bạc hà 200g,200,8400,bạc hà
+SKU002,banh_canh,Bánh canh,g,1,300.0,Bánh canh Nhật Minh gói 350g,350,31500,bánh canh
+SKU003,banh_hoi,Bánh hỏi,g,1,500.0,KHONG_CO,,,bánh hỏi
+SKU004,banh_mi,Bánh mì,g,1,200.0,Bánh mì sandwich khoai tây Fresta Richy gói 275g,275,21000,bánh mì
+SKU005,banh_mi,Bánh mì,miếng,3,2.0,Bánh mì chà bông Staff gói 55g,1,10000,bánh mì
+SKU006,banh_pho,Bánh phở,g,2,450.0,Phở tươi Nhật Minh gói 500g,500,35000,phở tươi
+SKU007,banh_trang,Bánh tráng,bó,1,1.0,Bánh tráng gạo Mikiri gói 200g,1,29000,bánh tráng
+SKU008,banh_trang,Bánh tráng,miếng,4,15.0,Bánh tráng dừa nướng Phương Nguyên 70g,3,11600,bánh tráng
+SKU009,bap,Bắp,quả,1,2.0,Bắp mỹ trái từ 300g trở lên,1,9000,bắp
+SKU010,bot_banh_xeo,Bột bánh xèo,g,4,250.0,Bột bánh xèo Meizan gói 400g,400,19000,bột bánh xèo
+SKU011,bot_gao,Bột gạo,g,7,150.0,Bột gạo Tài Ký gói 400g,400,22500,bột gạo
+SKU012,bot_gelatin,Bột gelatin,g,2,15.0,KHONG_CO,,,bột gelatin
+SKU013,bot_nang,Bột năng,g,24,50.0,Bột năng Tấn Sang gói 400g,400,13700,bột năng
+SKU014,bot_nep,Bột nếp,g,3,300.0,Bột nếp Tài Ký gói 400g,400,27500,bột nếp
+SKU015,bot_nghe,Bột nghệ,g,1,10.0,Nghệ bột Vipep hũ 35g,35,11500,bột nghệ
+SKU016,bot_rau_cau,Bột rau câu,g,3,10.0,Bột rau câu dẻo VinaThạch gói 10g,10,22500,bột rau câu
+SKU017,bot_suong_sao,Bột sương sáo,g,1,50.0,Sương sáo trắng 3K gói 50gr,50,17900,bột sương sáo
+SKU018,bot_tra_xanh,Bột trà xanh,g,1,5.0,Bột matcha Cozy Barista 100g,100,120000,bột trà xanh
+SKU019,bun_tuoi,Bún tươi,g,9,500.0,Bún tươi dạng khô Bà Bảy gói 200g,200,15800,bún tươi
+SKU020,buoi,Bưởi,quả,1,1.0,Bưởi năm roi trái từ 900g trở lên,1,36000,bưởi
+SKU021,ca,Cá,g,7,500.0,Cá lóc làm sạch 500g,500,42500,cá
+SKU022,ca_chua,Cà chua,g,1,300.0,Cà chua trái từ 60g trở lên,300,9240,cà chua
+SKU023,ca_chua,Cà chua,quả,6,2.0,Cà chua trái từ 60g trở lên,5,9240,cà chua
+SKU024,ca_phe,Cà phê,g,1,50.0,Cà phê quán chuẩn vị Phương Vy 500g,500,97000,cà phê
+SKU025,ca_rot,Cà rốt,củ,13,1.0,Cà rốt củ từ 150g trở lên,3,12800,cà rốt
+SKU026,ca_rot,Cà rốt,g,2,50.0,Cà rốt củ từ 150g trở lên,500,12800,cà rốt
+SKU027,ca_tim,Cà tím,g,1,100.0,Cà tím khoảng 500g (2 trái),500,12300,cà tím
+SKU028,ca_tim,Cà tím,quả,1,2.0,Cà tím khoảng 500g (2 trái),2,12300,cà tím
+SKU029,can_tay,Cần tây,bó,1,1.0,KHONG_CO,,,cần tây
+SKU030,cha,Chả,g,3,100.0,Chả giò nhân thịt Cầu Tre gói 500g,500,65000,chả
+SKU031,chanh,Chanh,quả,23,1.0,Chanh không hạt 300g (2 - 6 trái),4,11600,chanh
+SKU032,chuoi,Chuối,quả,3,5.0,Chuối cau trái từ 80g - 180g,8,27480,chuối
+SKU033,com_dep,Cốm dẹp,g,1,300.0,KHONG_CO,,,cốm dẹp
+SKU034,com_dua,Cơm dừa,g,4,75.0,KHONG_CO,,,cơm dừa
+SKU035,com_nguoi,Cơm nguội,g,1,400.0,KHONG_CO,,,cơm nguội
+SKU036,cua_dong,Cua đồng,g,3,300.0,Cua đồng xay 250g,250,24000,cua đồng
+SKU037,da_heo,Da heo,g,2,100.0,Da - mỡ heo C.P,300,7500,da heo
+SKU038,dao_ngam,Đào ngâm,g,2,150.0,KHONG_CO,,,đào ngâm
+SKU039,dau_den,Đậu đen,g,2,150.0,Đậu đen hạt gói 150g,150,15800,đậu đen
+SKU040,dau_hao,Dầu hào,ml,4,30.0,Dầu hào Maggi đậm đặc chai 350g,350,30000,dầu hào
+SKU041,dau_nanh,Đậu nành,g,1,200.0,Đậu nành gói 500g,500,27500,đậu nành
+SKU042,dau_phong,Lạc,g,10,50.0,Đậu phộng cao cấp 150g,150,17900,lạc
+SKU043,dau_phu,Đậu phụ,miếng,12,2.0,Đậu hũ ta Vị Nguyên hộp 280g,280,1,đậu phụ
+SKU044,dau_xanh,Đậu xanh,g,11,150.0,Đậu xanh hạt 150g,150,16800,đậu xanh
+SKU045,du_du,Đu đủ,g,4,125.0,Đu đủ vàng trái 1kg,1500,39750,đu đủ
+SKU046,dua_leo,Dưa leo,củ,12,1.0,Dưa leo trái từ 100g trở lên,500,7500,dưa leo
+SKU047,dua_leo,Dưa leo,quả,1,1.0,Dưa leo trái từ 100g trở lên,4,7500,dưa leo
+SKU048,duong_phen,Đường phèn,g,5,100.0,Đường phèn hạt Hoàng Hải gói 500g,500,29500,đường phèn
+SKU049,gao,Gạo,g,2,200.0,Gạo thơm đặc sản Mê Gạo ST25 túi 5kg,5000,115000,gạo
+SKU050,gao_nep,Gạo nếp,g,3,300.0,Nếp cái hoa vàng Vinh Hiển túi 1kg,1000,41000,gạo nếp
+SKU051,gao_tam,Gạo tấm,g,1,300.0,KHONG_CO,,,gạo tấm
+SKU052,gia_do,Giá đỗ,g,14,150.0,Giá mầm sạch gói 300g,300,11600,giá đỗ
+SKU053,gio_song,Giò sống,g,1,100.0,Giò sống 200g,200,36900,giò sống
+SKU054,gung,Gừng,củ,6,1.0,Gừng củ từ 50g trở lên,2,4640,gừng
+SKU055,gung,Gừng,g,4,25.0,Gừng củ từ 50g trở lên,100,4640,gừng
+SKU056,hanh_la,Hành lá,bó,29,1.0,Hành lá gói khoảng 100g,1,6000,hành lá
+SKU057,hanh_la,Hành lá,g,2,20.0,Hành lá gói khoảng 100g,100,6000,hành lá
+SKU058,hanh_nhan,Hạnh nhân,g,1,50.0,KHONG_CO,,,hạnh nhân
+SKU059,hanh_tay,Hành tây,củ,11,1.0,Hành tây 300gr,3,10600,hành tây
+SKU060,hanh_tay,Hành tây,g,1,50.0,Hành tây củ từ 100g trở lên,100,15000,hành tây
+SKU061,hanh_tim,Hành tím,củ,35,2.0,Hành tím 200g (túi từ 25 củ trở lên),25,20000,hành tím
+SKU062,hanh_tim,Hành tím,tép,1,5.0,Hành tím 200g (túi từ 25 củ trở lên),25,20000,hành tím
+SKU063,hat_sen,Hạt sen,g,2,125.0,Hạt sen khô gói 100g,100,38000,hạt sen
+SKU064,hoa_atiso,Hoa atiso,quả,1,2.0,KHONG_CO,,,hoa atiso
+SKU065,hoa_chuoi,Hoa chuối,g,2,250.0,KHONG_CO,,,hoa chuối
+SKU066,hoa_hoi,Hoa hồi,g,2,5.0,KHONG_CO,,,hoa hồi
+SKU067,hoa_hoi,Hoa hồi,quả,1,2.0,KHONG_CO,,,hoa hồi
+SKU068,kem_tuoi,Kem tươi,ml,3,200.0,Kem sữa chua măng cụt táo tây Celano hộp 460ml,460,91000,kem 
+SKU069,kho_qua,Khổ qua,quả,1,3.0,Khổ qua 500g (3 - 5 trái),5,14000,khổ qua
+SKU070,khoai_lang,Khoai lang,g,2,500.0,Khoai lang Nhật 500g (2 - 5 củ),500,16600,khoai lang
+SKU071,khoai_mi,Khoai mì,g,3,1000.0,KHONG_CO,,,khoai mì
+SKU072,khoai_mon,Khoai môn,g,2,300.0,KHONG_CO,,,khoai môn
+SKU073,la_chanh,Lá chanh,bó,1,1.0,KHONG_CO,,,lá chanh
+SKU074,la_chuoi,Lá chuối,bó,1,1.0,KHONG_CO,,,lá chuối
+SKU075,la_chuoi,Lá chuối,miếng,3,5.0,KHONG_CO,,,lá chuối
+SKU076,la_dua,Lá dứa,bó,5,5.0,KHONG_CO,,,lá dứa
+SKU077,la_dua,Lá dứa,g,1,50.0,KHONG_CO,,,lá dứa
+SKU078,la_gai,Lá gai,g,1,100.0,KHONG_CO,,,lá gai
+SKU079,la_han_qua,La hán quả,quả,1,1.0,KHONG_CO,,,la hán quả
+SKU080,mam_ca_linh,Mắm cá linh,g,1,150.0,KHONG_CO,,,mắm cá linh
+SKU081,mam_ca_linh,Mắm cá linh,ml,1,100.0,KHONG_CO,,,mắm cá linh
+SKU082,mam_tom,Mắm tôm,ml,2,30.0,Mắm tôm Tĩnh Gia chai 120g,120,13500,mắm tôm
+SKU083,me,Me,g,1,30.0,Me chua 68g,68,6000,me chua
+SKU084,mi,Mì,g,1,200.0,Mì trứng cao cấp Meizan gói 500g,500,33000,mì trứng
+SKU085,mi_cao_lau,Mì cao lầu,g,1,400.0,KHONG_CO,,,mì cao lầu
+SKU086,mia_lau,Mía lau,g,1,300.0,KHONG_CO,,,mía 
+SKU087,mia_lau,Mía lau,ml,1,1000.0,Đường lỏng Biên Hòa Syrup mía chai 400ml,400,18400,mía
+SKU088,mien_dong,Miến dong,g,2,125.0,Miến dong Susan gói 200g,200,26500,miến dong
+SKU089,moc_nhi,Mộc nhĩ,g,1,20.0,Nấm mèo đen khô gói 50g,50,15400,mộc nhĩ
+SKU090,muc_tuoi,Mực tươi,g,1,400.0,Mực nút làm sạch,200,46000,mực tươi
+SKU091,muop,Mướp,quả,1,2.0,Mướp hương (trái khoảng 250g),1,7000,mướp
+SKU092,nam,Nấm,g,11,100.0,Nấm hương 150g,150,33000,nấm
+SKU093,nghe,Nghệ,g,2,30.0,Nghệ bột Vipep hũ 35g,35,11500,nghệ
+SKU094,ngu_vi_huong,Ngũ vị hương,g,4,10.0,Bột ngũ vị hương Vianco gói 10g,10,6300,ngũ vị hương
+SKU095,nuoc_cot_dua,Nước cốt dừa,ml,26,200.0,Nước cốt dừa organic Vietcoco lon 400ml,400,38000,nước cốt dừa
+SKU096,nuoc_dua,Nước dừa,ml,3,500.0,Nước dừa xiêm xanh Vico Fresh 1 lít,1000,36000,nước dừa
+SKU097,nuoc_mam,Nước mắm,ml,25,50.0,Nước mắm cá cơm Hạnh Phúc 60 độ đạm chai 500ml,500,153000,nước mắm
+SKU098,nuoc_tuong,Nước tương,ml,5,50.0,Nước tương thượng hạng Nam Dương chính hiệu Con Mèo Đen chai 500ml,500,43000,nước tương
+SKU099,oc,Ốc,g,1,1000.0,Thịt ốc bươu vỉ 400g,400,32400,ốc bươu
+SKU100,ot,Ớt,quả,21,2.0,Ớt hiểm trái gói 50g,50,5500,ớt hiểm trái
+SKU101,pate,Pate,g,1,50.0,Pate thịt heo Vissan 170g,170,38000,pate
+SKU102,phen_chua,Phèn chua,g,1,10.0,KHONG_CO,,,phèn chua
+SKU103,qua_bo,Bơ,quả,1,2.0,Bơ Booth trái từ 300g trở lên,2,14500,bơ 
+SKU104,qua_tac,Quả tắc,quả,4,4.5,Tắc 200g (20 - 21 trái),20,6800,tắc
+SKU105,que,Quế,g,3,5.0,Rau húng quế gói khoảng 100g,100,5400,quế
+SKU106,rau_ma,Rau má,g,1,300.0,Rau má khoảng 200g,200,13300,rau má
+SKU107,rau_thom,Rau thơm,bó,23,1.0,Rau thơm các loại gói 200g,1,14200,rau thơm
+SKU108,re_tranh,Rễ tranh,g,1,100.0,KHONG_CO,,,rễ tranh
+SKU109,sa,Sả,bó,1,3.0,Sả cây 200gr,1,6800,sả
+SKU110,sa,Sả,củ,7,5.0,Sả cây 200gr,1,6800,sả
+SKU111,sot_mayonnaise,Sốt mayonnaise,g,1,50.0,Xốt mayonnaise Simply chai 230g,230,39000,sốt mayonnaise
+SKU112,sua_dac,Sữa đặc,g,1,100.0,Sữa đặc có đường Ông Thọ Trắng nhãn xanh hộp 380g,380,27500,sữa đặc
+SKU113,sua_dac,Sữa đặc,ml,1,60.0,Kem đặc Vinamilk Tài Lộc lon 380g,380,17500,sữa đặc
+SKU114,sua_tuoi,Sữa tươi,ml,7,200.0,Sữa tươi thanh trùng ít đường TH true MILK hộp 950ml,950,47500,sữa tươi
+SKU115,syrup_dao,Syrup đào,ml,1,50.0,KHONG_CO,,,siro đào
+SKU116,thi_la,Thì là,bó,1,1.0,Rau thì là 100g,1,5400,thì là
+SKU117,thit_bo,Thịt bò,g,4,350.0,Đùi bò,200,54459,thịt bò
+SKU118,thit_ga,Thịt gà,con,1,1.0,Gà dai da giòn nhập khẩu Hàn Quốc (túi 1 con),1,79000,gà nguyên con
+SKU119,thit_ga,Thịt gà,g,5,400.0,Ức gà có xương,400,38000,thịt gà
+SKU120,thit_heo,Thịt heo,g,27,200.0,Sườn que heo nhập khẩu,500,34500,thịt heo
+SKU121,thom,Dứa,g,1,150.0,Thơm trái trung từ 800g trở lên,800,17000,dứa
+SKU122,thom,Dứa,quả,1,1.0,Thơm trái trung từ 800g trở lên,1,17000,dứa
+SKU123,toi,Tỏi,tép,37,3.0,Tỏi tím Trung Quốc 200g,20,12600,tỏi
+SKU124,tom,Tôm,g,13,200.0,Thịt tôm nguyên chất Minh Phú hộp 200g,200,70000,tôm
+SKU125,tra_tui_loc,Trà túi lọc,miếng,2,2.0,Trà lài túi lọc Phúc Long hộp 50g (25 gói x 2g),25,42000,trà túi lọc
+SKU126,trung_cut,Trứng cút,quả,1,10.0,Trứng cút hộp 30 quả từ 300g-360g,30,25000,trứng cút
+SKU127,trung_vit,Trứng vịt,quả,10,2.0,Trứng vịt hộp 10 quả từ 600g-700g,10,38000,trứng vịt
+SKU128,trung_ga,Trứng gà,quả,10,2.0,Trứng gà hộp 10 quả từ 600g-700g,10,28000,trứng trứng gà
+SKU129,vai_thieu,Vải thiều,g,1,100.0,Vải thiều,500,27500,vải thiều
+SKU130,vai_thieu,Vải thiều,quả,1,10.0,Vải thiều,20,25000,vải thiều
+SKU131,xuong_bo,Xương bò,g,1,500.0,KHONG_CO,,,xương bò

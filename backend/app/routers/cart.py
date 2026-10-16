@@ -4,6 +4,7 @@ from fastapi import APIRouter
 
 from app.schemas.cart import CartData, CartRequest, CartResponse
 from app.services.sku_service import build_cart
+from app.services.n8n import sync_to_n8n
 
 router = APIRouter(prefix="/api/v1", tags=["cart"])
 
@@ -12,9 +13,14 @@ router = APIRouter(prefix="/api/v1", tags=["cart"])
 def create_cart(payload: CartRequest):
     items, summary = build_cart(payload.ingredients)
 
-    # TODO (task n8n Webhook Workflow): gửi `items` + `payload.dish` sang n8n
-    # (N8N_BHX_WEBHOOK_URL), nhận notion_page_id. Bọc try/except: n8n lỗi
-    # thì vẫn trả kết quả map, notion_page_id = None.
+    n8n_result = sync_to_n8n({
+        "request_id": payload.request_id,
+        "user_id": payload.user_id,
+        "dish": payload.dish.model_dump(),
+        "summary": summary.model_dump(),
+        "items": [i.model_dump() for i in items],
+    })
+    notion_page_id = (n8n_result or {}).get("notion_page_id")
 
     return CartResponse(
         data=CartData(
@@ -22,6 +28,6 @@ def create_cart(payload: CartRequest):
             status="processed",
             summary=summary,
             items=items,
-            notion_page_id=None,
+            notion_page_id=notion_page_id,
         )
     )
