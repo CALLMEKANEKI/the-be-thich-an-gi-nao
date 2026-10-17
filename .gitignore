@@ -1,6 +1,11 @@
 # Python
 backend/venv/
+backend/.venv/
+.venv/
+venv/
 backend/.env
+**/.env
+**/.venv/
 **/__pycache__/
 *.pyc
 backend/app/ml_models/
