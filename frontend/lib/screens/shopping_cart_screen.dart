@@ -6,7 +6,10 @@ import '../models/ingredient.dart';
 import '../provider/cart_provider.dart';
 import '../services/deeplink_service.dart';
 
-/// Screen 08_Shopping_List from Stitch Project "Food Decider Flutter UI"
+/// Screen 08_Shopping_List matching Notion System Architecture & Handoff Guide
+/// Segregated into:
+/// 1. "Có thể mua ở Bách Hoá Xanh" (available = true, with direct buy search_url button)
+/// 2. "Mua tại chợ (Tự mua)" (available = false, shows note, no buy button)
 class ShoppingCartScreen extends StatefulWidget {
   final int dishId;
   final String dishName;
@@ -45,6 +48,13 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         );
   }
 
+  String _formatQuantity(double q) {
+    if (q == q.roundToDouble()) {
+      return q.toInt().toString();
+    }
+    return q.toString();
+  }
+
   void _toggleItem(String name) {
     setState(() {
       if (_checkedItemNames.contains(name)) {
@@ -70,24 +80,35 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           icon: const Icon(Icons.arrow_back_ios_new, size: 20),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text('Danh sách mua sắm'),
+        title: Column(
+          children: [
+            const Text(
+              'Danh sách mua sắm',
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+            ),
+            Text(
+              widget.dishName,
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppTheme.onSurfaceVariant,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, size: 22),
-            onPressed: () {},
+            icon: const Icon(Icons.refresh, size: 22),
+            tooltip: 'Tải lại giỏ hàng',
+            onPressed: () {
+              context.read<CartProvider>().createCart(
+                    dishId: widget.dishId,
+                    dishName: widget.dishName,
+                    ingredients: widget.ingredients,
+                  );
+            },
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Container(
-              width: 32,
-              height: 32,
-              decoration: const BoxDecoration(
-                color: AppTheme.primary,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.person, color: Colors.white, size: 18),
-            ),
-          ),
+          const SizedBox(width: 8),
         ],
       ),
       body: Consumer<CartProvider>(
@@ -105,16 +126,30 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
   Widget _buildLoadingState() {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          CircularProgressIndicator(color: AppTheme.primary),
-          SizedBox(height: 16),
-          Text(
-            'Đang tra cứu giá & cửa hàng tại Bách Hoá Xanh...',
-            style: TextStyle(fontSize: 14, color: AppTheme.onSurfaceVariant),
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            CircularProgressIndicator(color: AppTheme.primary),
+            SizedBox(height: 18),
+            Text(
+              'Đang đối soát danh mục Bách Hoá Xanh...',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: AppTheme.onSurface,
+              ),
+            ),
+            SizedBox(height: 6),
+            Text(
+              'Phân loại nguyên liệu siêu thị & chợ truyền thống',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 13, color: AppTheme.onSurfaceVariant),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -151,22 +186,55 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   }
 
   Widget _buildSuccessState(CartResult cart, bool isFromCache) {
-    final allItems = cart.items;
-    final totalCount = allItems.length;
+    final availableItems = cart.availableItems;
+    final unavailableItems = cart.unavailableItems;
+    final totalCount = cart.items.length;
     final doneCount = _checkedItemNames.length;
-    final remainingCount = totalCount - doneCount;
-    final progressPercent = totalCount > 0 ? (doneCount / totalCount * 100).toInt() : 0;
+    final progressPercent =
+        totalCount > 0 ? (doneCount / totalCount * 100).toInt() : 0;
 
     return SafeArea(
       child: Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 1. Progress Card (Tiến độ đi chợ)
+                  // Offline Cache Banner (Notion requirement)
+                  if (isFromCache)
+                    Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(bottom: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 9),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFF8E1),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                            color: const Color(0xFFFFECB3), width: 1),
+                      ),
+                      child: Row(
+                        children: const [
+                          Icon(Icons.cloud_off,
+                              size: 18, color: Color(0xFFB78103)),
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              'Dữ liệu cũ (offline) — lưu từ phiên trước',
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF7A5800),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                  // 1. Progress & Summary Card
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(16),
@@ -175,7 +243,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: const [
                         BoxShadow(
-                          color: Color(0x12FF6B35),
+                          color: Color(0x10FF6B35),
                           blurRadius: 16,
                           offset: Offset(0, 4),
                         ),
@@ -196,8 +264,11 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                     color: AppTheme.primaryFixed,
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: const Icon(Icons.shopping_cart,
-                                      color: AppTheme.primary, size: 20),
+                                  child: const Icon(
+                                    Icons.checklist_rtl_rounded,
+                                    color: AppTheme.primary,
+                                    size: 20,
+                                  ),
                                 ),
                                 const SizedBox(width: 10),
                                 Column(
@@ -206,14 +277,14 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                     const Text(
                                       'TIẾN ĐỘ ĐI CHỢ',
                                       style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 10.5,
                                         fontWeight: FontWeight.w700,
                                         letterSpacing: 0.8,
                                         color: AppTheme.onSurfaceVariant,
                                       ),
                                     ),
                                     Text(
-                                      'Đã chuẩn bị: $doneCount / $totalCount món ($progressPercent%)',
+                                      'Đã xong: $doneCount / $totalCount món ($progressPercent%)',
                                       style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w800,
@@ -225,11 +296,16 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                               ],
                             ),
                             if (doneCount > 0)
-                              IconButton(
-                                icon: const Icon(Icons.delete_sweep,
-                                    color: AppTheme.onSurfaceVariant, size: 20),
+                              TextButton.icon(
                                 onPressed: _clearChecked,
-                                tooltip: 'Xóa các món đã chọn',
+                                icon: const Icon(Icons.restart_alt, size: 16),
+                                label: const Text('Bỏ chọn'),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: AppTheme.onSurfaceVariant,
+                                  visualDensity: VisualDensity.compact,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                ),
                               ),
                           ],
                         ),
@@ -240,7 +316,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(6),
                           child: LinearProgressIndicator(
-                            value: totalCount > 0 ? (doneCount / totalCount) : 0,
+                            value:
+                                totalCount > 0 ? (doneCount / totalCount) : 0,
                             backgroundColor: AppTheme.surfaceContainerHigh,
                             valueColor: const AlwaysStoppedAnimation<Color>(
                                 AppTheme.primaryContainer),
@@ -248,24 +325,64 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                           ),
                         ),
 
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 12),
 
+                        // Summary Statistics Pill Row
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Còn $remainingCount món cần chuẩn bị',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: AppTheme.onSurfaceVariant,
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFE8F5E9),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.storefront,
+                                        color: Color(0xFF2E7D32), size: 16),
+                                    const SizedBox(width: 6),
+                                    Expanded(
+                                      child: Text(
+                                        'Bách Hoá Xanh: ${cart.summary.available}',
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          color: Color(0xFF1B5E20),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Text(
-                              '$progressPercent%',
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w800,
-                                color: AppTheme.primary,
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFFFF3E0),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.store,
+                                        color: Color(0xFFE65100), size: 16),
+                                    const SizedBox(width: 6),
+                                    Expanded(
+                                      child: Text(
+                                        'Mua tại chợ: ${cart.summary.unavailable}',
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          color: Color(0xFFBF360C),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -276,175 +393,71 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
                   const SizedBox(height: 20),
 
-                  // 2. Section: Cần mua hôm nay
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.local_mall, color: AppTheme.primary, size: 20),
-                          const SizedBox(width: 8),
-                          const Text(
-                            'Cần mua hôm nay',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                              color: AppTheme.onSurface,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: AppTheme.primaryFixed,
-                              borderRadius: BorderRadius.circular(9999),
-                            ),
-                            child: Text(
-                              '$remainingCount',
-                              style: const TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w800,
-                                color: AppTheme.onPrimaryFixed,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Text(
-                        'Sắp xếp theo quầy',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: AppTheme.secondaryMint,
-                        ),
-                      ),
-                    ],
+                  // ==========================================
+                  // 2. PHẦN 1: CÓ THỂ MUA Ở BÁCH HOÁ XANH
+                  // ==========================================
+                  _buildSectionHeader(
+                    title: 'Có thể mua ở Bách Hoá Xanh',
+                    count: availableItems.length,
+                    icon: Icons.storefront_rounded,
+                    accentColor: const Color(0xFF008848), // BHX Green
+                    badgeBg: const Color(0xFFE8F5E9),
+                    badgeFg: const Color(0xFF1B5E20),
+                    description: 'Nguyên liệu khớp mã sản phẩm Bách Hoá Xanh',
                   ),
 
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 10),
 
-                  // 3. Item Cards List
-                  ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: allItems.length,
-                    separatorBuilder: (_, _) => const SizedBox(height: 10),
-                    itemBuilder: (context, index) {
-                      final item = allItems[index];
-                      final isChecked = _checkedItemNames.contains(item.name);
+                  if (availableItems.isEmpty)
+                    _buildEmptySectionMessage(
+                      message:
+                          'Chưa tìm thấy sản phẩm nào trên Bách Hoá Xanh cho món này.',
+                    )
+                  else
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: availableItems.length,
+                      separatorBuilder: (_, _) => const SizedBox(height: 10),
+                      itemBuilder: (context, index) {
+                        return _buildAvailableItemCard(availableItems[index]);
+                      },
+                    ),
 
-                      return InkWell(
-                        onTap: () => _toggleItem(item.name),
-                        borderRadius: BorderRadius.circular(16),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 150),
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: isChecked
-                                ? AppTheme.surfaceContainerLow
-                                : AppTheme.surfaceContainerLowest,
-                            borderRadius: BorderRadius.circular(16),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color(0x06000000),
-                                blurRadius: 6,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              // Checkbox indicator
-                              Container(
-                                width: 24,
-                                height: 24,
-                                decoration: BoxDecoration(
-                                  color: isChecked
-                                      ? AppTheme.primary
-                                      : AppTheme.surfaceContainer,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: isChecked
-                                    ? const Icon(Icons.check,
-                                        size: 16, color: Colors.white)
-                                    : null,
-                              ),
-                              const SizedBox(width: 12),
-                              // Thumbnail placeholder
-                              Container(
-                                width: 44,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  color: AppTheme.surfaceContainer,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: const Icon(
-                                  Icons.fastfood_outlined,
-                                  size: 22,
-                                  color: AppTheme.primary,
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              // Title and details
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      item.name,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w700,
-                                        color: isChecked
-                                            ? AppTheme.onSurfaceVariant
-                                            : AppTheme.onSurface,
-                                        decoration: isChecked
-                                            ? TextDecoration.lineThrough
-                                            : null,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 3),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8, vertical: 2),
-                                          decoration: BoxDecoration(
-                                            color: AppTheme.primaryFixed
-                                                .withOpacity(0.4),
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                          ),
-                                          child: Text(
-                                            '${item.packQuantity} gói',
-                                            style: const TextStyle(
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.w700,
-                                              color: AppTheme.primaryDark,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          '${_formatCurrency(item.totalPrice)} đ',
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w600,
-                                            color: AppTheme.onSurfaceVariant,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+                  const SizedBox(height: 24),
+
+                  // ==========================================
+                  // 3. PHẦN 2: MUA TẠI CHỢ (TỰ MUA)
+                  // ==========================================
+                  _buildSectionHeader(
+                    title: 'Mua tại chợ (Tự mua)',
+                    count: unavailableItems.length,
+                    icon: Icons.shopping_basket_rounded,
+                    accentColor: const Color(0xFFE65100), // Market Warm Orange
+                    badgeBg: const Color(0xFFFFF3E0),
+                    badgeFg: const Color(0xFFBF360C),
+                    description:
+                        'Nguyên liệu tươi/đặc sản không có trên siêu thị, tự mua tại chợ',
                   ),
+
+                  const SizedBox(height: 10),
+
+                  if (unavailableItems.isEmpty)
+                    _buildEmptySectionMessage(
+                      message:
+                          'Tuyệt vời! Toàn bộ nguyên liệu đều có sẵn trên Bách Hoá Xanh.',
+                    )
+                  else
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: unavailableItems.length,
+                      separatorBuilder: (_, _) => const SizedBox(height: 10),
+                      itemBuilder: (context, index) {
+                        return _buildUnavailableItemCard(
+                            unavailableItems[index]);
+                      },
+                    ),
 
                   const SizedBox(height: 24),
                 ],
@@ -452,14 +465,16 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
             ),
           ),
 
-          // Bottom Checkout Bar
+          // ==========================================
+          // 4. BOTTOM CHECKOUT BAR (ĐÃ GỠ SHOPEE & GRAB)
+          // ==========================================
           Container(
             padding: const EdgeInsets.fromLTRB(20, 14, 20, 16),
             decoration: BoxDecoration(
               color: AppTheme.surfaceContainerLowest,
               boxShadow: const [
                 BoxShadow(
-                  color: Color(0x10000000),
+                  color: Color(0x12000000),
                   blurRadius: 10,
                   offset: Offset(0, -3),
                 ),
@@ -470,77 +485,439 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Tổng dự tính:',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: AppTheme.onSurfaceVariant,
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Tổng tiền BHX dự tính:',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: AppTheme.onSurfaceVariant,
+                          ),
+                        ),
+                        SizedBox(height: 2),
+                        Text(
+                          'Chỉ tính mục Có thể mua trên Bách Hoá Xanh',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: AppTheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
                       '${_formatCurrency(cart.totalEstimatedPrice)} đ',
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.w900,
                         color: AppTheme.primary,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    // ShopeeFood
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          DeeplinkService.openShopeeFood(widget.dishName);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFEE4D2D), // Shopee Orange
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                        ),
-                        child: const Text(
-                          'ShopeeFood',
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.w700),
-                        ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      DeeplinkService.openUrl('https://www.bachhoaxanh.com');
+                    },
+                    icon: const Icon(Icons.storefront, size: 20),
+                    label: const Text(
+                      'Mở trang chủ Bách Hoá Xanh',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF008848), // BHX Brand Green
+                      foregroundColor: Colors.white,
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    // GrabMart
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          DeeplinkService.openGrabMart(widget.dishName);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF00B14F), // Grab Green
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                        ),
-                        child: const Text(
-                          'GrabMart',
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSectionHeader({
+    required String title,
+    required int count,
+    required IconData icon,
+    required Color accentColor,
+    required Color badgeBg,
+    required Color badgeFg,
+    required String description,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(icon, color: accentColor, size: 20),
+                const SizedBox(width: 8),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 15.5,
+                    fontWeight: FontWeight.w800,
+                    color: AppTheme.onSurface,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: badgeBg,
+                    borderRadius: BorderRadius.circular(9999),
+                  ),
+                  child: Text(
+                    '$count',
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      color: badgeFg,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 2),
+        Padding(
+          padding: const EdgeInsets.only(left: 28),
+          child: Text(
+            description,
+            style: const TextStyle(
+              fontSize: 11.5,
+              color: AppTheme.onSurfaceVariant,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEmptySectionMessage({required String message}) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: AppTheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Text(
+        message,
+        style: const TextStyle(
+          fontSize: 12.5,
+          color: AppTheme.onSurfaceVariant,
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAvailableItemCard(CartItem item) {
+    final isChecked = _checkedItemNames.contains(item.name);
+
+    return InkWell(
+      onTap: () => _toggleItem(item.name),
+      borderRadius: BorderRadius.circular(16),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: isChecked
+              ? AppTheme.surfaceContainerLow
+              : AppTheme.surfaceContainerLowest,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isChecked
+                ? Colors.transparent
+                : const Color(0xFFC8E6C9), // Light green border
+            width: 1,
+          ),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x06000000),
+              blurRadius: 6,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Checkbox indicator
+            Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                color: isChecked
+                    ? const Color(0xFF008848)
+                    : AppTheme.surfaceContainer,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: isChecked
+                  ? const Icon(Icons.check, size: 16, color: Colors.white)
+                  : null,
+            ),
+            const SizedBox(width: 12),
+
+            // Thumbnail / Icon
+            Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: const Color(0xFFE8F5E9),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(
+                Icons.shopping_bag_outlined,
+                size: 22,
+                color: Color(0xFF008848),
+              ),
+            ),
+            const SizedBox(width: 12),
+
+            // Content
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.productName ?? item.ingredient,
+                    style: TextStyle(
+                      fontSize: 13.5,
+                      fontWeight: FontWeight.w700,
+                      color: isChecked
+                          ? AppTheme.onSurfaceVariant
+                          : AppTheme.onSurface,
+                      decoration:
+                          isChecked ? TextDecoration.lineThrough : null,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    'Nguyên liệu: ${item.ingredient} (${_formatQuantity(item.quantity)} ${item.unit})',
+                    style: const TextStyle(
+                      fontSize: 11.5,
+                      color: AppTheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE8F5E9),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          '${item.packsNeeded ?? 1} gói',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFF1B5E20),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        '${_formatCurrency(item.priceVnd ?? 0)} đ/gói',
+                        style: const TextStyle(
+                          fontSize: 11.5,
+                          color: AppTheme.onSurfaceVariant,
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        '${_formatCurrency(item.totalPrice)} đ',
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF008848),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // Nút "Mua" mở search_url theo chuẩn Notion
+            if (item.searchUrl != null && item.searchUrl!.isNotEmpty) ...[
+              const SizedBox(width: 8),
+              ElevatedButton.icon(
+                onPressed: () {
+                  DeeplinkService.openUrl(item.searchUrl);
+                },
+                icon: const Icon(Icons.open_in_new, size: 13),
+                label: const Text('Mua'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF008848), // BHX Green
+                  foregroundColor: Colors.white,
+                  elevation: 0,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  textStyle: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUnavailableItemCard(CartItem item) {
+    final isChecked = _checkedItemNames.contains(item.ingredient);
+
+    return InkWell(
+      onTap: () => _toggleItem(item.ingredient),
+      borderRadius: BorderRadius.circular(16),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: isChecked
+              ? AppTheme.surfaceContainerLow
+              : AppTheme.surfaceContainerLowest,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isChecked
+                ? Colors.transparent
+                : const Color(0xFFFFE0B2), // Light amber border
+            width: 1,
+          ),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x06000000),
+              blurRadius: 6,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Checkbox indicator
+            Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                color: isChecked
+                    ? const Color(0xFFE65100)
+                    : AppTheme.surfaceContainer,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: isChecked
+                  ? const Icon(Icons.check, size: 16, color: Colors.white)
+                  : null,
+            ),
+            const SizedBox(width: 12),
+
+            // Thumbnail / Icon
+            Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFF3E0),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(
+                Icons.store,
+                size: 22,
+                color: Color(0xFFE65100),
+              ),
+            ),
+            const SizedBox(width: 12),
+
+            // Content
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        item.ingredient,
+                        style: TextStyle(
+                          fontSize: 13.5,
+                          fontWeight: FontWeight.w700,
+                          color: isChecked
+                              ? AppTheme.onSurfaceVariant
+                              : AppTheme.onSurface,
+                          decoration:
+                              isChecked ? TextDecoration.lineThrough : null,
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFF3E0),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          '${_formatQuantity(item.quantity)} ${item.unit}',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFFE65100),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      const Icon(Icons.info_outline,
+                          size: 13, color: Color(0xFFD78800)),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: Text(
+                          item.note ??
+                              'Chưa tìm thấy trên Bách Hoá Xanh (mua tại chợ)',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: Color(0xFF865300),
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
