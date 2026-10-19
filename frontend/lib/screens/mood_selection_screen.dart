@@ -6,7 +6,6 @@ import '../provider/recommendation_provider.dart';
 import '../services/location_service.dart';
 import 'spin_wheel_screen.dart';
 
-/// Screen 02_Mood_Selection from Stitch Project "Food Decider Flutter UI"
 class MoodSelectionScreen extends StatefulWidget {
   const MoodSelectionScreen({super.key});
 
@@ -15,55 +14,22 @@ class MoodSelectionScreen extends StatefulWidget {
 }
 
 class _MoodSelectionScreenState extends State<MoodSelectionScreen> {
-  final TextEditingController _customMoodController = TextEditingController();
+  final TextEditingController _textController = TextEditingController(
+    text: 'Hôm nay mệt quá, chán ăn ghê',
+  );
 
-  int _selectedMoodIndex = 0;
   double? _latitude = LocationService.defaultLatitude;
   double? _longitude = LocationService.defaultLongitude;
   bool _isLoadingGps = false;
-  String _weatherText = '28°C Nắng nhẹ • Vị trí hiện tại';
+  String _gpsNote = 'Quận 1, TP. Hồ Chí Minh (mặc định)';
 
-  final List<Map<String, dynamic>> _moodList = [
-    {
-      'id': 'happy',
-      'title': 'Vui vẻ & Hứng khởi',
-      'emoji': '😊',
-      'description':
-          'Tâm trạng phấn chấn, muốn ăn gì đó thật ngon miệng, rực rỡ và tươi tắn!',
-      'icon': Icons.sentiment_very_satisfied,
-    },
-    {
-      'id': 'comfort',
-      'title': 'Cần dỗ dành',
-      'emoji': '😢',
-      'description':
-          'Cần món ấm nóng dịu ngọt, comfort food xoa dịu tâm hồn và dạ dày.',
-      'icon': Icons.soup_kitchen,
-    },
-    {
-      'id': 'tired',
-      'title': 'Mệt mỏi & Uể oải',
-      'emoji': '😴',
-      'description':
-          'Cần nạp năng lượng nhanh, món thanh đạm, giàu vitamin và dễ tiêu hóa.',
-      'icon': Icons.bedtime,
-    },
-    {
-      'id': 'craving',
-      'title': 'Đói cồn cào',
-      'emoji': '🤤',
-      'description':
-          'Muốn món đậm đà, giòn rụm với topping đầy ắp, ăn no căng bụng!',
-      'icon': Icons.local_fire_department,
-    },
-    {
-      'id': 'chill',
-      'title': 'Chill & Thư thái',
-      'emoji': '🌿',
-      'description':
-          'Món nhẹ nhàng, thanh lọc cơ thể, nhâm nhi cùng nước mát.',
-      'icon': Icons.eco,
-    },
+  final List<Map<String, String>> _quickMoods = [
+    {'emoji': '😴', 'text': 'Hôm nay mệt mỏi, muốn ăn gì đó nhẹ bụng'},
+    {'emoji': '🌧️', 'text': 'Trời mưa lành lạnh, thèm món nước nóng hổi'},
+    {'emoji': '🥳', 'text': 'Tâm trạng vui vẻ, muốn ăn món gì thịnh soạn'},
+    {'emoji': '🌶️', 'text': 'Thèm đồ cay nồng, đậm đà kích thích vị giác'},
+    {'emoji': '🥗', 'text': 'Muốn ăn đồ healthy, thanh đạm và nhiều rau'},
+    {'emoji': '🍖', 'text': 'Đang rất đói, cần món nhiều đạm no lâu'},
   ];
 
   @override
@@ -74,7 +40,7 @@ class _MoodSelectionScreenState extends State<MoodSelectionScreen> {
 
   @override
   void dispose() {
-    _customMoodController.dispose();
+    _textController.dispose();
     super.dispose();
   }
 
@@ -87,26 +53,30 @@ class _MoodSelectionScreenState extends State<MoodSelectionScreen> {
         if (pos != null) {
           _latitude = pos.latitude;
           _longitude = pos.longitude;
-          _weatherText =
-              '28°C Nắng nhẹ • GPS (${pos.latitude.toStringAsFixed(2)}, ${pos.longitude.toStringAsFixed(2)})';
+          _gpsNote = 'GPS hiện tại: (${pos.latitude.toStringAsFixed(3)}, ${pos.longitude.toStringAsFixed(3)})';
         } else {
-          _weatherText = '28°C Nắng nhẹ • Quận 1, TP.HCM';
+          _gpsNote = 'Dùng toạ độ mặc định (Quận 1, TP.HCM)';
         }
       });
     }
   }
 
-  void _onContinue() {
-    final selectedMood = _moodList[_selectedMoodIndex];
-    final customText = _customMoodController.text.trim();
-    final queryText = customText.isNotEmpty
-        ? '$customText (${selectedMood['title']})'
-        : selectedMood['title'] as String;
+  void _onSpinPressed() {
+    final text = _textController.text.trim();
+    if (text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Vui lòng nhập tâm trạng hoặc chọn gợi ý bên dưới!'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
 
     // Gọi API lấy 10 món gợi ý
     final provider = context.read<RecommendationProvider>();
     provider.fetchWheelOption(
-      queryText,
+      text,
       latitude: _latitude,
       longitude: _longitude,
     );
@@ -126,374 +96,176 @@ class _MoodSelectionScreenState extends State<MoodSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.surface,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text('Chọn tâm trạng'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info_outline, size: 22),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Hệ thống AI sẽ dựa vào tâm trạng để gợi ý món ăn tối ưu.'),
-                ),
-              );
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Container(
-              width: 32,
-              height: 32,
-              decoration: const BoxDecoration(
-                color: AppTheme.primary,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.person, color: Colors.white, size: 18),
-            ),
-          ),
-        ],
+        title: const Text('Thế bé thích ăn gì nào? 💕'),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Stepper Indicator (Bước 1 trên 3 - 33%)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    'BƯỚC 1 TRÊN 3',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 1.0,
-                      color: AppTheme.primary,
-                    ),
-                  ),
-                  Text(
-                    '33%',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                      color: AppTheme.onSurfaceVariant,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 6),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: LinearProgressIndicator(
-                  value: 0.33,
-                  backgroundColor: AppTheme.surfaceContainer,
-                  valueColor: const AlwaysStoppedAnimation(AppTheme.primaryContainer),
-                  minHeight: 6,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Tiêu đề & Subtitle
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppTheme.primaryColor.withOpacity(0.12),
+                    AppTheme.secondaryColor.withOpacity(0.08),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
+                borderRadius: BorderRadius.circular(18),
               ),
-              const SizedBox(height: 8),
-              Row(
-                children: const [
-                  Icon(Icons.favorite, size: 16, color: AppTheme.primary),
-                  SizedBox(width: 4),
-                  Text(
-                    'Cảm xúc hôm nay',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      color: AppTheme.onSurfaceVariant,
+              child: Row(
+                children: [
+                  const Text('🍳', style: TextStyle(fontSize: 36)),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Hôm nay bạn cảm thấy thế nào?',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.textPrimary,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'AI sẽ đọc cảm xúc & thời tiết để gợi ý thực đơn chuẩn gu cho bạn!',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: AppTheme.textSecondary,
+                            height: 1.3,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
+            ),
+            const SizedBox(height: 20),
 
-              const SizedBox(height: 18),
-
-              // Prompt Headline & Context
-              const Text(
-                'Hôm nay bé đang cảm thấy thế nào?',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w800,
-                  color: AppTheme.onSurface,
-                  letterSpacing: -0.5,
+            // Ô nhập cảm xúc
+            const Text(
+              'Tâm trạng / Cảm xúc hiện tại:',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+                color: AppTheme.textPrimary,
+              ),
+            ),
+            const SizedBox(height: 8),
+            TextField(
+              controller: _textController,
+              maxLines: 3,
+              style: const TextStyle(fontSize: 15),
+              decoration: InputDecoration(
+                hintText: 'Nhập cảm xúc của bạn... (Ví dụ: Mệt mỏi, thèm đồ ngọt, đói cồn cào...)',
+                hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                filled: true,
+                fillColor: Colors.white,
+                contentPadding: const EdgeInsets.all(14),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: const BorderSide(color: AppTheme.cardBorderColor),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: const BorderSide(color: AppTheme.cardBorderColor),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: const BorderSide(color: AppTheme.primaryColor, width: 1.5),
                 ),
               ),
-              const SizedBox(height: 6),
-              const Text(
-                'Chọn 1 tâm trạng để gợi ý món ăn chuẩn vị và tràn đầy năng lượng nhé!',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: AppTheme.onSurfaceVariant,
-                  height: 1.4,
-                ),
+            ),
+            const SizedBox(height: 16),
+
+            // Gợi ý tâm trạng nhanh (Quick tags)
+            const Text(
+              'Hoặc chọn nhanh:',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+                color: AppTheme.textSecondary,
               ),
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: _quickMoods.map((mood) {
+                return ActionChip(
+                  avatar: Text(mood['emoji']!, style: const TextStyle(fontSize: 14)),
+                  label: Text(
+                    mood['text']!,
+                    style: const TextStyle(fontSize: 13, color: AppTheme.textPrimary),
+                  ),
+                  backgroundColor: Colors.white,
+                  side: const BorderSide(color: AppTheme.cardBorderColor),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  onPressed: () {
+                    setState(() {
+                      _textController.text = mood['text']!;
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 20),
 
-              const SizedBox(height: 16),
-
-              // Weather & Sensor Pill
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                decoration: BoxDecoration(
-                  color: AppTheme.surfaceContainerLow,
-                  borderRadius: BorderRadius.circular(16),
-                ),
+            // Định vị GPS
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                 child: Row(
                   children: [
-                    Container(
-                      width: 36,
-                      height: 36,
-                      decoration: const BoxDecoration(
-                        color: AppTheme.tertiaryFixed,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.wb_sunny,
-                        color: AppTheme.onTertiaryFixed,
-                        size: 20,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'GỢI Ý THỜI TIẾT',
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700,
-                              color: AppTheme.onSurfaceVariant,
-                              letterSpacing: 0.8,
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            _weatherText,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                              color: AppTheme.onSurface,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
-                    ),
                     if (_isLoadingGps)
                       const SizedBox(
-                        width: 16,
-                        height: 16,
+                        width: 18,
+                        height: 18,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
                     else
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: AppTheme.surfaceContainerHighest,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Text(
-                          'Tự động',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: AppTheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              // Mood Cards Collection
-              ListView.separated(
-                itemCount: _moodList.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                separatorBuilder: (_, _) => const SizedBox(height: 12),
-                itemBuilder: (context, index) {
-                  final item = _moodList[index];
-                  final isSelected = index == _selectedMoodIndex;
-
-                  return InkWell(
-                    onTap: () => setState(() => _selectedMoodIndex = index),
-                    borderRadius: BorderRadius.circular(20),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.all(14),
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? AppTheme.primaryFixed
-                            : AppTheme.surfaceContainerLowest,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: isSelected
-                              ? AppTheme.primary
-                              : Colors.transparent,
-                          width: 1.5,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: isSelected
-                                ? const Color(0x20FF6B35)
-                                : const Color(0x08000000),
-                            blurRadius: isSelected ? 12 : 6,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          // Emoji Avatar
-                          Container(
-                            width: 54,
-                            height: 54,
-                            decoration: BoxDecoration(
-                              color: isSelected
-                                  ? Colors.white.withOpacity(0.6)
-                                  : AppTheme.surfaceContainerLow,
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              item['emoji'] as String,
-                              style: const TextStyle(fontSize: 26),
-                            ),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item['title'] as String,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700,
-                                    color: isSelected
-                                        ? AppTheme.onPrimaryFixed
-                                        : AppTheme.onSurface,
-                                  ),
-                                ),
-                                const SizedBox(height: 3),
-                                Text(
-                                  item['description'] as String,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isSelected
-                                        ? AppTheme.onPrimaryFixedVariant
-                                        : AppTheme.onSurfaceVariant,
-                                    height: 1.3,
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          // Radio indicator
-                          Container(
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                              color: isSelected
-                                  ? AppTheme.primary
-                                  : AppTheme.surfaceContainer,
-                              shape: BoxShape.circle,
-                            ),
-                            child: isSelected
-                                ? const Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                    size: 16,
-                                  )
-                                : null,
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-
-              const SizedBox(height: 16),
-
-              // Optional Custom Mood Input Field
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                decoration: BoxDecoration(
-                  color: AppTheme.surfaceContainerLowest,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppTheme.outlineVariant.withOpacity(0.5)),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.edit_note, color: AppTheme.primary, size: 22),
+                      const Icon(Icons.location_on, color: AppTheme.primaryColor, size: 22),
                     const SizedBox(width: 10),
                     Expanded(
-                      child: TextField(
-                        controller: _customMoodController,
-                        decoration: const InputDecoration(
-                          hintText: 'Hoặc tự nhập tâm trạng, thèm món gì...',
-                          hintStyle: TextStyle(fontSize: 13, color: AppTheme.onSurfaceVariant),
-                          border: InputBorder.none,
-                          isDense: true,
-                        ),
+                      child: Text(
+                        _gpsNote,
+                        style: const TextStyle(fontSize: 12.5, color: AppTheme.textSecondary),
                       ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.refresh, size: 20, color: AppTheme.textSecondary),
+                      tooltip: 'Cập nhật lại GPS',
+                      onPressed: _isLoadingGps ? null : _fetchGps,
                     ),
                   ],
                 ),
               ),
+            ),
+            const SizedBox(height: 28),
 
-              const SizedBox(height: 28),
-
-              // Bottom CTA
-              SizedBox(
-                width: double.infinity,
-                height: 54,
-                child: ElevatedButton(
-                  onPressed: _onContinue,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.primaryContainer,
-                    foregroundColor: AppTheme.onPrimary,
-                    elevation: 4,
-                    shadowColor: const Color(0x4DFF6B35),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'TIẾP TỤC',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1.0,
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      Icon(Icons.arrow_forward, size: 20),
-                    ],
-                  ),
+            // Nút bấm chính
+            SizedBox(
+              width: double.infinity,
+              height: 52,
+              child: ElevatedButton.icon(
+                onPressed: _onSpinPressed,
+                icon: const Icon(Icons.auto_awesome, color: Colors.white),
+                label: const Text(
+                  'Gợi Ý Món Ăn & Vòng Quay 🎯',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
-
-              const SizedBox(height: 24),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

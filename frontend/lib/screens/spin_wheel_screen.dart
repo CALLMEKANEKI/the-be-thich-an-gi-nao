@@ -7,9 +7,9 @@ import '../models/wheel_option.dart';
 import '../provider/places_provider.dart';
 import '../provider/recommendation_provider.dart';
 import '../widgets/lucky_wheel_painter.dart';
-import 'recommendation_result_screen.dart';
+import 'ingredients_screen.dart';
+import 'restaurant_result_screen.dart';
 
-/// Screen 03_Spin_Wheel & 03_Spin_Wheel_Loading from Stitch Project "Food Decider Flutter UI"
 class SpinWheelScreen extends StatefulWidget {
   final double latitude;
   final double longitude;
@@ -30,6 +30,7 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
   late Animation<double> _animation;
   double _currentRotation = 0;
   bool _isSpinning = false;
+  int? _targetIndex;
 
   @override
   void initState() {
@@ -55,7 +56,7 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
         setState(() {
           _isSpinning = false;
         });
-        _navigateToResult();
+        _showResultSheet();
       }
     });
   }
@@ -66,19 +67,21 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
     super.dispose();
   }
 
-  /// Bắt đầu quay vòng may mắn theo Handoff Guide:
-  /// 1. Random trước 1 index (0..total-1)
-  /// 2. Bắt đầu prefetch quán ngầm bằng unawaited()
+  /// Bắt đầu quay vòng may mắn theo đúng chuẩn Handoff Guide:
+  /// 1. Random trước 1 index trên Flutter (0..total-1)
+  /// 2. Bắt đầu prefetch quán bằng unawaited() ngầm
   /// 3. Animation quay mượt mà không chờ API
   void _startSpin(List<WheelOption> options) {
     if (_isSpinning || options.isEmpty) return;
 
     final targetIndex = Random().nextInt(options.length);
+    _targetIndex = targetIndex;
     final winningOption = options[targetIndex];
 
+    // Cập nhật món được chọn vào provider
     context.read<RecommendationProvider>().selectDishByIndex(targetIndex);
 
-    // Prefetch ngầm bằng unawaited()
+    // BẮT BUỘC (Handoff Guide): Gọi prefetch ngầm bằng unawaited(), animation không chờ request
     unawaited(
       context.read<PlacesProvider>().prefetch(
             dishName: winningOption.dish.name,
@@ -87,9 +90,16 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
           ),
     );
 
+    // Tính góc quay:
+    // Kim chỉ nằm ở đỉnh (góc 3*pi / 2 hoặc 270 độ, tức -pi/2).
+    // Mỗi lát có góc sliceAngle = 2*pi / length.
+    // Tâm lát thứ i nằm ở: i * sliceAngle + sliceAngle / 2.
     final sliceAngle = 2 * pi / options.length;
     final targetCenterAngle = targetIndex * sliceAngle + sliceAngle / 2;
-    final fullSpins = 5 + Random().nextInt(3);
+
+    // Để kim (ở đỉnh -pi/2) trỏ đúng tâm lát:
+    // currentRotation + targetCenterAngle = -pi/2 + K * 2*pi
+    final fullSpins = 5 + Random().nextInt(3); // quay 5 đến 7 vòng
     final double targetAngle = (fullSpins * 2 * pi) + (3 * pi / 2 - targetCenterAngle);
 
     _controller.reset();
@@ -108,19 +118,203 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
     _controller.forward();
   }
 
-  void _navigateToResult() {
+  /// Hiển thị kết quả món ăn trúng thưởng (Task 7: Recommendation Result UI)
+  void _showResultSheet() {
     final provider = context.read<RecommendationProvider>();
     final option = provider.selectedOption;
     if (option == null) return;
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => RecommendationResultScreen(
-          option: option,
-          latitude: widget.latitude,
-          longitude: widget.longitude,
-        ),
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => _buildResultModal(ctx, option),
+    );
+  }
+
+  Widget _buildResultModal(BuildContext ctx, WheelOption option) {
+    final dish = option.dish;
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Drag handle
+          Container(
+            width: 40,
+            height: 4,
+            margin: const EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+
+          // Huy hiệu chúc mừng
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text('🎉', style: TextStyle(fontSize: 24)),
+              SizedBox(width: 8),
+              Text(
+                'Món Ăn Dành Cho Bạn!',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.primaryDark,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+
+          // Tên món & phân loại
+          Text(
+            dish.name,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w800,
+              color: AppTheme.textPrimary,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          if (dish.category.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+              decoration: BoxDecoration(
+                color: AppTheme.primaryColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                dish.category,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.primaryColor,
+                ),
+              ),
+            ),
+          ],
+          const SizedBox(height: 12),
+
+          // Lý do gợi ý & Độ tự tin
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.amber.shade50,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.amber.shade200),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.psychology, size: 20, color: Colors.amber),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        option.reason,
+                        style: TextStyle(
+                          fontSize: 13.5,
+                          color: Colors.brown.shade800,
+                          height: 1.3,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    'Độ phù hợp: ${(option.confidence * 100).toInt()}%',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.brown.shade600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+
+          // Hai nút hành động: "Ra ngoài ăn" và "Tự nấu"
+          Row(
+            children: [
+              // Nút 1: Ra ngoài ăn
+              Expanded(
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1E88E5), // Blue
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => RestaurantResultScreen(
+                          dishName: dish.name,
+                          latitude: widget.latitude,
+                          longitude: widget.longitude,
+                        ),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.storefront, size: 20),
+                  label: const Text(
+                    'Ra ngoài ăn 🛵',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+
+              // Nút 2: Tự nấu
+              Expanded(
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppTheme.primaryColor,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => IngredientsScreen(
+                          dishId: dish.id,
+                          dishName: dish.name,
+                        ),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.kitchen, size: 20),
+                  label: const Text(
+                    'Tự nấu 🍳',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -128,503 +322,187 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.surface,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text('Vòng quay may mắn'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info_outline, size: 22),
-            onPressed: () {},
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Container(
-              width: 32,
-              height: 32,
-              decoration: const BoxDecoration(
-                color: AppTheme.primary,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.person, color: Colors.white, size: 18),
-            ),
-          ),
-        ],
+        title: const Text('Vòng Quay May Mắn 🎯'),
       ),
       body: Consumer<RecommendationProvider>(
         builder: (context, provider, child) {
           return switch (provider.status) {
-            RecommendationStatus.loading => _buildSpinWheelLoading(),
-            RecommendationStatus.error => _buildErrorState(provider),
-            _ => _buildWheelUI(provider.wheelOptions),
+            RecommendationStatus.idle => const Center(
+                child: Text('Chưa có danh sách món ăn để quay.'),
+              ),
+            RecommendationStatus.loading => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    CircularProgressIndicator(color: AppTheme.primaryColor),
+                    SizedBox(height: 16),
+                    Text(
+                      'AI đang chọn lọc 10 món ngon theo cảm xúc...',
+                      style: TextStyle(fontSize: 14, color: AppTheme.textSecondary),
+                    ),
+                  ],
+                ),
+              ),
+            RecommendationStatus.error => Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.error_outline, size: 48, color: Colors.red),
+                      const SizedBox(height: 12),
+                      Text(
+                        provider.errorMessage ?? 'Đã có lỗi xảy ra',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.red, fontSize: 14),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('Quay lại thử lại'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            RecommendationStatus.success => _buildWheelUI(provider.wheelOptions),
           };
         },
       ),
     );
   }
 
-  // ==========================================
-  // 1. LOADING STATE (03_Spin_Wheel_Loading)
-  // ==========================================
-  Widget _buildSpinWheelLoading() {
-    return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Column(
-          children: [
-            // Orbiting Animation Visual
-            SizedBox(
-              height: 240,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    width: 210,
-                    height: 210,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppTheme.outlineVariant.withOpacity(0.4),
-                        width: 2,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 160,
-                    height: 160,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppTheme.primaryFixedDim,
-                        width: 2,
-                      ),
-                    ),
-                  ),
-                  // Rotating Core
-                  Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppTheme.primaryContainer,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppTheme.primary.withOpacity(0.3),
-                          blurRadius: 16,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: const Icon(
-                      Icons.restaurant,
-                      color: Colors.white,
-                      size: 36,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 12),
-
-            // Status Badge
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-              decoration: BoxDecoration(
-                color: AppTheme.primaryFixed,
-                borderRadius: BorderRadius.circular(9999),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  SizedBox(
-                    width: 14,
-                    height: 14,
-                    child: CircularProgressIndicator(strokeWidth: 2, color: AppTheme.primary),
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    'Đang trộn vị ngon',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                      color: AppTheme.onPrimaryFixed,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 14),
-
-            const Text(
-              'Đang quay tìm món ngon cho bé...',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w800,
-                color: AppTheme.onSurface,
-              ),
-            ),
-            const SizedBox(height: 8),
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 320),
-              child: const Text(
-                'Vũ trụ ẩm thực đang kết nối sở thích, tâm trạng và thời tiết hôm nay để chọn món chuẩn vị nhất!',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: AppTheme.onSurfaceVariant,
-                  height: 1.4,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 24),
-
-            // Step Progress Card
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppTheme.surfaceContainerLowest,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x08000000),
-                    blurRadius: 10,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        'TIẾN TRÌNH ĐỀ XUẤT',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 0.8,
-                          color: AppTheme.onSurfaceVariant,
-                        ),
-                      ),
-                      Text(
-                        'Bước 2 / 3',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w800,
-                          color: AppTheme.primary,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: const LinearProgressIndicator(
-                      value: 0.66,
-                      backgroundColor: AppTheme.surfaceContainer,
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(AppTheme.primaryContainer),
-                      minHeight: 6,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // Cancel Button
-            TextButton.icon(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.close, size: 18),
-              label: const Text('Dừng quay và quay lại'),
-              style: TextButton.styleFrom(
-                foregroundColor: AppTheme.onSurfaceVariant,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // ==========================================
-  // 2. ERROR STATE
-  // ==========================================
-  Widget _buildErrorState(RecommendationProvider provider) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.error_outline, size: 48, color: AppTheme.error),
-            const SizedBox(height: 12),
-            Text(
-              provider.errorMessage ?? 'Không thể tải món quay',
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: AppTheme.error, fontSize: 14),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Quay lại chọn tâm trạng'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // ==========================================
-  // 3. SUCCESS / ACTIVE WHEEL (03_Spin_Wheel)
-  // ==========================================
   Widget _buildWheelUI(List<WheelOption> options) {
     if (options.isEmpty) {
       return const Center(child: Text('Không có món ăn nào trong danh sách.'));
     }
 
-    final size = MediaQuery.of(context).size.width * 0.85;
+    final size = MediaQuery.of(context).size.width * 0.88;
 
-    return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        child: Column(
-          children: [
-            // Headline & Subtitle
-            const Text(
-              'Quay để tìm món nhé!',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w800,
-                color: AppTheme.onSurface,
-              ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      child: Column(
+        children: [
+          // Hướng dẫn
+          Text(
+            _isSpinning ? 'Đang quay... Chờ món trúng thưởng nào!' : 'Bấm nút giữa hoặc nút Quay để chọn món!',
+            style: const TextStyle(
+              fontSize: 14.5,
+              fontWeight: FontWeight.w600,
+              color: AppTheme.textSecondary,
             ),
-            const SizedBox(height: 4),
-            const Text(
-              'Chạm vào nút QUAY hoặc chạm vào tâm vòng quay',
-              style: TextStyle(
-                fontSize: 13,
-                color: AppTheme.onSurfaceVariant,
-              ),
-            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
 
-            const SizedBox(height: 20),
-
-            // Wheel Container with Canvas and Center Pin
-            Center(
-              child: SizedBox(
-                width: size,
-                height: size,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // Canvas Wheel
-                    CustomPaint(
-                      size: Size(size, size),
-                      painter: LuckyWheelPainter(
-                        items: options,
-                        currentRotation: _currentRotation,
-                      ),
+          // Vòng quay + Kim chỉ
+          Center(
+            child: SizedBox(
+              width: size,
+              height: size,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // Vòng xoay Canvas
+                  CustomPaint(
+                    size: Size(size, size),
+                    painter: LuckyWheelPainter(
+                      items: options,
+                      currentRotation: _currentRotation,
                     ),
+                  ),
 
-                    // Center Button
-                    GestureDetector(
-                      onTap: _isSpinning ? null : () => _startSpin(options),
-                      child: Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: _isSpinning
-                              ? Colors.grey.shade400
-                              : AppTheme.primaryContainer,
-                          shape: BoxShape.circle,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0x33FF6B35),
-                              blurRadius: 10,
-                              offset: Offset(0, 4),
-                            ),
-                          ],
-                          border: Border.all(color: Colors.white, width: 3),
-                        ),
-                        child: const Center(
-                          child: Icon(
-                            Icons.play_arrow_rounded,
-                            color: Colors.white,
-                            size: 34,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    // Pointer Top Arrow
-                    Positioned(
-                      top: 0,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 22,
-                            height: 22,
-                            decoration: const BoxDecoration(
-                              color: AppTheme.primaryDark,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color(0x30000000),
-                                  blurRadius: 4,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.arrow_drop_down,
-                              color: Colors.white,
-                              size: 18,
-                            ),
+                  // Nút bấm tâm vòng quay
+                  GestureDetector(
+                    onTap: _isSpinning ? null : () => _startSpin(options),
+                    child: Container(
+                      width: 58,
+                      height: 58,
+                      decoration: BoxDecoration(
+                        color: _isSpinning ? Colors.grey : AppTheme.primaryColor,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            blurRadius: 8,
+                            offset: const Offset(0, 3),
                           ),
                         ],
+                        border: Border.all(color: Colors.white, width: 3),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'SPIN',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 13,
+                          ),
+                        ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 28),
-
-            // Action Button 1: QUAY NGAY
-            SizedBox(
-              width: double.infinity,
-              height: 54,
-              child: ElevatedButton(
-                onPressed: _isSpinning ? null : () => _startSpin(options),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.primaryContainer,
-                  foregroundColor: Colors.white,
-                  elevation: 4,
-                  shadowColor: const Color(0x4DFF6B35),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
                   ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      _isSpinning ? Icons.hourglass_top : Icons.play_circle,
-                      size: 22,
+
+                  // Kim chỉ góc trên (Indicator Arrow pointing down)
+                  Positioned(
+                    top: 0,
+                    child: Column(
+                      children: [
+                        CustomPaint(
+                          size: const Size(26, 26),
+                          painter: _TrianglePointerPainter(),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 8),
-                    Text(
-                      _isSpinning ? 'ĐANG QUAY...' : 'QUAY NGAY',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: 1.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 12),
-
-            // Action Button 2: Tùy chỉnh danh sách món
-            SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: OutlinedButton.icon(
-                onPressed: () {
-                  _showCustomizationDialog(options);
-                },
-                icon: const Icon(Icons.tune, size: 18, color: AppTheme.onSurfaceVariant),
-                label: const Text(
-                  'Tùy chỉnh danh sách món',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: AppTheme.onSurfaceVariant,
-                  ),
-                ),
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: AppTheme.outlineVariant),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showCustomizationDialog(List<WheelOption> options) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (ctx) {
-        return Container(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Món ăn trên vòng (${options.length})',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: AppTheme.onSurface,
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => Navigator.pop(ctx),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: options.length,
-                  itemBuilder: (_, i) => ListTile(
-                    dense: true,
-                    leading: const Icon(Icons.restaurant, color: AppTheme.primary, size: 18),
-                    title: Text(
-                      options[i].dish.name,
-                      style: const TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    subtitle: Text(
-                      options[i].dish.category,
-                      style: const TextStyle(fontSize: 11),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        );
-      },
+          const SizedBox(height: 36),
+
+          // Nút bấm Quay lớn bên dưới
+          SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: ElevatedButton.icon(
+              onPressed: _isSpinning ? null : () => _startSpin(options),
+              icon: const Icon(Icons.play_arrow),
+              label: Text(
+                _isSpinning ? 'Đang chọn món...' : 'QUAY NGAY 🎯',
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
+}
+
+class _TrianglePointerPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFFD50000)
+      ..style = PaintingStyle.fill;
+
+    final border = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+
+    final path = Path()
+      ..moveTo(size.width / 2, size.height)
+      ..lineTo(0, 0)
+      ..lineTo(size.width, 0)
+      ..close();
+
+    canvas.drawPath(path, paint);
+    canvas.drawPath(path, border);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
