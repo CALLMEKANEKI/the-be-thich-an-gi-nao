@@ -88,8 +88,12 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Banner: Personalized by AI
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            runAlignment: WrapAlignment.center,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -117,7 +121,7 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: AppTheme.secondaryContainer.withOpacity(0.4),
+                  color: AppTheme.secondaryContainer.withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(9999),
                 ),
                 child: Row(
@@ -278,12 +282,12 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
                 // Dish metadata pills
                 Padding(
                   padding: const EdgeInsets.all(14),
-                  child: Row(
+                  child: Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
                     children: [
                       _buildMetaPill('🍜', 'Món nước ấm nóng'),
-                      const SizedBox(width: 8),
                       _buildMetaPill('⏱️', '35 phút'),
-                      const SizedBox(width: 8),
                       _buildMetaPill('🔥', '540 kcal'),
                     ],
                   ),
@@ -301,9 +305,9 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppTheme.primaryFixed.withOpacity(0.4),
+                  AppTheme.primaryFixed.withValues(alpha: 0.4),
                   AppTheme.surfaceContainerLow,
-                  AppTheme.tertiaryFixed.withOpacity(0.3),
+                  AppTheme.tertiaryFixed.withValues(alpha: 0.3),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -316,34 +320,40 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          width: 32,
-                          height: 32,
-                          decoration: const BoxDecoration(
-                            color: AppTheme.primary,
-                            shape: BoxShape.circle,
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 32,
+                            height: 32,
+                            decoration: const BoxDecoration(
+                              color: AppTheme.primary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.psychology,
+                                size: 18, color: Colors.white),
                           ),
-                          child: const Icon(Icons.psychology,
-                              size: 18, color: Colors.white),
-                        ),
-                        const SizedBox(width: 8),
-                        const Text(
-                          'Lý do gợi ý',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700,
-                            color: AppTheme.onSurface,
+                          const SizedBox(width: 8),
+                          const Flexible(
+                            child: Text(
+                              'Lý do gợi ý',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.onSurface,
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: AppTheme.primaryContainer.withOpacity(0.15),
+                        color: AppTheme.primaryContainer.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(9999),
                       ),
                       child: Row(
@@ -419,14 +429,18 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
-                    Text(
-                      'Nguyên liệu chuẩn bị nhanh',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w700,
-                        color: AppTheme.onSurface,
+                    Expanded(
+                      child: Text(
+                        'Nguyên liệu chuẩn bị nhanh',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: AppTheme.onSurface,
+                        ),
                       ),
                     ),
+                    SizedBox(width: 8),
                     Text(
                       '5 món chính',
                       style: TextStyle(
@@ -538,7 +552,7 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.primaryFixed.withOpacity(0.6),
+                    backgroundColor: AppTheme.primaryFixed.withValues(alpha: 0.6),
                     foregroundColor: AppTheme.onPrimaryFixed,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
@@ -643,7 +657,7 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
                     height: 110,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppTheme.primaryFixed.withOpacity(0.4),
+                      color: AppTheme.primaryFixed.withValues(alpha: 0.4),
                     ),
                   ),
                   const SizedBox(
@@ -717,14 +731,18 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
-                    Text(
-                      'Tiến trình AI gợi ý',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: AppTheme.onSurfaceVariant,
+                    Expanded(
+                      child: Text(
+                        'Tiến trình AI gợi ý',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.onSurfaceVariant,
+                        ),
                       ),
                     ),
+                    SizedBox(width: 8),
                     Text(
                       '68%',
                       style: TextStyle(
@@ -936,7 +954,7 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
                   child: TextButton(
                     onPressed: () => Navigator.pop(context),
                     style: TextButton.styleFrom(
-                      backgroundColor: AppTheme.primaryFixed.withOpacity(0.5),
+                      backgroundColor: AppTheme.primaryFixed.withValues(alpha: 0.5),
                       foregroundColor: AppTheme.onPrimaryFixed,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -1008,7 +1026,7 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
         width: 38,
         height: 38,
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.85),
+          color: Colors.white.withValues(alpha: 0.85),
           shape: BoxShape.circle,
           boxShadow: const [
             BoxShadow(
@@ -1051,31 +1069,36 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
   Widget _buildReasonTile(String emoji, String label, String value) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
         decoration: BoxDecoration(
-          color: AppTheme.surfaceContainerLowest.withOpacity(0.8),
+          color: AppTheme.surfaceContainerLowest.withValues(alpha: 0.8),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
           children: [
-            Text(emoji, style: const TextStyle(fontSize: 20)),
-            const SizedBox(height: 4),
+            Text(emoji, style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 3),
             Text(
               label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontSize: 10,
                 color: AppTheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: 2),
-            Text(
-              value,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w700,
-                color: AppTheme.onSurface,
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                value,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.onSurface,
+                ),
               ),
             ),
           ],
@@ -1121,7 +1144,7 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
     Color statusColor = AppTheme.secondary;
 
     if (isLoading) {
-      bg = AppTheme.primaryFixed.withOpacity(0.3);
+      bg = AppTheme.primaryFixed.withValues(alpha: 0.3);
       statusColor = AppTheme.primary;
     } else if (isPending) {
       bg = AppTheme.surfaceContainerLowest;
