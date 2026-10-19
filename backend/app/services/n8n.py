@@ -16,7 +16,7 @@ def sync_to_n8n(payload: dict) -> dict | None:
         r = httpx.post(url, json=payload, timeout=8.0)
         r.raise_for_status()
         data = r.json()
-        return data if isinstance(data, dict) else None
+        return data if isinstance(data, dict) and "notion_page_id" in data else None
     except Exception as e:
         logger.warning("Gọi n8n thất bại: %s", e)
         return None
