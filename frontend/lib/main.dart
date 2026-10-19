@@ -5,7 +5,7 @@ import 'provider/cart_provider.dart';
 import 'provider/ingredient_provider.dart';
 import 'provider/places_provider.dart';
 import 'provider/recommendation_provider.dart';
-import 'screens/mood_selection_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +31,7 @@ class FoodPickerApp extends StatelessWidget {
       title: 'Thế bé thích ăn gì nào?',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const MoodSelectionScreen(),
+      home: const HomeScreen(),
     );
   }
 }

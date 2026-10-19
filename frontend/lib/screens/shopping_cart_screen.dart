@@ -6,6 +6,7 @@ import '../models/ingredient.dart';
 import '../provider/cart_provider.dart';
 import '../services/deeplink_service.dart';
 
+/// Screen 08_Shopping_List from Stitch Project "Food Decider Flutter UI"
 class ShoppingCartScreen extends StatefulWidget {
   final int dishId;
   final String dishName;
@@ -23,6 +24,8 @@ class ShoppingCartScreen extends StatefulWidget {
 }
 
 class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
+  final Set<String> _checkedItemNames = {};
+
   @override
   void initState() {
     super.initState();
@@ -42,313 +45,104 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         );
   }
 
+  void _toggleItem(String name) {
+    setState(() {
+      if (_checkedItemNames.contains(name)) {
+        _checkedItemNames.remove(name);
+      } else {
+        _checkedItemNames.add(name);
+      }
+    });
+  }
+
+  void _clearChecked() {
+    setState(() {
+      _checkedItemNames.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.surface,
       appBar: AppBar(
-        title: Text('Giỏ Hàng: ${widget.dishName} 🛒'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new, size: 20),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text('Danh sách mua sắm'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline, size: 22),
+            onPressed: () {},
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Container(
+              width: 32,
+              height: 32,
+              decoration: const BoxDecoration(
+                color: AppTheme.primary,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.person, color: Colors.white, size: 18),
+            ),
+          ),
+        ],
       ),
       body: Consumer<CartProvider>(
         builder: (context, provider, child) {
           return switch (provider.status) {
-            CartStatus.idle || CartStatus.loading => Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    CircularProgressIndicator(color: AppTheme.primaryColor),
-                    SizedBox(height: 16),
-                    Text(
-                      'Đang tra cứu giá & số gói tại Bách Hoá Xanh...',
-                      style: TextStyle(fontSize: 14, color: AppTheme.textSecondary),
-                    ),
-                  ],
-                ),
-              ),
-            CartStatus.error => Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.error_outline, size: 48, color: Colors.red),
-                      const SizedBox(height: 12),
-                      Text(
-                        provider.errorMessage ?? 'Không thể lập giỏ hàng',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(color: Colors.red, fontSize: 14),
-                      ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          provider.createCart(
-                            dishId: widget.dishId,
-                            dishName: widget.dishName,
-                            ingredients: widget.ingredients,
-                          );
-                        },
-                        child: const Text('Thử lại'),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            CartStatus.success => _buildCartContent(provider.cart!, provider.isFromCache),
+            CartStatus.idle || CartStatus.loading => _buildLoadingState(),
+            CartStatus.error => _buildErrorState(provider),
+            CartStatus.success =>
+              _buildSuccessState(provider.cart!, provider.isFromCache),
           };
         },
       ),
     );
   }
 
-  Widget _buildCartContent(CartResult cart, bool isFromCache) {
-    final available = cart.availableItems;
-    final unavailable = cart.unavailableItems;
-
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+  Widget _buildLoadingState() {
+    return Center(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Banner Offline nếu dùng cache SQLite
-          if (isFromCache)
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.only(bottom: 12),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              decoration: BoxDecoration(
-                color: Colors.orange.shade100,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.orange),
-              ),
-              child: Row(
-                children: const [
-                  Icon(Icons.wifi_off, color: Colors.deepOrange, size: 20),
-                  SizedBox(width: 8),
-                  Text(
-                    'Dữ liệu cũ (offline)',
-                    style: TextStyle(
-                      color: Colors.deepOrange,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-          // Card Tổng kết chi phí (Summary)
-          Card(
-            color: Colors.green.shade50,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-              side: BorderSide(color: Colors.green.shade200),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Tổng tiền ước tính:',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: AppTheme.textPrimary,
-                        ),
-                      ),
-                      Text(
-                        '${_formatCurrency(cart.summary.estimatedTotalVnd)} đ',
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w900,
-                          color: Color(0xFF1B5E20),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Divider(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.check_circle, size: 16, color: Colors.green),
-                          const SizedBox(width: 6),
-                          Text(
-                            'Có thể mua: ${cart.summary.available} món',
-                            style: const TextStyle(fontSize: 13, color: Colors.green),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Icon(Icons.help_outline, size: 16, color: Colors.orange),
-                          const SizedBox(width: 6),
-                          Text(
-                            'Tự mua: ${cart.summary.unavailable} món',
-                            style: const TextStyle(fontSize: 13, color: Colors.orange),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  if (cart.notionPageId != null) ...[
-                    const SizedBox(height: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: const [
-                          Icon(Icons.cloud_done, size: 15, color: Colors.blue),
-                          SizedBox(width: 6),
-                          Text(
-                            'Đã tự động lưu vào Notion Shopping List ✅',
-                            style: TextStyle(fontSize: 11.5, color: Colors.blue, fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            ),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          CircularProgressIndicator(color: AppTheme.primary),
+          SizedBox(height: 16),
+          Text(
+            'Đang tra cứu giá & cửa hàng tại Bách Hoá Xanh...',
+            style: TextStyle(fontSize: 14, color: AppTheme.onSurfaceVariant),
           ),
-          const SizedBox(height: 20),
-
-          // MỤC 1: CÓ THỂ MUA TẠI BÁCH HOÁ XANH
-          if (available.isNotEmpty) ...[
-            Row(
-              children: [
-                const Icon(Icons.shopping_bag, color: Colors.green, size: 20),
-                const SizedBox(width: 8),
-                Text(
-                  'CÓ THỂ MUA TẠI BÁCH HOÁ XANH (${available.length})',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            ...available.map((item) => _buildAvailableItem(item)),
-            const SizedBox(height: 20),
-          ],
-
-          // MỤC 2: TỰ MUA (Chưa tìm thấy trên Bách Hoá Xanh)
-          if (unavailable.isNotEmpty) ...[
-            Row(
-              children: [
-                const Icon(Icons.store, color: Colors.orange, size: 20),
-                const SizedBox(width: 8),
-                Text(
-                  'TỰ MUA NGOÀI CHỢ (${unavailable.length})',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.orange,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            ...unavailable.map((item) => _buildUnavailableItem(item)),
-          ],
         ],
       ),
     );
   }
 
-  Widget _buildAvailableItem(CartItem item) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 10),
+  Widget _buildErrorState(CartProvider provider) {
+    return Center(
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    item.ingredient,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: AppTheme.textPrimary,
-                    ),
-                  ),
-                ),
-                Text(
-                  'Cần ${item.quantity % 1 == 0 ? item.quantity.toInt() : item.quantity} ${item.unit}',
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: AppTheme.textSecondary,
-                  ),
-                ),
-              ],
+            const Icon(Icons.error_outline, size: 48, color: AppTheme.error),
+            const SizedBox(height: 12),
+            Text(
+              provider.errorMessage ?? 'Không thể lập giỏ hàng',
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: AppTheme.error, fontSize: 14),
             ),
-            const SizedBox(height: 6),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade50,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.grey.shade200),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item.productName ?? '',
-                          style: const TextStyle(
-                            fontSize: 13.5,
-                            fontWeight: FontWeight.w600,
-                            color: AppTheme.textPrimary,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '${item.packsNeeded ?? 1} gói × ${_formatCurrency(item.priceVnd ?? 0)}đ = ${_formatCurrency(item.subtotalVnd ?? 0)}đ',
-                          style: const TextStyle(
-                            fontSize: 12.5,
-                            color: Color(0xFF2E7D32),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  if (item.searchUrl != null && item.searchUrl!.isNotEmpty)
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                        DeeplinkService.openUrl(item.searchUrl);
-                      },
-                      child: const Text(
-                        'Mua ngay',
-                        style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                ],
-              ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                provider.createCart(
+                  dishId: widget.dishId,
+                  dishName: widget.dishName,
+                  ingredients: widget.ingredients,
+                );
+              },
+              child: const Text('Thử lại'),
             ),
           ],
         ),
@@ -356,49 +150,397 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     );
   }
 
-  Widget _buildUnavailableItem(CartItem item) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 10),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item.ingredient,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: AppTheme.textPrimary,
+  Widget _buildSuccessState(CartResult cart, bool isFromCache) {
+    final allItems = cart.items;
+    final totalCount = allItems.length;
+    final doneCount = _checkedItemNames.length;
+    final remainingCount = totalCount - doneCount;
+    final progressPercent = totalCount > 0 ? (doneCount / totalCount * 100).toInt() : 0;
+
+    return SafeArea(
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 1. Progress Card (Tiến độ đi chợ)
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: AppTheme.surfaceContainerLowest,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0x12FF6B35),
+                          blurRadius: 16,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  width: 36,
+                                  height: 36,
+                                  decoration: BoxDecoration(
+                                    color: AppTheme.primaryFixed,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Icon(Icons.shopping_cart,
+                                      color: AppTheme.primary, size: 20),
+                                ),
+                                const SizedBox(width: 10),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'TIẾN ĐỘ ĐI CHỢ',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.8,
+                                        color: AppTheme.onSurfaceVariant,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Đã chuẩn bị: $doneCount / $totalCount món ($progressPercent%)',
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w800,
+                                        color: AppTheme.onSurface,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            if (doneCount > 0)
+                              IconButton(
+                                icon: const Icon(Icons.delete_sweep,
+                                    color: AppTheme.onSurfaceVariant, size: 20),
+                                onPressed: _clearChecked,
+                                tooltip: 'Xóa các món đã chọn',
+                              ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 12),
+
+                        // Progress Bar
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: LinearProgressIndicator(
+                            value: totalCount > 0 ? (doneCount / totalCount) : 0,
+                            backgroundColor: AppTheme.surfaceContainerHigh,
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                                AppTheme.primaryContainer),
+                            minHeight: 8,
+                          ),
+                        ),
+
+                        const SizedBox(height: 8),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Còn $remainingCount món cần chuẩn bị',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: AppTheme.onSurfaceVariant,
+                              ),
+                            ),
+                            Text(
+                              '$progressPercent%',
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w800,
+                                color: AppTheme.primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  item.note ?? 'Chưa tìm thấy trên Bách Hoá Xanh',
-                  style: TextStyle(fontSize: 12, color: Colors.orange.shade800),
+
+                  const SizedBox(height: 20),
+
+                  // 2. Section: Cần mua hôm nay
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(Icons.local_mall, color: AppTheme.primary, size: 20),
+                          const SizedBox(width: 8),
+                          const Text(
+                            'Cần mua hôm nay',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                              color: AppTheme.onSurface,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: AppTheme.primaryFixed,
+                              borderRadius: BorderRadius.circular(9999),
+                            ),
+                            child: Text(
+                              '$remainingCount',
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w800,
+                                color: AppTheme.onPrimaryFixed,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Text(
+                        'Sắp xếp theo quầy',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.secondaryMint,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // 3. Item Cards List
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: allItems.length,
+                    separatorBuilder: (_, _) => const SizedBox(height: 10),
+                    itemBuilder: (context, index) {
+                      final item = allItems[index];
+                      final isChecked = _checkedItemNames.contains(item.name);
+
+                      return InkWell(
+                        onTap: () => _toggleItem(item.name),
+                        borderRadius: BorderRadius.circular(16),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 150),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: isChecked
+                                ? AppTheme.surfaceContainerLow
+                                : AppTheme.surfaceContainerLowest,
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0x06000000),
+                                blurRadius: 6,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              // Checkbox indicator
+                              Container(
+                                width: 24,
+                                height: 24,
+                                decoration: BoxDecoration(
+                                  color: isChecked
+                                      ? AppTheme.primary
+                                      : AppTheme.surfaceContainer,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: isChecked
+                                    ? const Icon(Icons.check,
+                                        size: 16, color: Colors.white)
+                                    : null,
+                              ),
+                              const SizedBox(width: 12),
+                              // Thumbnail placeholder
+                              Container(
+                                width: 44,
+                                height: 44,
+                                decoration: BoxDecoration(
+                                  color: AppTheme.surfaceContainer,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Icon(
+                                  Icons.fastfood_outlined,
+                                  size: 22,
+                                  color: AppTheme.primary,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              // Title and details
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.name,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                        color: isChecked
+                                            ? AppTheme.onSurfaceVariant
+                                            : AppTheme.onSurface,
+                                        decoration: isChecked
+                                            ? TextDecoration.lineThrough
+                                            : null,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 3),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8, vertical: 2),
+                                          decoration: BoxDecoration(
+                                            color: AppTheme.primaryFixed
+                                                .withOpacity(0.4),
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                          child: Text(
+                                            '${item.packQuantity} gói',
+                                            style: const TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppTheme.primaryDark,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          '${_formatCurrency(item.totalPrice)} đ',
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            color: AppTheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+
+                  const SizedBox(height: 24),
+                ],
+              ),
+            ),
+          ),
+
+          // Bottom Checkout Bar
+          Container(
+            padding: const EdgeInsets.fromLTRB(20, 14, 20, 16),
+            decoration: BoxDecoration(
+              color: AppTheme.surfaceContainerLowest,
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x10000000),
+                  blurRadius: 10,
+                  offset: Offset(0, -3),
                 ),
               ],
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.orange.shade50,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                '${item.quantity % 1 == 0 ? item.quantity.toInt() : item.quantity} ${item.unit}',
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.deepOrange,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Tổng dự tính:',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.onSurfaceVariant,
+                      ),
+                    ),
+                    Text(
+                      '${_formatCurrency(cart.totalEstimatedPrice)} đ',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        color: AppTheme.primary,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    // ShopeeFood
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          DeeplinkService.openShopeeFood(widget.dishName);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFEE4D2D), // Shopee Orange
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                        ),
+                        child: const Text(
+                          'ShopeeFood',
+                          style: TextStyle(
+                              fontSize: 13, fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    // GrabMart
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          DeeplinkService.openGrabMart(widget.dishName);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF00B14F), // Grab Green
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                        ),
+                        child: const Text(
+                          'GrabMart',
+                          style: TextStyle(
+                              fontSize: 13, fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

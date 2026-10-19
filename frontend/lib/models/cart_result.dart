@@ -69,6 +69,9 @@ class CartItem {
       note: json['note'] as String?,
     );
   }
+  String get name => productName ?? ingredient;
+  int get packQuantity => packsNeeded ?? 1;
+  int get totalPrice => subtotalVnd ?? priceVnd ?? 0;
 }
 
 class CartResult {
@@ -86,6 +89,7 @@ class CartResult {
     this.notionPageId,
   });
 
+  int get totalEstimatedPrice => summary.estimatedTotalVnd;
   List<CartItem> get availableItems => items.where((i) => i.available).toList();
   List<CartItem> get unavailableItems => items.where((i) => !i.available).toList();
 

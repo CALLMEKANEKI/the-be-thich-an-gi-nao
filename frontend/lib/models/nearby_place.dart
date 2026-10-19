@@ -17,6 +17,11 @@ class NearbyPlace {
     required this.map_url,
   });
 
+  double get distanceMeters => distance;
+  bool get openNow => true;
+  String get imageUrl => '';
+
+
   factory NearbyPlace.fromJson (Map<String, dynamic> json){
     return NearbyPlace (
       name: json['name'],
