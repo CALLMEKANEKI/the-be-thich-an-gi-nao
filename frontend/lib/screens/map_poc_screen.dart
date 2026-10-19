@@ -1,45 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
-import '../provider/places_provider.dart';
 import '../services/deeplink_service.dart';
 import '../services/location_service.dart';
 import '../widgets/osm_map_widget.dart';
 
-/// Screen 06_Map from Stitch Project "Food Decider Flutter UI"
 class MapPocScreen extends StatefulWidget {
-  final String? destinationName;
-  final double? destinationLat;
-  final double? destinationLng;
-  final String? restaurantAddress;
-  final double? rating;
-
-  const MapPocScreen({
-    super.key,
-    this.destinationName,
-    this.destinationLat,
-    this.destinationLng,
-    this.restaurantAddress,
-    this.rating,
-  });
+  const MapPocScreen({super.key});
 
   @override
   State<MapPocScreen> createState() => _MapPocScreenState();
 }
 
 class _MapPocScreenState extends State<MapPocScreen> {
-  final MapController _mapController = MapController();
   double _userLat = LocationService.defaultLatitude;
   double _userLng = LocationService.defaultLongitude;
-
-  late String _currentDestName;
-  late double _currentDestLat;
-  late double _currentDestLng;
-  late String _currentAddress;
-  late double _currentRating;
 
   @override
   void initState() {
@@ -58,9 +34,13 @@ class _MapPocScreenState extends State<MapPocScreen> {
     if (mounted) {
       setState(() {
         if (pos != null) {
-          _userLat = pos.latitude;
-          _userLng = pos.longitude;
+          _lat = pos.latitude;
+          _lng = pos.longitude;
+          _status = 'Vị trí hiện tại: (${_lat.toStringAsFixed(4)}, ${_lng.toStringAsFixed(4)})';
+        } else {
+          _status = 'Dùng toạ độ mặc định (Quận 1, TP.HCM): (${_lat.toStringAsFixed(4)}, ${_lng.toStringAsFixed(4)})';
         }
+        _loadingLocation = false;
       });
     }
   }
@@ -82,8 +62,11 @@ class _MapPocScreenState extends State<MapPocScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final placesProvider = context.watch<PlacesProvider>();
-    final nearbyList = placesProvider.places;
+    final destName = widget.destinationName ?? 'Bún Bò Huế O Oanh';
+    final destLat = widget.destinationLat ?? _userLat + 0.005;
+    final destLng = widget.destinationLng ?? _userLng + 0.005;
+    final address = widget.restaurantAddress ?? 'Số 55 Hoàng Quốc Việt, Cầu Giấy, Hà Nội';
+    final rating = widget.rating ?? 4.8;
 
     return Scaffold(
       backgroundColor: AppTheme.surface,
@@ -93,25 +76,8 @@ class _MapPocScreenState extends State<MapPocScreen> {
             // 1. Full Screen Interactive OpenStreetMap Canvas
             Positioned.fill(
               child: OsmMapWidget(
-                mapController: _mapController,
-                centerLatitude: _currentDestLat,
-                centerLongitude: _currentDestLng,
-                userLatitude: _userLat,
-                userLongitude: _userLng,
-                destinationLatitude: _currentDestLat,
-                destinationLongitude: _currentDestLng,
-                destinationName: _currentDestName,
-                places: nearbyList,
-                onPlaceSelected: (place) {
-                  setState(() {
-                    _currentDestName = place.name;
-                    _currentDestLat = place.latitude;
-                    _currentDestLng = place.longitude;
-                    _currentAddress = place.address;
-                    _currentRating = place.rating > 0 ? place.rating : 4.8;
-                  });
-                  _mapController.move(LatLng(place.latitude, place.longitude), 15.5);
-                },
+                centerLatitude: destLat,
+                centerLongitude: destLng,
               ),
             ),
 
@@ -161,7 +127,7 @@ class _MapPocScreenState extends State<MapPocScreen> {
                             ),
                           ),
                           Text(
-                            _currentDestName,
+                            destName,
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w800,
@@ -212,7 +178,7 @@ class _MapPocScreenState extends State<MapPocScreen> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.add, size: 20),
-                          onPressed: _zoomIn,
+                          onPressed: () {},
                         ),
                         Container(
                           width: 24,
@@ -221,7 +187,7 @@ class _MapPocScreenState extends State<MapPocScreen> {
                         ),
                         IconButton(
                           icon: const Icon(Icons.remove, size: 20),
-                          onPressed: _zoomOut,
+                          onPressed: () {},
                         ),
                       ],
                     ),
@@ -230,7 +196,7 @@ class _MapPocScreenState extends State<MapPocScreen> {
                   _buildFloatingMapButton(
                     icon: Icons.my_location,
                     color: AppTheme.secondaryMint,
-                    onTap: _recenterOnUser,
+                    onTap: _initLocation,
                   ),
                 ],
               ),
@@ -280,7 +246,7 @@ class _MapPocScreenState extends State<MapPocScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                _currentDestName,
+                                destName,
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w800,
@@ -295,7 +261,7 @@ class _MapPocScreenState extends State<MapPocScreen> {
                                   const Icon(Icons.star, size: 14, color: AppTheme.tertiaryAmber),
                                   const SizedBox(width: 3),
                                   Text(
-                                    _currentRating.toStringAsFixed(1),
+                                    rating.toStringAsFixed(1),
                                     style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w700,
@@ -304,7 +270,7 @@ class _MapPocScreenState extends State<MapPocScreen> {
                                   ),
                                   const SizedBox(width: 8),
                                   const Text(
-                                    'Quán ngon gần bạn',
+                                    '0.8 km • 5 phút đi xe',
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: AppTheme.onSurfaceVariant,
@@ -314,7 +280,7 @@ class _MapPocScreenState extends State<MapPocScreen> {
                               ),
                               const SizedBox(height: 2),
                               Text(
-                                _currentAddress,
+                                address,
                                 style: const TextStyle(
                                   fontSize: 11,
                                   color: AppTheme.onSurfaceVariant,
@@ -337,9 +303,9 @@ class _MapPocScreenState extends State<MapPocScreen> {
                           child: ElevatedButton.icon(
                             onPressed: () {
                               DeeplinkService.openMap(
-                                latitude: _currentDestLat,
-                                longitude: _currentDestLng,
-                                placeName: _currentDestName,
+                                latitude: destLat,
+                                longitude: destLng,
+                                placeName: destName,
                               );
                             },
                             icon: const Icon(Icons.directions, size: 18),

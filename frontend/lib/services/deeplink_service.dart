@@ -20,26 +20,4 @@ class DeeplinkService {
     final url = 'https://www.google.com/maps/dir/?api=1&destination=$lat,$lng';
     return openUrl(url);
   }
-
-  static Future<bool> openMap({
-    required double latitude,
-    required double longitude,
-    String? placeName,
-  }) async {
-    final encodedName = Uri.encodeComponent(placeName ?? '');
-    final url = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude($encodedName)';
-    return openUrl(url);
-  }
-
-  static Future<bool> openShopeeFood(String keyword) async {
-    final encoded = Uri.encodeComponent(keyword);
-    final url = 'https://shopeefood.vn/search?q=$encoded';
-    return openUrl(url);
-  }
-
-  static Future<bool> openGrabMart(String keyword) async {
-    final encoded = Uri.encodeComponent(keyword);
-    final url = 'https://food.grab.com/vn/vi/search?q=$encoded';
-    return openUrl(url);
-  }
 }
