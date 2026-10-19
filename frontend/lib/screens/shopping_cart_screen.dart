@@ -487,27 +487,30 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Tổng tiền BHX dự tính:',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: AppTheme.onSurfaceVariant,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            'Tổng tiền BHX dự tính:',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: AppTheme.onSurfaceVariant,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 2),
-                        Text(
-                          'Chỉ tính mục Có thể mua trên Bách Hoá Xanh',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: AppTheme.onSurfaceVariant,
+                          SizedBox(height: 2),
+                          Text(
+                            'Chỉ tính mục Có thể mua trên Bách Hoá Xanh',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: AppTheme.onSurfaceVariant,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     Text(
                       '${_formatCurrency(cart.totalEstimatedPrice)} đ',
                       style: const TextStyle(
@@ -665,35 +668,38 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           children: [
             // Checkbox indicator
             Container(
-              width: 24,
-              height: 24,
+              width: 22,
+              height: 22,
               decoration: BoxDecoration(
                 color: isChecked
                     ? const Color(0xFF008848)
                     : AppTheme.surfaceContainer,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(6),
+                border: isChecked
+                    ? null
+                    : Border.all(color: const Color(0xFFBDBDBD), width: 1.2),
               ),
               child: isChecked
-                  ? const Icon(Icons.check, size: 16, color: Colors.white)
+                  ? const Icon(Icons.check, size: 15, color: Colors.white)
                   : null,
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 10),
 
             // Thumbnail / Icon
             Container(
-              width: 44,
-              height: 44,
+              width: 40,
+              height: 40,
               decoration: BoxDecoration(
                 color: const Color(0xFFE8F5E9),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const Icon(
                 Icons.shopping_bag_outlined,
-                size: 22,
+                size: 20,
                 color: Color(0xFF008848),
               ),
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 10),
 
             // Content
             Expanded(
@@ -702,6 +708,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 children: [
                   Text(
                     item.productName ?? item.ingredient,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 13.5,
                       fontWeight: FontWeight.w700,
@@ -715,13 +723,18 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   const SizedBox(height: 2),
                   Text(
                     'Nguyên liệu: ${item.ingredient} (${_formatQuantity(item.quantity)} ${item.unit})',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontSize: 11.5,
                       color: AppTheme.onSurfaceVariant,
                     ),
                   ),
-                  const SizedBox(height: 4),
-                  Row(
+                  const SizedBox(height: 5),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 4,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -739,15 +752,16 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 6),
-                      Text(
-                        '${_formatCurrency(item.priceVnd ?? 0)} đ/gói',
-                        style: const TextStyle(
-                          fontSize: 11.5,
-                          color: AppTheme.onSurfaceVariant,
+                      if ((item.packsNeeded ?? 1) > 1 &&
+                          item.priceVnd != null &&
+                          item.priceVnd! > 0)
+                        Text(
+                          '${_formatCurrency(item.priceVnd!)} đ/gói',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: AppTheme.onSurfaceVariant,
+                          ),
                         ),
-                      ),
-                      const Spacer(),
                       Text(
                         '${_formatCurrency(item.totalPrice)} đ',
                         style: const TextStyle(
@@ -769,20 +783,22 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 onPressed: () {
                   DeeplinkService.openUrl(item.searchUrl);
                 },
-                icon: const Icon(Icons.open_in_new, size: 13),
+                icon: const Icon(Icons.open_in_new, size: 12),
                 label: const Text('Mua'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF008848), // BHX Green
                   foregroundColor: Colors.white,
                   elevation: 0,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  minimumSize: Size.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   textStyle: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
                   ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),
@@ -826,35 +842,38 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           children: [
             // Checkbox indicator
             Container(
-              width: 24,
-              height: 24,
+              width: 22,
+              height: 22,
               decoration: BoxDecoration(
                 color: isChecked
                     ? const Color(0xFFE65100)
                     : AppTheme.surfaceContainer,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(6),
+                border: isChecked
+                    ? null
+                    : Border.all(color: const Color(0xFFBDBDBD), width: 1.2),
               ),
               child: isChecked
-                  ? const Icon(Icons.check, size: 16, color: Colors.white)
+                  ? const Icon(Icons.check, size: 15, color: Colors.white)
                   : null,
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 10),
 
             // Thumbnail / Icon
             Container(
-              width: 44,
-              height: 44,
+              width: 40,
+              height: 40,
               decoration: BoxDecoration(
                 color: const Color(0xFFFFF3E0),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const Icon(
                 Icons.store,
-                size: 22,
+                size: 20,
                 color: Color(0xFFE65100),
               ),
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 10),
 
             // Content
             Expanded(
@@ -862,20 +881,24 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        item.ingredient,
-                        style: TextStyle(
-                          fontSize: 13.5,
-                          fontWeight: FontWeight.w700,
-                          color: isChecked
-                              ? AppTheme.onSurfaceVariant
-                              : AppTheme.onSurface,
-                          decoration:
-                              isChecked ? TextDecoration.lineThrough : null,
+                      Expanded(
+                        child: Text(
+                          item.ingredient,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 13.5,
+                            fontWeight: FontWeight.w700,
+                            color: isChecked
+                                ? AppTheme.onSurfaceVariant
+                                : AppTheme.onSurface,
+                            decoration:
+                                isChecked ? TextDecoration.lineThrough : null,
+                          ),
                         ),
                       ),
+                      const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 6, vertical: 2),
