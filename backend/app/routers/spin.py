@@ -10,7 +10,11 @@ router = APIRouter(prefix="/api/v1/spin", tags=["spin"])
 def recommend(payload: SpinRequest):
     detected_mood = emotion_service.predict_emotion(payload.text)
     
-    result = recommend_dish(detected_mood)
+    result = recommend_dish(
+        detected_mood,
+        lat=payload.latitude,
+        lon=payload.longitude,
+    )
     recommendations_raw = result.get("recommendations", [])
     
     formatted_items = []
