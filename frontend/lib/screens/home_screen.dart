@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
+import '../provider/auth_provider.dart';
 import '../services/location_service.dart';
+import 'food_search_screen.dart';
 import 'ingredients_screen.dart';
+import 'login_screen.dart';
 import 'map_poc_screen.dart';
 import 'mood_selection_screen.dart';
 import 'spin_wheel_screen.dart';
@@ -22,28 +26,120 @@ class HomeScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 8),
 
-              // 1. Friendly Greeting Badge
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                decoration: BoxDecoration(
-                  color: AppTheme.primaryFixed,
-                  borderRadius: BorderRadius.circular(9999),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x0D000000),
-                      blurRadius: 4,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: const Text(
-                  'Chào bé yêu! 👋',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: AppTheme.onPrimaryFixed,
-                  ),
-                ),
+              // 1. Friendly Greeting Badge & Profile Button
+              Consumer<AuthProvider>(
+                builder: (context, auth, _) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryFixed,
+                          borderRadius: BorderRadius.circular(9999),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color(0x0D000000),
+                              blurRadius: 4,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          auth.isLoggedIn ? 'Chào ${auth.displayName}! 👋' : 'Chào bé yêu! 👋',
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: AppTheme.onPrimaryFixed,
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          if (!auth.isLoggedIn) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (_) => const LoginScreen()),
+                            );
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                title: Row(
+                                  children: [
+                                    const Icon(Icons.account_circle, color: AppTheme.primary),
+                                    const SizedBox(width: 8),
+                                    Text(auth.displayName),
+                                  ],
+                                ),
+                                content: Text('Tài khoản: ${auth.user.contact}\n\nBạn có muốn đăng xuất?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(ctx),
+                                    child: const Text('Đóng'),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      auth.logout();
+                                      Navigator.pop(ctx);
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                          content: Text('Đã đăng xuất tài khoản.'),
+                                          behavior: SnackBarBehavior.floating,
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xFFBA1A1A),
+                                    ),
+                                    child: const Text('Đăng xuất', style: TextStyle(color: Colors.white)),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: auth.isLoggedIn ? AppTheme.secondaryContainer : AppTheme.surfaceContainerLowest,
+                            borderRadius: BorderRadius.circular(999),
+                            border: Border.all(color: const Color(0x15000000)),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0x08000000),
+                                blurRadius: 4,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                auth.isLoggedIn ? Icons.sentiment_satisfied_alt : Icons.person_outline,
+                                size: 16,
+                                color: auth.isLoggedIn ? AppTheme.onSecondaryContainer : AppTheme.primary,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                auth.isLoggedIn ? auth.displayName : 'Đăng nhập',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: auth.isLoggedIn ? AppTheme.onSecondaryContainer : AppTheme.onSurface,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
 
               const SizedBox(height: 12),
@@ -117,7 +213,68 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
+
+              // Search Trigger Bar -> FoodSearchScreen
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const FoodSearchScreen()),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  decoration: BoxDecoration(
+                    color: AppTheme.surfaceContainerLowest,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x0CFF6B35),
+                        blurRadius: 10,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                    border: Border.all(color: const Color(0x18FF6B35)),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.search, color: AppTheme.primary, size: 22),
+                      const SizedBox(width: 10),
+                      const Expanded(
+                        child: Text(
+                          'Tìm kiếm món: phở bò, bún chả...',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: AppTheme.outline,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryFixed,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Text(
+                          'TÌM KIẾM',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w800,
+                            color: AppTheme.onPrimaryFixed,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 16),
 
               // 5. Hero Illustration Visual Card
               Container(
@@ -304,6 +461,18 @@ class HomeScreen extends StatelessWidget {
                   ),
                   _buildFeaturePill(
                     context: context,
+                    icon: Icons.search,
+                    title: 'Tìm món ngon',
+                    subtitle: 'Kho 100+ món ăn',
+                    iconBg: AppTheme.primaryContainer,
+                    iconFg: Colors.white,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const FoodSearchScreen()),
+                    ),
+                  ),
+                  _buildFeaturePill(
+                    context: context,
                     icon: Icons.casino,
                     title: 'Vòng quay vui',
                     subtitle: 'Chọn ngẫu nhiên',
@@ -344,6 +513,33 @@ class HomeScreen extends StatelessWidget {
                         builder: (_) => const IngredientsScreen(dishName: 'Bún Bò Huế'),
                       ),
                     ),
+                  ),
+                  Consumer<AuthProvider>(
+                    builder: (context, auth, _) {
+                      return _buildFeaturePill(
+                        context: context,
+                        icon: auth.isLoggedIn ? Icons.sentiment_satisfied_alt : Icons.account_circle,
+                        title: auth.isLoggedIn ? auth.displayName : 'Tài khoản bé',
+                        subtitle: auth.isLoggedIn ? 'Đã đăng nhập' : 'Đăng nhập / Đăng ký',
+                        iconBg: auth.isLoggedIn ? AppTheme.secondaryFixed : AppTheme.surfaceContainerHigh,
+                        iconFg: auth.isLoggedIn ? AppTheme.onSecondaryFixedVariant : AppTheme.onSurface,
+                        onTap: () {
+                          if (!auth.isLoggedIn) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (_) => const LoginScreen()),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Đang đăng nhập với tài khoản: ${auth.user.contact}'),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
               ),

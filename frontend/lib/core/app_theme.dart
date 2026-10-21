@@ -16,8 +16,11 @@ class AppTheme {
   static const Color secondary = Color(0xFF006A62);
   static const Color secondaryMint = Color(0xFF2EC4B6);
   static const Color secondaryContainer = Color(0xFF70F8E8);
+  static const Color secondaryFixed = Color(0xFF70F8E8);
   static const Color onSecondary = Color(0xFFFFFFFF);
   static const Color onSecondaryContainer = Color(0xFF007168);
+  static const Color onSecondaryFixed = Color(0xFF00201D);
+  static const Color onSecondaryFixedVariant = Color(0xFF005049);
 
   // Tertiary & Warm Amber
   static const Color tertiary = Color(0xFF865300);
@@ -28,6 +31,7 @@ class AppTheme {
   static const Color onTertiary = Color(0xFFFFFFFF);
   static const Color onTertiaryContainer = Color(0xFF492B00);
   static const Color onTertiaryFixed = Color(0xFF2B1700);
+  static const Color onTertiaryFixedVariant = Color(0xFF663E00);
 
   // Surface & Neutrals
   static const Color background = Color(0xFFF8F9FF);
