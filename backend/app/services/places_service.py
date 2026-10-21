@@ -54,6 +54,8 @@ def _goong_search(keyword, latitude, longitude, radius_m, limit):
             continue  # Bỏ qua địa danh, tên đường...
         if pred.get("place_id"):
             candidates.append(pred)
+            
+    candidates = candidates[:max_results]
 
     if not candidates:
         return []
