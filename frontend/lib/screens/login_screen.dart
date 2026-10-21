@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pop(context);
     } else {
       setState(() {
-        _errorMessage = 'Email hoặc mật khẩu không chính xác. Vui lòng thử lại!';
+        _errorMessage = authProvider.lastError ?? 'Email hoặc mật khẩu không chính xác. Vui lòng thử lại!';
       });
     }
   }

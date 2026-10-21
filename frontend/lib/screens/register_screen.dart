@@ -126,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       Navigator.pop(context);
     } else {
       setState(() {
-        _errorMessage = 'Đăng ký thất bại. Vui lòng kiểm tra lại thông tin!';
+        _errorMessage = authProvider.lastError ?? 'Đăng ký thất bại. Vui lòng kiểm tra lại thông tin!';
       });
     }
   }
