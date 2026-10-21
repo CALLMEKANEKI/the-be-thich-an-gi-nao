@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../core/api_config.dart';
 import '../models/cart_result.dart';
 import '../models/ingredient.dart';
 import 'local_cache_service.dart';
 
 class CartApiService {
-  final String _baseUrl = 'http://10.0.2.2:8000';
   static const String _cacheKey = 'cart_last';
   final LocalCacheService _cache = LocalCacheService();
 
@@ -14,17 +14,19 @@ class CartApiService {
     required String dishName,
     required List<Ingredient> ingredients,
   }) async {
-    final response = await http.post(
-      Uri.parse('$_baseUrl/api/v1/cart'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'dish': {'id': dishId, 'name': dishName},
-        'ingredients': ingredients.map((i) => i.toCartJson()).toList(),
-      }),
-    );
+    final response = await http
+        .post(
+          Uri.parse('${ApiConfig.baseUrl}/api/v1/cart'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            'dish': {'id': dishId, 'name': dishName},
+            'ingredients': ingredients.map((i) => i.toCartJson()).toList(),
+          }),
+        )
+        .timeout(ApiConfig.defaultTimeout);
 
     if (response.statusCode != 200) {
-      throw Exception('Lỗi server: ${response.statusCode}');
+      throw Exception('Lỗi server giỏ hàng: ${response.statusCode}');
     }
 
     // Parse trước. Parse thành công mới lưu cache, nên không bao giờ lưu dữ liệu hỏng.

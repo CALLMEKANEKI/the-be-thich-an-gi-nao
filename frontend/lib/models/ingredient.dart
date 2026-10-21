@@ -11,6 +11,10 @@ class Ingredient {
     required this.unit,
   });
 
+  int get id => name.hashCode;
+  double get amount => quantity;
+
+
   // Đọc từ GET /api/v1/dishes/{id}/ingredients (field gốc tên "ingredient")
   factory Ingredient.fromJson(Map<String, dynamic> json) {
     return Ingredient(
