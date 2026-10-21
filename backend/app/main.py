@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import spin,places,dishes, cart
+from app.routers import spin,places,dishes, cart, me
 from app.core.config import settings
 from app.db.session import engine, Base
 
@@ -9,6 +9,7 @@ app.include_router(spin.router)
 app.include_router(places.router)
 app.include_router(dishes.router)
 app.include_router(cart.router)
+app.include_router(me.router)
 
 @app.get("/health")
 def health_check():
