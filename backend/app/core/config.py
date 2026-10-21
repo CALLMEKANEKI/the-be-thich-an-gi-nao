@@ -15,5 +15,7 @@ class Setting():
     geoapify_api_key: str = os.getenv("GEOAPIFY_API_KEY")
     hf_token: str = os.getenv("HF_TOKEN")
     hf_model_repo: str = os.getenv("HF_MODEL_REPO")
+    supabase_url: str = os.getenv("SUPABASE_URL")
+    supabase_jwt_secret: str = os.getenv("SUPABASE_JWT_SECRET")
         
 settings = Setting()
