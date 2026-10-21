@@ -321,10 +321,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           children: [
             // Field 1: Nickname
             _buildTextField(
-              label: 'Tên của bé',
-              sublabel: '(Nickname)',
+              label: 'Tên đăng nhập',
               controller: _nameController,
-              hint: 'VD: Bé Bơ, Sóc nhỏ...',
               icon: Icons.sentiment_satisfied_alt,
             ),
 
@@ -334,7 +332,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             _buildTextField(
               label: 'Email hoặc Số điện thoại',
               controller: _contactController,
-              hint: 'Nhập email hoặc SĐT phụ huynh',
               icon: Icons.mail_outline,
               keyboardType: TextInputType.emailAddress,
             ),
@@ -343,9 +340,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
             // Field 3: Password
             _buildPasswordField(
-              label: 'Mật khẩu',
+              label: 'Mật khẩu (Tối thiểu 6 ký tự)',
               controller: _passwordController,
-              hint: 'Tối thiểu 6 ký tự',
               obscure: _obscurePassword,
               onToggleObscure: () {
                 setState(() {
@@ -518,7 +514,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     required String label,
     String? sublabel,
     required TextEditingController controller,
-    required String hint,
+    String hint = '',
     required IconData icon,
     TextInputType keyboardType = TextInputType.text,
   }) {
@@ -559,7 +555,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             keyboardType: keyboardType,
             style: const TextStyle(fontSize: 14, color: AppTheme.onSurface),
             decoration: InputDecoration(
-              hintText: hint,
+              hintText: hint.isNotEmpty ? hint : null,
               hintStyle: const TextStyle(fontSize: 13, color: AppTheme.outline),
               prefixIcon: Icon(icon, size: 20, color: AppTheme.onSurfaceVariant),
               border: InputBorder.none,
@@ -574,7 +570,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _buildPasswordField({
     required String label,
     required TextEditingController controller,
-    required String hint,
+    String hint = '',
     required bool obscure,
     required VoidCallback onToggleObscure,
     ValueChanged<String>? onChanged,
@@ -613,7 +609,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               color: hasError ? const Color(0xFFBA1A1A) : AppTheme.onSurface,
             ),
             decoration: InputDecoration(
-              hintText: hint,
+              hintText: hint.isNotEmpty ? hint : null,
               hintStyle: const TextStyle(fontSize: 13, color: AppTheme.outline),
               prefixIcon: Icon(
                 isConfirm ? Icons.lock_reset : Icons.lock_outline,
