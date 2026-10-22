@@ -166,7 +166,7 @@ class _RestaurantResultScreenState extends State<RestaurantResultScreen> {
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             itemCount: places.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 10),
+            separatorBuilder: (_, _) => const SizedBox(height: 10),
             itemBuilder: (context, index) {
               final place = places[index];
               final isSelected = _selectedPlace?.name == place.name;
@@ -253,8 +253,8 @@ class _RestaurantResultScreenState extends State<RestaurantResultScreen> {
                             foregroundColor: const Color(0xFF1E88E5),
                           ),
                           onPressed: () {
-                            if (place.map_url.isNotEmpty) {
-                              DeeplinkService.openUrl(place.map_url);
+                            if (place.mapUrl.isNotEmpty) {
+                              DeeplinkService.openUrl(place.mapUrl);
                             } else {
                               DeeplinkService.openMapDirections(
                                 place.latitude,
