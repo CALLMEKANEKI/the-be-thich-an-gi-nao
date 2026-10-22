@@ -17,7 +17,7 @@ def build_dish_list_text(dishes: list[Dish]) -> str:
     lines = [f"- {d.name} (id={d.id}, category={d.category}): {d.description}" for d in dishes]
     return "\n".join(lines)
 
-def recommend_dish(mood: str, lat: float = None, lon: float = None) -> dict:
+def recommend_dish(mood: str, lat: float = None, lon: float = None, recent_names: list[str] = None) -> dict:
     with SessionLocal() as db:
         dishes = db.query(Dish).all()
     
@@ -28,7 +28,12 @@ def recommend_dish(mood: str, lat: float = None, lon: float = None) -> dict:
     dish_list_text = build_dish_list_text(dishes)
 
     weather_info = get_current_weather(lat, lon) if lat is not None and lon is not None else "không rõ"
-
+    recent_text = ""
+    if recent_names:
+        recent_text = (
+            f"\n    Người dùng gần đây đã chọn các món: {', '.join(recent_names)}. "
+            "Ưu tiên đa dạng: tránh chọn lại các món này nếu còn món phù hợp khác.\n"
+        )
     prompt = f"""
     Bạn là trợ lý gợi ý món ăn. Người dùng đang cảm thấy: "{mood}".
     Thời tiết hiện tại: {weather_info}
@@ -36,7 +41,7 @@ def recommend_dish(mood: str, lat: float = None, lon: float = None) -> dict:
     {dish_list_text}
 
     Hãy chọn ĐÚNG 10 món ăn phù hợp nhất từ danh sách trên (xắp xếp từ phù hợp nhất xuống ít phù hợp hơn).
-    
+    {recent_text}
     Trả về định dạng một JSON ARRAY gồm 10 object, mỗi object có các field:
     - "dish_id": (int) ID của món được chọn.
     - "reason": (string) Lý do chọn món ngắn gọn trong 1 câu bằng Tiếng Việt.
