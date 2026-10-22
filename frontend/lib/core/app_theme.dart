@@ -12,6 +12,27 @@ class AppTheme {
   static const Color accentGreen = Color(0xFF10B981);
   static const Color accentBlue = Color(0xFF3B82F6);
 
+  static const Color primary = primaryColor;
+  static const Color onPrimary = Colors.white;
+  static const Color primaryContainer = primaryColor;
+  static const Color primaryFixed = Color(0xFFFFE1D8);
+  static const Color primaryFixedDim = Color(0xFFFFB59D);
+  static const Color onPrimaryFixed = Color(0xFF4A1608);
+  static const Color onPrimaryFixedVariant = Color(0xFF7A2D18);
+  static const Color secondary = secondaryColor;
+  static const Color secondaryContainer = Color(0xFFFFE7AD);
+  static const Color onSecondaryContainer = Color(0xFF4A3500);
+  static const Color secondaryMint = accentGreen;
+  static const Color tertiaryFixed = Color(0xFFD8F3E8);
+  static const Color onTertiaryFixed = Color(0xFF124734);
+  static const Color tertiaryAmber = secondaryColor;
+  static const Color surface = surfaceColor;
+  static const Color surfaceContainer = Color(0xFFF7F2ED);
+  static const Color surfaceContainerLow = Color(0xFFFAF7F3);
+  static const Color surfaceContainerLowest = Colors.white;
+  static const Color onSurface = textPrimary;
+  static const Color onSurfaceVariant = textSecondary;
+
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
@@ -20,7 +41,6 @@ class AppTheme {
         primary: primaryColor,
         secondary: secondaryColor,
         surface: surfaceColor,
-        background: backgroundColor,
       ),
       scaffoldBackgroundColor: backgroundColor,
       appBarTheme: const AppBarTheme(
@@ -38,7 +58,7 @@ class AppTheme {
       cardTheme: CardThemeData(
         color: surfaceColor,
         elevation: 1,
-        shadowColor: Colors.black.withOpacity(0.04),
+        shadowColor: Colors.black.withValues(alpha: 0.04),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: const BorderSide(color: cardBorderColor, width: 1),
