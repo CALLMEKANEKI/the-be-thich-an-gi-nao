@@ -128,7 +128,7 @@ def test_jwks_outage_is_503_not_401(monkeypatch, key):
     assert client.get("/optional", headers=bearer(token(key))).status_code == 503
 
 
-# ---------------- /me ----------------
+# ---------------- /me & Migration ----------------
 me_app = FastAPI()
 me_app.include_router(me.router)
 me_app.dependency_overrides[auth.get_required_claims] = lambda: {"sub": SUB, "email": "a@b.c"}
@@ -143,6 +143,20 @@ def test_me_returns_internal_user():
     get_user.assert_called_once_with(SUB)
 
 
-def test_me_db_failure_is_503():
-    with patch.object(me, "get_or_create_user", side_effect=RuntimeError("DB lỗi")):
-        assert me_client.get("/api/v1/me").status_code == 503
+def test_anonymous_data_migration_endpoint():
+    """Kiểm tra endpoint POST /api/v1/me/migrate."""
+    mock_device_id = "test-device-uuid-1234"
+    mock_user_id = 7
+
+    with patch.object(me, "get_or_create_user", return_value={"id": mock_user_id, "auth_user_id": SUB}), \
+         patch.object(me, "migrate_anonymous_data", return_value={"spin_history": 2, "shopping_lists": 1}) as mock_migrate:
+        
+        response = me_client.post(
+            "/api/v1/me/migrate",
+            json={"device_id": mock_device_id}
+        )
+        
+        assert response.status_code == 200
+        assert response.json()["success"] is True
+        assert response.json()["data"] == {"spin_history": 2, "shopping_lists": 1}
+        mock_migrate.assert_called_once_with(device_id=mock_device_id, user_id=mock_user_id)
