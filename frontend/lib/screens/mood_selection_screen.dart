@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
+import '../provider/auth_provider.dart';
 import '../provider/recommendation_provider.dart';
 import '../services/location_service.dart';
+import 'food_search_screen.dart';
+import 'login_screen.dart';
 import 'spin_wheel_screen.dart';
 
 class MoodSelectionScreen extends StatefulWidget {
@@ -98,6 +101,45 @@ class _MoodSelectionScreenState extends State<MoodSelectionScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Thế bé thích ăn gì nào? 💕'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: 'Tìm kiếm món ăn',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const FoodSearchScreen()),
+              );
+            },
+          ),
+          Consumer<AuthProvider>(
+            builder: (context, auth, _) {
+              return IconButton(
+                icon: Icon(
+                  auth.isLoggedIn ? Icons.account_circle : Icons.person_outline,
+                  color: auth.isLoggedIn ? AppTheme.primary : null,
+                ),
+                tooltip: auth.isLoggedIn ? auth.displayName : 'Đăng nhập',
+                onPressed: () {
+                  if (!auth.isLoggedIn) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const LoginScreen()),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Đang đăng nhập: ${auth.displayName} (${auth.user.contact})'),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  }
+                },
+              );
+            },
+          ),
+          const SizedBox(width: 4),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),

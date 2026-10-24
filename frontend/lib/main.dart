@@ -8,6 +8,7 @@ import 'provider/cart_provider.dart';
 import 'provider/dish_search_provider.dart';
 import 'provider/ingredient_provider.dart';
 import 'provider/places_provider.dart';
+import 'screens/home_screen.dart';
 import 'screens/mood_selection_screen.dart';
 
 void main() {
@@ -36,7 +37,8 @@ class FoodPickerApp extends StatelessWidget {
       title: 'Thế bé thích ăn gì nào?',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const MoodSelectionScreen(),
+      home: const HomeScreen(),
     );
   }
 }
+
