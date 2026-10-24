@@ -34,7 +34,11 @@ def filter_and_sort(dishes: list[dict], q: str | None = None, category: str | No
     if q:
         needle = slugify(q)
         if needle:  # q chỉ toàn dấu câu thì bỏ qua bộ lọc
-            result = [d for d in result if needle in slugify(d["name"])]
+            tokens = [t for t in needle.split("_") if t]
+            def matches(d_name: str) -> bool:
+                s_name = slugify(d_name)
+                return needle in s_name or all(t in s_name for t in tokens)
+            result = [d for d in result if matches(d["name"])]
     return sorted(result, key=lambda d: (slugify(d["name"]), d["id"]))
 
 

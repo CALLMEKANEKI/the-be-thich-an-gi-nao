@@ -26,7 +26,13 @@ def recommend(payload: SpinRequest, claims: dict | None = Depends(get_optional_c
     detected_mood = emotion_service.predict_emotion(payload.text)
     recent_names = _recent_names(claims)
     
-    result = recommend_dish(detected_mood, recent_names=recent_names)
+    result = recommend_dish(
+        detected_mood,
+        lat=payload.latitude,
+        lon=payload.longitude,
+        recent_names=recent_names,
+    )
+
     recommendations_raw = result.get("recommendations", [])
     
     formatted_items = []

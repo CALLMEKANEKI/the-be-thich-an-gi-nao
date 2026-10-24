@@ -1,37 +1,67 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color primaryColor = Color(0xFFFF6F43);      // Warm Coral / Foodie Orange
-  static const Color primaryDark = Color(0xFFE64A19);
-  static const Color secondaryColor = Color(0xFFFFB300);    // Warm Gold / Honey
-  static const Color backgroundColor = Color(0xFFFBF8F5);   // Soft Warm White
-  static const Color surfaceColor = Colors.white;
-  static const Color cardBorderColor = Color(0xFFF0EBE5);
-  static const Color textPrimary = Color(0xFF1E2124);
-  static const Color textSecondary = Color(0xFF6B7280);
-  static const Color accentGreen = Color(0xFF10B981);
-  static const Color accentBlue = Color(0xFF3B82F6);
-
-  static const Color primary = primaryColor;
-  static const Color onPrimary = Colors.white;
-  static const Color primaryContainer = primaryColor;
-  static const Color primaryFixed = Color(0xFFFFE1D8);
+  // Brand Primary & Coral
+  static const Color primary = Color(0xFFFF6B35);
+  static const Color primaryColor = primary;
+  static const Color primaryDark = Color(0xFFAB3500);
+  static const Color primaryContainer = Color(0xFFFF6B35);
+  static const Color onPrimary = Color(0xFFFFFFFF);
+  static const Color primaryFixed = Color(0xFFFFDBD0);
   static const Color primaryFixedDim = Color(0xFFFFB59D);
-  static const Color onPrimaryFixed = Color(0xFF4A1608);
-  static const Color onPrimaryFixedVariant = Color(0xFF7A2D18);
-  static const Color secondary = secondaryColor;
-  static const Color secondaryContainer = Color(0xFFFFE7AD);
-  static const Color onSecondaryContainer = Color(0xFF4A3500);
-  static const Color secondaryMint = accentGreen;
-  static const Color tertiaryFixed = Color(0xFFD8F3E8);
-  static const Color onTertiaryFixed = Color(0xFF124734);
-  static const Color tertiaryAmber = secondaryColor;
-  static const Color surface = surfaceColor;
-  static const Color surfaceContainer = Color(0xFFF7F2ED);
-  static const Color surfaceContainerLow = Color(0xFFFAF7F3);
-  static const Color surfaceContainerLowest = Colors.white;
-  static const Color onSurface = textPrimary;
-  static const Color onSurfaceVariant = textSecondary;
+  static const Color onPrimaryFixed = Color(0xFF390C00);
+  static const Color onPrimaryFixedVariant = Color(0xFF832600);
+
+  // Secondary & Mint Fresh
+  static const Color secondary = Color(0xFF006A62);
+  static const Color secondaryColor = Color(0xFFFFB300);
+  static const Color secondaryMint = Color(0xFF2EC4B6);
+  static const Color secondaryContainer = Color(0xFF70F8E8);
+  static const Color secondaryFixed = Color(0xFF70F8E8);
+  static const Color onSecondary = Color(0xFFFFFFFF);
+  static const Color onSecondaryContainer = Color(0xFF007168);
+  static const Color onSecondaryFixed = Color(0xFF00201D);
+  static const Color onSecondaryFixedVariant = Color(0xFF005049);
+
+  // Tertiary & Warm Amber
+  static const Color tertiary = Color(0xFF865300);
+  static const Color tertiaryAmber = Color(0xFFFFA200);
+  static const Color tertiaryContainer = Color(0xFFD78800);
+  static const Color tertiaryFixed = Color(0xFFFFDDB9);
+  static const Color tertiaryFixedDim = Color(0xFFFFB962);
+  static const Color onTertiary = Color(0xFFFFFFFF);
+  static const Color onTertiaryContainer = Color(0xFF492B00);
+  static const Color onTertiaryFixed = Color(0xFF2B1700);
+  static const Color onTertiaryFixedVariant = Color(0xFF663E00);
+
+  // Surface & Neutrals
+  static const Color background = Color(0xFFF8F9FF);
+  static const Color backgroundColor = background;
+  static const Color surface = Color(0xFFF8F9FF);
+  static const Color surfaceColor = Color(0xFFFFFFFF);
+  static const Color surfaceDim = Color(0xFFD6DAE4);
+  static const Color surfaceBright = Color(0xFFF8F9FF);
+  static const Color surfaceContainerLowest = Color(0xFFFFFFFF);
+  static const Color surfaceContainerLow = Color(0xFFF0F4FD);
+  static const Color surfaceContainer = Color(0xFFEAEEF8);
+  static const Color surfaceContainerHigh = Color(0xFFE4E8F2);
+  static const Color surfaceContainerHighest = Color(0xFFDEE2EC);
+
+  static const Color onSurface = Color(0xFF171C23);
+  static const Color onSurfaceVariant = Color(0xFF594139);
+  static const Color textPrimary = onSurface;
+  static const Color textSecondary = onSurfaceVariant;
+  static const Color outline = Color(0xFF8D7168);
+  static const Color outlineVariant = Color(0xFFE1BFB5);
+  static const Color cardBorderColor = outlineVariant;
+
+  // Accents & Errors
+  static const Color accentGreen = secondaryMint;
+  static const Color accentBlue = Color(0xFF3B82F6);
+  static const Color error = Color(0xFFBA1A1A);
+  static const Color errorContainer = Color(0xFFFFDAD6);
+  static const Color onError = Color(0xFFFFFFFF);
+
 
   static ThemeData get lightTheme {
     return ThemeData(

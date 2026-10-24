@@ -42,6 +42,7 @@ dependencies:
   latlong2: ^0.9.1
   geolocator: ^13.0.2
   url_launcher: ^6.3.1
+  google_sign_in: ^6.2.2
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +55,18 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
   build_runner: ^2.17.1
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/appicon_circle.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "assets/icon/appicon_background.png"
+  adaptive_icon_foreground: "assets/icon/appicon_foreground.png"
+  web:
+    generate: true
+    image_path: "assets/icon/appicon_circle.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -66,9 +79,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/icon/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
