@@ -210,7 +210,7 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
                 });
               },
               decoration: const InputDecoration(
-                hintText: 'Hôm nay bé thèm món gì? (VD: phở, cơm...)',
+                hintText: 'Hôm nay bé thèm món gì nà?',
                 hintStyle: TextStyle(
                   fontSize: 13.5,
                   color: AppTheme.onSurfaceVariant,

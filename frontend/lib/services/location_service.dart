@@ -27,12 +27,17 @@ class LocationService {
         return null;
       }
 
-      return await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.medium,
-          timeLimit: Duration(seconds: 5),
-        ),
-      );
+      try {
+        return await Geolocator.getCurrentPosition(
+          locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.high,
+            timeLimit: Duration(seconds: 5),
+          ),
+        );
+      } catch (_) {
+        // Fallback lấy vị trí đã lưu gần nhất (rất nhạy với máy ảo Emulator khi set Location)
+        return await Geolocator.getLastKnownPosition();
+      }
     } catch (_) {
       return null;
     }

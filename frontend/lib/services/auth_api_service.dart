@@ -19,14 +19,7 @@ class AuthResult {
 }
 
 class AuthApiService {
-  String get _baseUrl {
-    String base = ApiConfig.baseUrl;
-    // Tự động điều chỉnh host cho Android Emulator nếu cần
-    if (!kIsWeb && Platform.isAndroid && base.contains('127.0.0.1')) {
-      base = base.replaceAll('127.0.0.1', '10.0.2.2');
-    }
-    return base;
-  }
+  String get _baseUrl => ApiConfig.baseUrl;
 
   /// Đăng nhập tài khoản: POST /api/v1/auth/login
   Future<AuthResult> login({
