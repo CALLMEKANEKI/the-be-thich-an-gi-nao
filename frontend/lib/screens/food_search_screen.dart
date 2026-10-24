@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../core/app_theme.dart';
@@ -7,6 +8,7 @@ import '../provider/dish_search_provider.dart';
 import '../services/location_service.dart';
 import 'ingredients_screen.dart';
 import 'login_screen.dart';
+import 'restaurant_result_screen.dart';
 import 'spin_wheel_screen.dart';
 
 /// Screen 11_Food_Search from Stitch Project "Food Decider Flutter UI"
@@ -22,10 +24,14 @@ class FoodSearchScreen extends StatefulWidget {
 class _FoodSearchScreenState extends State<FoodSearchScreen> {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+  Timer? _debounce;
+  double _latitude = LocationService.defaultLatitude;
+  double _longitude = LocationService.defaultLongitude;
 
   @override
   void initState() {
     super.initState();
+    _loadUserLocation();
     if (widget.initialQuery != null && widget.initialQuery!.isNotEmpty) {
       _searchController.text = widget.initialQuery!;
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -34,8 +40,19 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
     }
   }
 
+  Future<void> _loadUserLocation() async {
+    final pos = await LocationService.getCurrentPosition();
+    if (pos != null && mounted) {
+      setState(() {
+        _latitude = pos.latitude;
+        _longitude = pos.longitude;
+      });
+    }
+  }
+
   @override
   void dispose() {
+    _debounce?.cancel();
     _searchController.dispose();
     _focusNode.dispose();
     super.dispose();
@@ -160,25 +177,42 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
           ),
         ],
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Row(
         children: [
-          const Icon(
-            Icons.search,
-            color: AppTheme.primary,
-            size: 24,
+          InkWell(
+            onTap: () => _onSearchSubmitted(_searchController.text),
+            borderRadius: BorderRadius.circular(9999),
+            child: const Padding(
+              padding: EdgeInsets.all(4.0),
+              child: Icon(
+                Icons.search,
+                color: AppTheme.primary,
+                size: 24,
+              ),
+            ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 8),
           Expanded(
             child: TextField(
               controller: _searchController,
               focusNode: _focusNode,
               textInputAction: TextInputAction.search,
+              keyboardType: TextInputType.text,
+              autocorrect: false,
+              enableSuggestions: true,
               onSubmitted: _onSearchSubmitted,
+              onChanged: (val) {
+                setState(() {});
+                _debounce?.cancel();
+                _debounce = Timer(const Duration(milliseconds: 350), () {
+                  context.read<DishSearchProvider>().search(val);
+                });
+              },
               decoration: const InputDecoration(
-                hintText: 'Hôm nay bé thèm món gì?',
+                hintText: 'Hôm nay bé thèm món gì? (VD: phở, cơm...)',
                 hintStyle: TextStyle(
-                  fontSize: 14.5,
+                  fontSize: 13.5,
                   color: AppTheme.onSurfaceVariant,
                 ),
                 border: InputBorder.none,
@@ -196,6 +230,7 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
             InkWell(
               onTap: () {
                 _searchController.clear();
+                setState(() {});
                 context.read<DishSearchProvider>().clearSearch();
               },
               borderRadius: BorderRadius.circular(9999),
@@ -381,12 +416,12 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
                   spacing: 8,
                   runSpacing: 8,
                   children: [
-                    _buildTrendingChip('🥢', 'Bún đậu'),
+                    _buildTrendingChip('🍜', 'Phở bò'),
                     _buildTrendingChip('🍛', 'Cơm tấm'),
-                    _buildTrendingChip('🌶️', 'Mì cay 7 cấp'),
-                    _buildTrendingChip('🧋', 'Trà sữa trân châu'),
-                    _buildTrendingChip('🍜', 'Phở bò tái lăn'),
-                    _buildTrendingChip('🥗', 'Gỏi cuốn'),
+                    _buildTrendingChip('🥢', 'Bún thịt nướng'),
+                    _buildTrendingChip('🍲', 'Bún riêu'),
+                    _buildTrendingChip('🥖', 'Bánh mì chay'),
+                    _buildTrendingChip('🥑', 'Sinh tố bơ'),
                   ],
                 ),
               ],
@@ -395,7 +430,7 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
 
           const SizedBox(height: 16),
 
-          // 3. Gợi ý theo nhóm vị
+          // 3. Gợi ý theo nhóm vị / danh mục
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
@@ -417,7 +452,7 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
                     Icon(Icons.restaurant_menu, color: AppTheme.secondary, size: 20),
                     SizedBox(width: 6),
                     Text(
-                      'Gợi ý theo nhóm vị',
+                      'Gợi ý theo nhóm vị & danh mục',
                       style: TextStyle(
                         fontSize: 14.5,
                         fontWeight: FontWeight.w700,
@@ -436,40 +471,52 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
                   childAspectRatio: 2.3,
                   children: [
                     _buildTasteCard(
-                      icon: Icons.spa,
-                      title: 'Thanh đạm',
-                      subtitle: 'Canh, rau, hấp',
-                      bg: AppTheme.secondaryFixed.withValues(alpha: 0.35),
-                      iconBg: AppTheme.secondaryFixed,
-                      iconFg: AppTheme.secondary,
-                      onTap: () => _setQueryAndSearch('Thanh đạm'),
-                    ),
-                    _buildTasteCard(
-                      icon: Icons.dinner_dining,
-                      title: 'Đậm đà',
-                      subtitle: 'Kho, nướng, xào',
-                      bg: AppTheme.primaryFixed.withValues(alpha: 0.35),
-                      iconBg: AppTheme.primaryFixed,
-                      iconFg: AppTheme.primary,
-                      onTap: () => _setQueryAndSearch('Đậm đà'),
-                    ),
-                    _buildTasteCard(
                       icon: Icons.soup_kitchen,
-                      title: 'Nóng hổi',
-                      subtitle: 'Lẩu, mì nước',
+                      title: 'Món Nước',
+                      subtitle: 'Phở, bún, mì nước',
                       bg: AppTheme.tertiaryFixed.withValues(alpha: 0.35),
                       iconBg: AppTheme.tertiaryFixed,
                       iconFg: AppTheme.tertiary,
-                      onTap: () => _setQueryAndSearch('Nóng hổi'),
+                      onTap: () {
+                        _searchController.clear();
+                        context.read<DishSearchProvider>().selectCategory('Món nước');
+                      },
                     ),
                     _buildTasteCard(
-                      icon: Icons.icecream,
-                      title: 'Mát lạnh',
-                      subtitle: 'Chè, kem, sinh tố',
+                      icon: Icons.spa,
+                      title: 'Món Chay',
+                      subtitle: 'Thanh đạm, rau củ',
+                      bg: AppTheme.secondaryFixed.withValues(alpha: 0.35),
+                      iconBg: AppTheme.secondaryFixed,
+                      iconFg: AppTheme.secondary,
+                      onTap: () {
+                        _searchController.clear();
+                        context.read<DishSearchProvider>().selectCategory('món chay');
+                      },
+                    ),
+                    _buildTasteCard(
+                      icon: Icons.dinner_dining,
+                      title: 'Món Kho & Mặn',
+                      subtitle: 'Đậm đà đưa cơm',
+                      bg: AppTheme.primaryFixed.withValues(alpha: 0.35),
+                      iconBg: AppTheme.primaryFixed,
+                      iconFg: AppTheme.primary,
+                      onTap: () {
+                        _searchController.clear();
+                        context.read<DishSearchProvider>().selectCategory('Món kho');
+                      },
+                    ),
+                    _buildTasteCard(
+                      icon: Icons.local_drink,
+                      title: 'Đồ Uống & Chè',
+                      subtitle: 'Mát lạnh giải nhiệt',
                       bg: AppTheme.surfaceContainerHigh,
                       iconBg: AppTheme.surfaceContainerHighest,
                       iconFg: AppTheme.secondary,
-                      onTap: () => _setQueryAndSearch('Mát lạnh'),
+                      onTap: () {
+                        _searchController.clear();
+                        context.read<DishSearchProvider>().selectCategory('Đồ uống');
+                      },
                     ),
                   ],
                 ),
@@ -682,19 +729,173 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
     );
   }
 
+  void _showDishActionModal(DishRecommendation dish) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Drag handle
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                margin: const EdgeInsets.only(bottom: 16),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(14),
+                  child: Container(
+                    width: 64,
+                    height: 64,
+                    color: AppTheme.surfaceContainer,
+                    child: dish.imageUrl.isNotEmpty
+                        ? Image.network(
+                            dish.imageUrl,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) => const Icon(
+                              Icons.ramen_dining,
+                              size: 32,
+                              color: AppTheme.primary,
+                            ),
+                          )
+                        : const Icon(
+                            Icons.ramen_dining,
+                            size: 32,
+                            color: AppTheme.primary,
+                          ),
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        dish.name,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
+                          color: AppTheme.onSurface,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        dish.category.isNotEmpty ? dish.category : 'Món ngon hấp dẫn',
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: AppTheme.secondary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 18),
+            const Divider(height: 1),
+            const SizedBox(height: 16),
+            const Text(
+              'Bé muốn ăn món này theo cách nào? ✨',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: AppTheme.onSurfaceVariant,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                // Lựa chọn 1: Ra ngoài ăn 🛵
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => RestaurantResultScreen(
+                            dishName: dish.name,
+                            latitude: _latitude,
+                            longitude: _longitude,
+                          ),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.storefront, size: 20),
+                    label: const Text(
+                      'Ra ngoài ăn 🛵',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF1E88E5),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                // Lựa chọn 2: Tự nấu 🍳
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => IngredientsScreen(
+                            dishId: dish.id,
+                            dishName: dish.name,
+                          ),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.kitchen, size: 20),
+                    label: const Text(
+                      'Tự nấu 🍳',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.5),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppTheme.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildDishCard(DishRecommendation dish) {
     return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => IngredientsScreen(
-              dishId: dish.id,
-              dishName: dish.name,
-            ),
-          ),
-        );
-      },
+      onTap: () => _showDishActionModal(dish),
       borderRadius: BorderRadius.circular(16),
       child: Container(
         padding: const EdgeInsets.all(12),
@@ -718,8 +919,8 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(14),
                   child: Container(
-                    width: 80,
-                    height: 80,
+                    width: 76,
+                    height: 76,
                     color: AppTheme.surfaceContainer,
                     child: dish.imageUrl.isNotEmpty
                         ? Image.network(
@@ -727,13 +928,13 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) => const Icon(
                               Icons.ramen_dining,
-                              size: 36,
+                              size: 34,
                               color: AppTheme.primary,
                             ),
                           )
                         : const Icon(
                             Icons.ramen_dining,
-                            size: 36,
+                            size: 34,
                             color: AppTheme.primary,
                           ),
                   ),
@@ -783,63 +984,96 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
                       color: AppTheme.onSurface,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 2),
+                  Text(
+                    dish.category.isNotEmpty ? dish.category : 'Món ngon',
+                    style: const TextStyle(
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w600,
+                      color: AppTheme.secondary,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  // Hai nút thao tác nhanh: Quán gần 🛵 và Tự nấu 🍳
                   Row(
                     children: [
-                      const Icon(Icons.timer_outlined, size: 13, color: AppTheme.primary),
-                      const SizedBox(width: 4),
-                      const Text(
-                        '20-30 phút',
-                        style: TextStyle(
-                          fontSize: 11.5,
-                          color: AppTheme.onSurfaceVariant,
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                      const Text('•', style: TextStyle(color: AppTheme.onSurfaceVariant)),
-                      const SizedBox(width: 6),
-                      Text(
-                        dish.category.isNotEmpty ? dish.category : 'Bổ dưỡng',
-                        style: const TextStyle(
-                          fontSize: 11.5,
-                          fontWeight: FontWeight.w600,
-                          color: AppTheme.secondary,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  Wrap(
-                    spacing: 6,
-                    runSpacing: 4,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: AppTheme.secondaryFixed.withValues(alpha: 0.35),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text(
-                          dish.category.isNotEmpty ? dish.category : 'Món ngon',
-                          style: const TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                            color: AppTheme.secondary,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => RestaurantResultScreen(
+                                dishName: dish.name,
+                                latitude: _latitude,
+                                longitude: _longitude,
+                              ),
+                            ),
+                          );
+                        },
+                        borderRadius: BorderRadius.circular(8),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF1E88E5).withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: const Color(0xFF1E88E5).withValues(alpha: 0.35),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Icon(Icons.storefront, size: 12, color: Color(0xFF1E88E5)),
+                              SizedBox(width: 4),
+                              Text(
+                                'Quán gần 🛵',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF1E88E5),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: AppTheme.primaryFixed.withValues(alpha: 0.35),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: const Text(
-                          'Chuẩn vị',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                            color: AppTheme.primary,
+                      const SizedBox(width: 8),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => IngredientsScreen(
+                                dishId: dish.id,
+                                dishName: dish.name,
+                              ),
+                            ),
+                          );
+                        },
+                        borderRadius: BorderRadius.circular(8),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: AppTheme.primaryFixed.withValues(alpha: 0.4),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: AppTheme.primary.withValues(alpha: 0.35),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Icon(Icons.kitchen, size: 12, color: AppTheme.primary),
+                              SizedBox(width: 4),
+                              Text(
+                                'Tự nấu 🍳',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppTheme.primary,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -848,19 +1082,11 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
                 ],
               ),
             ),
-            const SizedBox(width: 6),
-            Container(
-              width: 32,
-              height: 32,
-              decoration: const BoxDecoration(
-                color: AppTheme.surfaceContainerLow,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.chevron_right,
-                size: 20,
-                color: AppTheme.onSurfaceVariant,
-              ),
+            const SizedBox(width: 4),
+            const Icon(
+              Icons.chevron_right,
+              size: 20,
+              color: AppTheme.onSurfaceVariant,
             ),
           ],
         ),
