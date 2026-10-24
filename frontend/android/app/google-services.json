@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "395047407004",
+    "firebase_url": "https://fir-project-npa-default-rtdb.firebaseio.com",
+    "project_id": "fir-project-npa",
+    "storage_bucket": "fir-project-npa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395047407004:android:ba28690ac1fea033e88c59",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_npa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAAev9pNQuZFZos59ezY0eFQWuPlzBXDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395047407004:android:0eab03c0aabb9583e88c59",
+        "android_client_info": {
+          "package_name": "com.example.frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAAev9pNQuZFZos59ezY0eFQWuPlzBXDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../services/auth_api_service.dart';
+import '../services/google_auth_service.dart';
 
 class UserModel {
   final int? id;
@@ -174,6 +175,7 @@ class AuthProvider extends ChangeNotifier {
       contact: '',
       isLoggedIn: false,
     );
+    GoogleAuthService.signOut();
     notifyListeners();
   }
 }

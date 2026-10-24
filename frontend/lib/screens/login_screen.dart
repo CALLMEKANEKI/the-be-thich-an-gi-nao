@@ -5,7 +5,7 @@ import '../provider/auth_provider.dart';
 import '../services/location_service.dart';
 import 'register_screen.dart';
 import 'spin_wheel_screen.dart';
-import '../widgets/google_account_picker_sheet.dart';
+import '../services/google_auth_service.dart';
 
 /// Screen 09_Login from Stitch "Food Decider Flutter UI"
 class LoginScreen extends StatefulWidget {
@@ -86,55 +86,67 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _handleGoogleSignIn() async {
-    final selectedAccount = await showModalBottomSheet<Map<String, String>>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (ctx) => const GoogleAccountPickerSheet(),
-    );
-
-    if (selectedAccount == null || !mounted) return;
-
-    setState(() {
-      _isGoogleLoading = true;
-      _errorMessage = null;
-    });
-
-    final authProvider = context.read<AuthProvider>();
-    final email = selectedAccount['email'] ?? 'be.google@gmail.com';
-    final name = selectedAccount['name'] ?? 'Bé Google';
-
-    final success = await authProvider.loginWithGoogle(email, name);
-
-    if (!mounted) return;
-
-    setState(() {
-      _isGoogleLoading = false;
-    });
-
-    if (success) {
-      ScaffoldMessenger.of(context)
-        ..clearSnackBars()
-        ..showSnackBar(
-          SnackBar(
-            content: Row(
-              children: [
-                const Icon(Icons.check_circle, color: Colors.white, size: 20),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text('Chào mừng ${authProvider.displayName}! Đăng nhập Google thành công 🎉'),
-                ),
-              ],
-            ),
-            backgroundColor: AppTheme.secondary,
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          ),
-        );
-      Navigator.pop(context);
-    } else {
+    try {
       setState(() {
-        _errorMessage = authProvider.lastError ?? 'Đăng nhập Google thất bại. Vui lòng thử lại!';
+        _isGoogleLoading = true;
+        _errorMessage = null;
+      });
+
+      final account = await GoogleAuthService.signIn();
+
+      if (account == null) {
+        // Người dùng đã đóng/hủy hộp thoại chọn tài khoản Google
+        if (mounted) {
+          setState(() {
+            _isGoogleLoading = false;
+          });
+        }
+        return;
+      }
+
+      final email = account.email;
+      final name = account.displayName ?? account.email.split('@').first;
+
+      if (!mounted) return;
+      final authProvider = context.read<AuthProvider>();
+      final success = await authProvider.loginWithGoogle(email, name);
+
+      if (!mounted) return;
+
+      setState(() {
+        _isGoogleLoading = false;
+      });
+
+      if (success) {
+        ScaffoldMessenger.of(context)
+          ..clearSnackBars()
+          ..showSnackBar(
+            SnackBar(
+              content: Row(
+                children: [
+                  const Icon(Icons.check_circle, color: Colors.white, size: 20),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text('Chào mừng ${authProvider.displayName}! Đăng nhập Google thành công 🎉'),
+                  ),
+                ],
+              ),
+              backgroundColor: AppTheme.secondary,
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+          );
+        Navigator.pop(context);
+      } else {
+        setState(() {
+          _errorMessage = authProvider.lastError ?? 'Đăng nhập Google thất bại. Vui lòng thử lại!';
+        });
+      }
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _isGoogleLoading = false;
+        _errorMessage = 'Không thể kết nối dịch vụ Google Sign-In ($e). Vui lòng kiểm tra tài khoản Google trên thiết bị!';
       });
     }
   }
