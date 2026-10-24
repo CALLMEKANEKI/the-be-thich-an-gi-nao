@@ -4,7 +4,6 @@ import '../core/app_theme.dart';
 import '../provider/auth_provider.dart';
 import '../services/location_service.dart';
 import 'food_search_screen.dart';
-import 'ingredients_screen.dart';
 import 'login_screen.dart';
 
 import 'map_poc_screen.dart';

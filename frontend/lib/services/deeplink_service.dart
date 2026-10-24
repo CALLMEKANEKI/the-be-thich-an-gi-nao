@@ -20,4 +20,17 @@ class DeeplinkService {
     final url = 'https://www.google.com/maps/dir/?api=1&destination=$lat,$lng';
     return openUrl(url);
   }
+
+  static Future<bool> openMap({
+    required double latitude,
+    required double longitude,
+    String? placeName,
+  }) async {
+    final query = (placeName != null && placeName.isNotEmpty)
+        ? '$latitude,$longitude ($placeName)'
+        : '$latitude,$longitude';
+    final url = 'https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent(query)}';
+    return openUrl(url);
+  }
+
 }

@@ -688,7 +688,10 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => IngredientsScreen(dishName: dish.name),
+            builder: (_) => IngredientsScreen(
+              dishId: dish.id,
+              dishName: dish.name,
+            ),
           ),
         );
       },

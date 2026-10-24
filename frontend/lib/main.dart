@@ -9,7 +9,6 @@ import 'provider/dish_search_provider.dart';
 import 'provider/ingredient_provider.dart';
 import 'provider/places_provider.dart';
 import 'screens/home_screen.dart';
-import 'screens/mood_selection_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
