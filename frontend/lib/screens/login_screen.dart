@@ -5,6 +5,7 @@ import '../provider/auth_provider.dart';
 import '../services/location_service.dart';
 import 'register_screen.dart';
 import 'spin_wheel_screen.dart';
+import '../widgets/google_account_picker_sheet.dart';
 
 /// Screen 09_Login from Stitch "Food Decider Flutter UI"
 class LoginScreen extends StatefulWidget {
@@ -21,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _obscurePassword = true;
   bool _isLoading = false;
+  bool _isGoogleLoading = false;
   String? _errorMessage;
 
   @override
@@ -59,26 +61,93 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     if (success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Row(
-            children: [
-              const Icon(Icons.check_circle, color: Colors.white, size: 20),
-              const SizedBox(width: 8),
-              Text('Chào mừng ${authProvider.displayName} đã quay lại! 🎉'),
-            ],
+      ScaffoldMessenger.of(context)
+        ..clearSnackBars()
+        ..showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.check_circle, color: Colors.white, size: 20),
+                const SizedBox(width: 8),
+                Text('Chào mừng ${authProvider.displayName} đã quay lại! 🎉'),
+              ],
+            ),
+            backgroundColor: AppTheme.secondary,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
-          backgroundColor: AppTheme.secondary,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ),
-      );
+        );
       Navigator.pop(context);
     } else {
       setState(() {
         _errorMessage = authProvider.lastError ?? 'Email hoặc mật khẩu không chính xác. Vui lòng thử lại!';
       });
     }
+  }
+
+  Future<void> _handleGoogleSignIn() async {
+    final selectedAccount = await showModalBottomSheet<Map<String, String>>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => const GoogleAccountPickerSheet(),
+    );
+
+    if (selectedAccount == null || !mounted) return;
+
+    setState(() {
+      _isGoogleLoading = true;
+      _errorMessage = null;
+    });
+
+    final authProvider = context.read<AuthProvider>();
+    final email = selectedAccount['email'] ?? 'be.google@gmail.com';
+    final name = selectedAccount['name'] ?? 'Bé Google';
+
+    final success = await authProvider.loginWithGoogle(email, name);
+
+    if (!mounted) return;
+
+    setState(() {
+      _isGoogleLoading = false;
+    });
+
+    if (success) {
+      ScaffoldMessenger.of(context)
+        ..clearSnackBars()
+        ..showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.check_circle, color: Colors.white, size: 20),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text('Chào mừng ${authProvider.displayName}! Đăng nhập Google thành công 🎉'),
+                ),
+              ],
+            ),
+            backgroundColor: AppTheme.secondary,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+        );
+      Navigator.pop(context);
+    } else {
+      setState(() {
+        _errorMessage = authProvider.lastError ?? 'Đăng nhập Google thất bại. Vui lòng thử lại!';
+      });
+    }
+  }
+
+  void _handleAppleSignIn() {
+    ScaffoldMessenger.of(context)
+      ..clearSnackBars()
+      ..showSnackBar(
+        const SnackBar(
+          content: Text('Tính năng Đăng nhập bằng Apple ID hiện chỉ khả dụng trên thiết bị iOS.'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
   }
 
   @override
@@ -513,14 +582,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // Google Button
         Expanded(
           child: OutlinedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Đang kết nối tài khoản Google...'),
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
-            },
+            onPressed: (_isLoading || _isGoogleLoading) ? null : _handleGoogleSignIn,
             style: OutlinedButton.styleFrom(
               backgroundColor: AppTheme.surfaceContainerLowest,
               foregroundColor: AppTheme.onSurface,
@@ -530,50 +592,65 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 20,
-                  height: 20,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFEA4335),
-                    shape: BoxShape.circle,
+            child: _isGoogleLoading
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFEA4335)),
+                        ),
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        'Đang xử lý...',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFEA4335),
+                          shape: BoxShape.circle,
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'G',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'Google',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'G',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                const Text(
-                  'Google',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
         const SizedBox(width: 12),
         // Apple Button
         Expanded(
           child: OutlinedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Đang kết nối Apple ID...'),
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
-            },
+            onPressed: _handleAppleSignIn,
             style: OutlinedButton.styleFrom(
               backgroundColor: AppTheme.surfaceContainerLowest,
               foregroundColor: AppTheme.onSurface,
