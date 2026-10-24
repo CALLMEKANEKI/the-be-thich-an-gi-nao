@@ -6,6 +6,7 @@ import '../services/location_service.dart';
 import 'food_search_screen.dart';
 import 'ingredients_screen.dart';
 import 'login_screen.dart';
+
 import 'map_poc_screen.dart';
 import 'mood_selection_screen.dart';
 import 'spin_wheel_screen.dart';
@@ -503,14 +504,14 @@ class HomeScreen extends StatelessWidget {
                   _buildFeaturePill(
                     context: context,
                     icon: Icons.soup_kitchen,
-                    title: 'Tự nấu nhanh',
-                    subtitle: '15-30 phút',
+                    title: 'Tìm món để nấu',
+                    subtitle: 'Chọn món gợi ý trước',
                     iconBg: AppTheme.primaryFixedDim,
                     iconFg: AppTheme.onPrimaryFixedVariant,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const IngredientsScreen(dishName: 'Bún Bò Huế'),
+                        builder: (_) => const MoodSelectionScreen(),
                       ),
                     ),
                   ),

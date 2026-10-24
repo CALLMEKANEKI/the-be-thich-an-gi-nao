@@ -5,7 +5,7 @@ class NearbyPlace {
   final double longitude;
   final double distance;
   final double rating;
-  final String map_url;
+  final String mapUrl;
 
   NearbyPlace({
     required this.name,
@@ -14,7 +14,7 @@ class NearbyPlace {
     required this.longitude,
     required this.distance,
     required this.rating,
-    required this.map_url,
+    required this.mapUrl,
   });
 
   double get distanceMeters => distance;
@@ -30,7 +30,7 @@ class NearbyPlace {
       longitude: (json['longitude'] as num).toDouble(),
       distance: (json['distance_m'] as num).toDouble(),
       rating: (json['rating'] as num).toDouble(),
-      map_url: json['map_url']
+      mapUrl: (json['map_url'] ?? '').toString(),
     );
   }
 }

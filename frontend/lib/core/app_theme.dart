@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-/// Design tokens extracted directly from Stitch project "Food Decider Flutter UI" (Culinary Companion)
 class AppTheme {
   // Brand Primary & Coral
   static const Color primary = Color(0xFFFF6B35);
+  static const Color primaryColor = primary;
   static const Color primaryDark = Color(0xFFAB3500);
   static const Color primaryContainer = Color(0xFFFF6B35);
   static const Color onPrimary = Color(0xFFFFFFFF);
@@ -14,6 +14,7 @@ class AppTheme {
 
   // Secondary & Mint Fresh
   static const Color secondary = Color(0xFF006A62);
+  static const Color secondaryColor = Color(0xFFFFB300);
   static const Color secondaryMint = Color(0xFF2EC4B6);
   static const Color secondaryContainer = Color(0xFF70F8E8);
   static const Color secondaryFixed = Color(0xFF70F8E8);
@@ -35,7 +36,9 @@ class AppTheme {
 
   // Surface & Neutrals
   static const Color background = Color(0xFFF8F9FF);
+  static const Color backgroundColor = background;
   static const Color surface = Color(0xFFF8F9FF);
+  static const Color surfaceColor = Color(0xFFFFFFFF);
   static const Color surfaceDim = Color(0xFFD6DAE4);
   static const Color surfaceBright = Color(0xFFF8F9FF);
   static const Color surfaceContainerLowest = Color(0xFFFFFFFF);
@@ -46,94 +49,77 @@ class AppTheme {
 
   static const Color onSurface = Color(0xFF171C23);
   static const Color onSurfaceVariant = Color(0xFF594139);
+  static const Color textPrimary = onSurface;
+  static const Color textSecondary = onSurfaceVariant;
   static const Color outline = Color(0xFF8D7168);
   static const Color outlineVariant = Color(0xFFE1BFB5);
+  static const Color cardBorderColor = outlineVariant;
 
-  // Error
+  // Accents & Errors
+  static const Color accentGreen = secondaryMint;
+  static const Color accentBlue = Color(0xFF3B82F6);
   static const Color error = Color(0xFFBA1A1A);
   static const Color errorContainer = Color(0xFFFFDAD6);
   static const Color onError = Color(0xFFFFFFFF);
 
-  // Legacy mappings for backwards compatibility
-  static const Color primaryColor = primary;
-  static const Color secondaryColor = tertiaryAmber;
-  static const Color backgroundColor = background;
-  static const Color surfaceColor = surfaceContainerLowest;
-  static const Color cardBorderColor = outlineVariant;
-  static const Color textPrimary = onSurface;
-  static const Color textSecondary = onSurfaceVariant;
-  static const Color accentGreen = secondaryMint;
-  static const Color accentBlue = Color(0xFF3B82F6);
 
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
-      fontFamily: 'Plus Jakarta Sans',
-      fontFamilyFallback: const ['Roboto', 'sans-serif'],
-      colorScheme: const ColorScheme(
-        brightness: Brightness.light,
-        primary: primary,
-        onPrimary: onPrimary,
-        primaryContainer: primaryContainer,
-        onPrimaryContainer: onPrimaryFixed,
-        secondary: secondary,
-        onSecondary: onSecondary,
-        secondaryContainer: secondaryContainer,
-        onSecondaryContainer: onSecondaryContainer,
-        tertiary: tertiary,
-        onTertiary: onTertiary,
-        tertiaryContainer: tertiaryContainer,
-        onTertiaryContainer: onTertiaryContainer,
-        error: error,
-        onError: onError,
-        errorContainer: errorContainer,
-        onErrorContainer: Color(0xFF93000A),
-        surface: surface,
-        onSurface: onSurface,
-        surfaceContainerLowest: surfaceContainerLowest,
-        surfaceContainerLow: surfaceContainerLow,
-        surfaceContainer: surfaceContainer,
-        surfaceContainerHigh: surfaceContainerHigh,
-        surfaceContainerHighest: surfaceContainerHighest,
-        outline: outline,
-        outlineVariant: outlineVariant,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: primaryColor,
+        primary: primaryColor,
+        secondary: secondaryColor,
+        surface: surfaceColor,
       ),
-      scaffoldBackgroundColor: background,
+      scaffoldBackgroundColor: backgroundColor,
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.transparent,
+        backgroundColor: surfaceColor,
         elevation: 0,
-        scrolledUnderElevation: 0,
+        scrolledUnderElevation: 1,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          color: onSurface,
+          color: textPrimary,
           fontSize: 18,
           fontWeight: FontWeight.w700,
-          letterSpacing: -0.2,
         ),
-        iconTheme: IconThemeData(color: onSurface),
+        iconTheme: IconThemeData(color: textPrimary),
       ),
       cardTheme: CardThemeData(
-        color: surfaceContainerLowest,
+        color: surfaceColor,
         elevation: 1,
-        shadowColor: const Color(0x15FF6B35),
+        shadowColor: Colors.black.withValues(alpha: 0.04),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(color: Color(0x10000000), width: 0.5),
+          borderRadius: BorderRadius.circular(16),
+          side: const BorderSide(color: cardBorderColor, width: 1),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: primary,
-          foregroundColor: onPrimary,
+          backgroundColor: primaryColor,
+          foregroundColor: Colors.white,
           elevation: 2,
-          shadowColor: const Color(0x4DFF6B35),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(14),
           ),
           textStyle: const TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: primaryColor,
+          side: const BorderSide(color: primaryColor, width: 1.5),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+          textStyle: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),

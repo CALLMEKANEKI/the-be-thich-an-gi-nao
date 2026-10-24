@@ -28,7 +28,7 @@ class SpinHistory(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable= False)
     dish_id = Column(Integer, ForeignKey("dishes.id"), nullable= False)
     mood = Column(String)
-    create_at = Column(DateTime(timezone= True), server_default= func.now())
+    created_at = Column(DateTime(timezone= True), server_default= func.now())
     
 class ShoppingList(Base):
     __tablename__ = "shopping_list"
@@ -38,4 +38,4 @@ class ShoppingList(Base):
     dish_id = Column(Integer, ForeignKey("dishes.id"), nullable= False)
     items = Column(JSON)
     deeplink = Column(String)
-    create_at = Column(DateTime(timezone= True), server_default= func.now())
+    created_at = Column(DateTime(timezone= True), server_default= func.now())

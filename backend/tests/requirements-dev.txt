@@ -1,2 +1,2 @@
--r requirements.txt
 pytest
+httpx2==2.16.0

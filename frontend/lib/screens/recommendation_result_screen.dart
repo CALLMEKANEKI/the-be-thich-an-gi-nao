@@ -478,7 +478,7 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
                 child: ElevatedButton(
                   onPressed: () {
                     // Prefetch and navigate to Restaurant Screen
-                    context.read<PlacesProvider>().searchPlaces(
+                    context.read<PlacesProvider>().prefetch(
                           dishName: dish.name,
                           latitude: widget.latitude,
                           longitude: widget.longitude,
@@ -547,7 +547,10 @@ class _RecommendationResultScreenState extends State<RecommendationResultScreen>
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => IngredientsScreen(dishName: dish.name),
+                        builder: (_) => IngredientsScreen(
+                          dishId: dish.id,
+                          dishName: dish.name,
+                        ),
                       ),
                     );
                   },

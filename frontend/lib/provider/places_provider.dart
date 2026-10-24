@@ -59,22 +59,6 @@ class PlacesProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> searchPlaces({
-    required String dishName,
-    required double latitude,
-    required double longitude,
-    int radiusM = 3000,
-    int limit = 20,
-  }) async {
-    return prefetch(
-      dishName: dishName,
-      latitude: latitude,
-      longitude: longitude,
-      radiusM: radiusM,
-      limit: limit,
-    );
-  }
-
   void reset() {
     _requestToken++;
     _status = PlacesStatus.idle;
