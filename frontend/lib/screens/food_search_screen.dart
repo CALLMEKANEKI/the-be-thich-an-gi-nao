@@ -5,6 +5,7 @@ import '../core/app_theme.dart';
 import '../models/dish_recommendation.dart';
 import '../provider/auth_provider.dart';
 import '../provider/dish_search_provider.dart';
+import '../provider/places_provider.dart';
 import '../services/location_service.dart';
 import 'ingredients_screen.dart';
 import 'login_screen.dart';
@@ -828,6 +829,11 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
                   child: ElevatedButton.icon(
                     onPressed: () {
                       Navigator.pop(ctx);
+                      context.read<PlacesProvider>().prefetch(
+                            dishName: dish.name,
+                            latitude: _latitude,
+                            longitude: _longitude,
+                          );
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -999,6 +1005,11 @@ class _FoodSearchScreenState extends State<FoodSearchScreen> {
                     children: [
                       InkWell(
                         onTap: () {
+                          context.read<PlacesProvider>().prefetch(
+                                dishName: dish.name,
+                                latitude: _latitude,
+                                longitude: _longitude,
+                              );
                           Navigator.push(
                             context,
                             MaterialPageRoute(
