@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'core/app_theme.dart';
 import 'provider/recommendation_provider.dart';
 import 'provider/cart_provider.dart';
 import 'provider/ingredient_provider.dart';
 import 'provider/places_provider.dart';
-import 'provider/recommendation_provider.dart';
 import 'screens/mood_selection_screen.dart';
 
 void main() {

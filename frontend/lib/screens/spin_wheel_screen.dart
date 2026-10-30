@@ -30,7 +30,6 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
   late Animation<double> _animation;
   double _currentRotation = 0;
   bool _isSpinning = false;
-  int? _targetIndex;
 
   @override
   void initState() {
@@ -75,7 +74,6 @@ class _SpinWheelScreenState extends State<SpinWheelScreen>
     if (_isSpinning || options.isEmpty) return;
 
     final targetIndex = Random().nextInt(options.length);
-    _targetIndex = targetIndex;
     final winningOption = options[targetIndex];
 
     // Cập nhật món được chọn vào provider
