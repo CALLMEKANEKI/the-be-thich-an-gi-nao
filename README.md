@@ -77,8 +77,8 @@ Tài liệu API tương tác (Swagger): http://localhost:8000/docs. `--host 0.0.
 **Dữ liệu lần đầu:** các bảng được tạo khi backend khởi động. Nhập danh sách món và (tùy chọn) làm nóng cache nguyên liệu:
 
 ```bash
-python -m scripts.import_dishes        # [CẦN XÁC NHẬN: tên script, đường dẫn CSV]
-python -m scripts.warm_ingredients     # [CẦN XÁC NHẬN: tên script]; nguyên liệu cũng tự sinh ở lần gọi API đầu tiên
+python -m scripts.import_dishes       
+python -m scripts.warm_ingredients     
 ```
 
 **Mô hình PhoBERT:** Link : https://huggingface.co/CALLMEKANEKI/phobert-emotion-multitask
@@ -95,7 +95,7 @@ python -m scripts.warm_ingredients     # [CẦN XÁC NHẬN: tên script]; nguy�
 | `MAP_PROVIDER` | Không | `goong` (mặc định) hoặc `geoapify` |
 | `GOONG_API_KEY` | Nếu dùng Goong | Khóa Goong Place API |
 | `GEOAPIFY_API_KEY` | Nếu dùng Geoapify / làm dự phòng | Khóa Geoapify |
-| `HF_TOKEN`, `HF_MODEL_REPO` | **[CẦN XÁC NHẬN]** | Tải mô hình từ Hugging Face |
+| `HF_TOKEN`, `HF_MODEL_REPO` | Tải mô hình từ Hugging Face |
 | `N8N_BHX_WEBHOOK_URL` | Không | Tùy chọn: gửi giỏ hàng sang webhook n8n. Để trống thì bỏ qua |
 
 ### Ứng dụng Flutter
@@ -106,8 +106,6 @@ flutter pub get
 flutter run                                                     # máy ảo Android: backend mặc định http://10.0.2.2:8000
 flutter run --dart-define=API_BASE_URL=http://<IP-máy-chạy-backend>:8000   # thiết bị thật cùng Wi-Fi
 ```
-
-Cấu hình Supabase trong ứng dụng (URL và khóa công khai anon/publishable): **[CẦN XÁC NHẬN: cách cung cấp, ví dụ `--dart-define` hay hằng số]**. Không đưa khóa `service_role` vào ứng dụng. Cấu hình đăng nhập Google/GitHub: **[CẦN XÁC NHẬN: redirect URL của ứng dụng]**.
 
 ## API chính
 
@@ -138,7 +136,6 @@ python -m pytest -q          # 90 test, chạy không cần mạng hay cơ sở 
 - Tìm quán dựa trên tên quán, không theo thực đơn; dữ liệu không có đánh giá sao.
 - Danh mục sản phẩm Bách Hóa Xanh do nhóm tự soạn (khoảng 130 dòng), một số nguyên liệu chưa có; giá chỉ để tham khảo. Ứng dụng không đặt hàng và không thanh toán.
 - Gợi ý và nguyên liệu do AI sinh nên mang tính tham khảo; phản hồi mất vài giây và phụ thuộc hạn mức miễn phí của dịch vụ bên ngoài.
-- **[CẦN XÁC NHẬN: backend chạy trên máy phát triển, chưa triển khai; mới kiểm thử trên Android]**
 
 ## English summary
 
