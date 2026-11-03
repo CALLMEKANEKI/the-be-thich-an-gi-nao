@@ -24,7 +24,6 @@
 | Thành phần | Công nghệ |
 |---|---|
 | Ứng dụng | Flutter (Dart), Provider, gói `http`, SQLite (`sqflite`), `flutter_map` + OpenStreetMap, `url_launcher` |
-| Xác thực (ứng dụng) | **[CẦN XÁC NHẬN: gói `supabase_flutter`?]** |
 | Backend | Python, FastAPI, SQLAlchemy |
 | Cơ sở dữ liệu | PostgreSQL trên Supabase |
 | AI | PhoBERT (PyTorch, Transformers), Gemini API |
